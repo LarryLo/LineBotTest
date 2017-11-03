@@ -315,11 +315,36 @@ function claculater(inputStr){
 }
 function claculate(inputStr){
   let tempMatch=inputStr.match(/[^()]+/).toString();
+  //乘
   while(tempMatch.match(/\d+\*\d+/)!=null){
     //b[0]*b[1]=a
     let a = tempMatch.match(/\d+\*\d+/).toString();
     let b = a.match(/\d+/g);
     let c = b[0]*b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //除
+  while(tempMatch.match(/\d+\/\d+/)!=null){
+    //b[0]/b[1]=a
+    let a = tempMatch.match(/\d+\/\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]/b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //加
+  while(tempMatch.match(/\d+\+\d+/)!=null){
+    //b[0]+b[1]=a
+    let a = tempMatch.match(/\d+\+\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]+b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //減
+  while(tempMatch.match(/\d+-\d+/)!=null){
+    //b[0]-b[1]=a
+    let a = tempMatch.match(/\d+-\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]-b[1];
     tempMatch=tempMatch.replace(a,c.toString());
   }
   return tempMatch;
