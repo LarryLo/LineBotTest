@@ -319,7 +319,7 @@ function claculate(inputStr){
     //b[0]*b[1]=a
     let a = tempMatch.match(/\d+\*\d+/).toString();
     let b = a.match(/\d+/g);
-    return b[0].toString;
+    return b.toString;
     let c = b[0]*b[1];
     tempMatch=tempMatch.replace(a,c.toString());
   }
