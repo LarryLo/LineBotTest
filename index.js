@@ -204,7 +204,7 @@ function parseInput(rplyToken, inputStr) {
     return inputStr;
   }
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
-    return claculater(inputStr);
+    return claculate(inputStr);
   }
   return countStr;
 }
