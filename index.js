@@ -296,6 +296,11 @@ function swGr() {
 }
 
 //基本運算
+function claculate(inputStr){
+  return ":target:";
+  let tempMatch=inputStr.match(/[^()]+/).toString();
+  return tempMatch;
+}
 function claculater(inputStr){
   let returnStr = '基本運算：\n';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
@@ -310,9 +315,4 @@ function claculater(inputStr){
   }
   returnStr += tempMatch;
   return returnStr;
-}
-function claculate(inputStr){
-  return ":target:";
-  let tempMatch=inputStr.match(/[^()]+/).toString();
-  return tempMatch;
 }
