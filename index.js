@@ -355,9 +355,8 @@ function claculate(inputStr){
   }
   return tempMatch;
 }
-/*
+
 ////基本骰組
-// /^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/
 function xDx(inputStr){
   let returnStr='基本骰組：';
   let answer=0;
@@ -390,4 +389,4 @@ function xDx(inputStr){
   returnStr+=' = '+answer.toString();
   return returnStr;
 }
-*/
+
