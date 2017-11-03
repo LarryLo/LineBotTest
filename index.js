@@ -305,13 +305,13 @@ function claculater(inputStr){
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    return 'target:'+target;
     tempMatch.replace(target,calculate(target));
   }
   returnStr += tempMatch;
   return returnStr;
 }
 function claculate(inputStr){
+  return 'target:'+inputStr;
   let tempMatch=inputStr.match(/[^()]+/).toString();
   return tempMatch;
 }
