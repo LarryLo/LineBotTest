@@ -200,6 +200,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr/)!= null ){
     return swGr();
   }
+  if (trigger.match(/^(\d|\(|\)|d|\+|-|\*|\/)+/)!= null ){
+    return inputStr;
+  }
   return countStr;
 }
 //SW2.0指令
