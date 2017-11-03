@@ -300,10 +300,10 @@ function claculater(inputStr){
   let returnStr = '基本運算：\n';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
   let calError=(/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?((\+|-|\*|\/)(\+|-|\*|\/))?/);
-  if(tempMatch.match(calError)){
+  if(tempMatch.match(calError) != null){
     return 'error';
   }
-  while(tempMatch.match(/\([^(]+\)/)){
+  while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
     tempMatch.replace(target,calculate(target));
   }
