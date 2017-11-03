@@ -390,13 +390,13 @@ function xDx(inputStr){
     let tempMatch=inputStr.match(/\+\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     answer+=Number(a[0]);
-    returnStr+='+'a[0].toString();
+    returnStr+='+'+a[0].toString();
   }
   if(inputStr.match(/-\d+/)!=null){
     let tempMatch=inputStr.match(/-\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     answer-=Number(a[0]);
-    returnStr+='-'a[0].toString();
+    returnStr+='-'+a[0].toString();
   }
   returnStr+=' = '+answer.toString();
   return returnStr;
