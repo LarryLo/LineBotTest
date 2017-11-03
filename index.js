@@ -174,7 +174,8 @@ function Kx(triggermsg) {
   else{
     returnStr=returnStr+'→'+damage;
   }
-  return returnStr;}
+  return returnStr;
+}
 
 //成長骰
 function swGr() {
