@@ -83,45 +83,15 @@ function replyMsgToLine(rplyToken, rplyVal) {
 }
 
 function parseInput(rplyToken, inputStr) {
-  console.log('InputStr: ' + inputStr);
-  let msgSplitor = ' ';
-  let comSplitor = 'd';
-
-  let mainMsg = inputStr.split(msgSplitor);
-  let trigger = mainMsg[0];
-  console.log(trigger);
-  if (trigger != '李孟儒') return null;
-
-  _isNaN = function(obj) {
-    return isNaN(parseInt(obj));
-  }
-
-  let commandArr = mainMsg[1].split(comSplitor);
-  if (commandArr.length != 2 || _isNaN(commandArr[0]) || _isNaN(commandArr[1])) return randomReply();
-  let countOfNum = commandArr[0];
-  let randomRange = commandArr[1];
-  
   let countStr = '';
-  let count = 0;
-  for (let idx = 1; idx <= countOfNum; idx ++) {
-    let temp = random(1, randomRange);
-    countStr = countStr + temp + '+';
-    count += temp; 
-  }
-  
-  if (countOfNum == 1) {
-    countStr = count;
-  } else {
-    countStr = countStr.substring(0, countStr.length - 1) + '=' + count;
+  let msgSplitor = ' ';
+  let mainMsg = inputStr.split(msgSplitor);
+  //Kx
+  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
+    return Kx(trigger);}
+  //gr
+  if (trigger.match(/^gr/)!= null ){
+    return swGr();
   }
   return countStr;
-}
-
-function random(min, max) {
-  return Math.floor((Math.random() * max) + min);
-}
-
-function randomReply() {
-  let rplyArr = ['幹你娘不要亂打好嗎？懂？', '你媽知道你在這裡發廢文嗎？', '啊啊啊啊～我要被玩壞惹', '幫QQ', '我看不到明天的陽光', '在非洲，每六十秒，就有一分鐘過去。認同請分享', '只要每天省下買一杯奶茶的錢，十天後就能買十杯奶茶', '當你的左臉被人打，那你的左臉就會痛', '誰能想的到，這名16歲少女，在四年前，只是一名12歲少女', '當蝴蝶在南半球拍了兩下翅膀，牠就會稍微飛高一點點', '台灣競爭力低落，在美國就連小學生都會說流利的英語', '每呼吸60秒，就減少一分鐘的壽命', '據統計，未婚生子的人數中有高機率為女性'];
-  return rplyArr[random((rplyArr.length - 1), 0)];
 }
