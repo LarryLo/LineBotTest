@@ -212,9 +212,9 @@ function parseInput(rplyToken, inputStr) {
 //骰組function
 ////SW2.0function開始
 //////sw威力表
-function Kx(triggermsg) {
+function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：\n';
-  let tempMatch = triggermsg.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
+  let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
   let b=0;
@@ -340,7 +340,7 @@ function claculate(inputStr){
     //b[0]+b[1]=a
     let a = tempMatch.match(/\d+\+\d+/).toString();
     let b = a.match(/\d+/g);
-    let c = b[0]+b[1];
+    let c = Number(b[0])+Number(b[1]);
     tempMatch=tempMatch.replace(a,c.toString());
   }
   //減
