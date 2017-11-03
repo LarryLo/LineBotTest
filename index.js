@@ -213,7 +213,7 @@ function parseInput(rplyToken, inputStr) {
     return GinWay();
   }  
   if (trigger.match(/^(複雜度|O\(\)|)$/)!= null ){
-    return '\\逼歐恩平方/';
+    return '☆逼歐恩平方☆';
   }
   return countStr;
 }
