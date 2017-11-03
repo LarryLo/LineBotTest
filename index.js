@@ -311,7 +311,7 @@ function claculater(inputStr){
   return returnStr;
 }
 function claculate(inputStr){
-  return 'target:'+inputStr;
+  return ':target:';
   let tempMatch=inputStr.match(/[^()]+/).toString();
   return tempMatch;
 }
