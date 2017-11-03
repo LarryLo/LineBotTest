@@ -358,7 +358,7 @@ function claculate(inputStr){
 
 ////基本骰組
 function xDx(inputStr){
-  let returnStr='基本骰組：';
+  let returnStr='基本骰組：[';
   let answer=0;
   let dice=0
   
@@ -372,6 +372,7 @@ function xDx(inputStr){
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
     }
+    returnStr+=']';
   }
   //xd
   else if(inputStr.match(/\d+d/)!=null){
@@ -382,17 +383,20 @@ function xDx(inputStr){
       answer+=dice;
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
-    }    
+    }
+    returnStr+=']';
   }
   if(inputStr.match(/\+\d+/)!=null){
     let tempMatch=inputStr.match(/\+\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     answer+=Number(a[0]);
+    returnStr+='+'a[0].toString();
   }
   if(inputStr.match(/-\d+/)!=null){
     let tempMatch=inputStr.match(/-\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     answer-=Number(a[0]);
+    returnStr+='-'a[0].toString();
   }
   returnStr+=' = '+answer.toString();
   return returnStr;
