@@ -249,7 +249,7 @@ function Kx(inputStr) {
   }
   if(tempMatch.match(/\$(\+|-)?\d+/)!=null){
     s=tempMatch.match(/\$(\+|-)?\d+/)[0].toString();
-    if(tempMatch.match(/(\+|-)/)==null)
+    if(s.match(/(\+|-)/)==null)
       sFlag=true;
     s=s.match(/-?\d+/).toString();
   }
