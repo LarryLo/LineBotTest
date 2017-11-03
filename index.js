@@ -200,6 +200,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
+  //峻崴
+  if (trigger.match(/^峻崴$/)!= null ){
+    return inputStr;
+  }
   //基本骰組xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
