@@ -355,6 +355,7 @@ function claculate(inputStr){
   }
   return tempMatch;
 }
+/*
 ////基本骰組
 // /^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/
 function xDx(inputStr){
@@ -382,13 +383,13 @@ function xDx(inputStr){
       returnStr+=' '+dice.toString();
     }
   }
-  /*//dx
+  //dx
   else if(inputStr.match(/d\d+/)!=null){
     let tempMatch=inputStr.match(/\d+d\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     for(i=0;i<a[0];i++)
       dice+=Math.ceil(Math.random()*a[1]);
-  }//*/
+  }//
   if(inputStr.match(/\+\d+/)!=null){
   }
   if(inputStr.match(/-\d+/)!=null){
@@ -396,3 +397,4 @@ function xDx(inputStr){
   returnStr+=' = '+answer.toString();
   return returnStr;
 }
+*/
