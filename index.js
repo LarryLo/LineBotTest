@@ -205,7 +205,7 @@ function parseInput(rplyToken, inputStr) {
     return xDx(inputStr);
   }
   //基本運算
-  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
+  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
   }
   return countStr;
@@ -361,7 +361,7 @@ function xDx(inputStr){
   let returnStr='基本骰組：[';
   let answer=0;
   
-  //xdx
+  //xDx
   if(inputStr.match(/\d+d\d+/)!=null){
     let tempMatch=inputStr.match(/\d+d\d+/).toString();
     let a=tempMatch.match(/\d+/g);
@@ -373,7 +373,7 @@ function xDx(inputStr){
     }
     returnStr+=']';
   }
-  //xd
+  //xD
   else if(inputStr.match(/\d+d/)!=null){
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);    
@@ -384,6 +384,10 @@ function xDx(inputStr){
       returnStr+=dice.toString();
     }
     returnStr+=']';
+  }
+  //Dx
+  else if(inputStr.match(/d\d+/)!=null){
+    return undefined;
   }
   if(inputStr.match(/\+\d+/)!=null){
     let tempMatch=inputStr.match(/\+\d+/).toString();
