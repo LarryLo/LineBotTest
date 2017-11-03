@@ -374,6 +374,7 @@ function basic(inputStr){
   }
   //xd
   else if(inputStr.match(/\d+d/)!=null){
+    /*
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);
     for(i=0;i<a[0];i++){
@@ -382,6 +383,7 @@ function basic(inputStr){
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
     }
+    */
   }
   if(inputStr.match(/\+\d+/)!=null){
   }
