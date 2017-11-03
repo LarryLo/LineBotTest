@@ -192,17 +192,19 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
-  //Kx
+  //SW2.0 Kx
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
   }
-  //gr
+  //SW2.0 gr
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  if (trigger.match(/^(\d+d\d+|\d+d|d\d+)(\+\d+)?(>\d+)?$/)!= null ){
+  //基本骰組xdx+a>b
+  if (trigger.match(/^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return inputStr;
   }
+  //基本運算
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
     return claculater(inputStr);
   }
@@ -298,12 +300,6 @@ function swGr() {
   return returnStr;
 }
 ////SW2.0function結束
-////基本骰組
-function xDx(inputStr){
-  let returnStr='基本骰組：';
-    
-  return returnStr;
-}
 ////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：';
@@ -358,4 +354,45 @@ function claculate(inputStr){
     tempMatch=tempMatch.replace(a,c.toString());
   }
   return tempMatch;
+}
+////基本骰組
+// /^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/
+function xDx(inputStr){
+  let returnStr='基本骰組：';
+  let answer=0;
+  //xdx
+  if(inputStr.match(/\d+d\d+/)!=null){
+    let tempMatch=inputStr.match(/\d+d\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    for(i=0;i<a[0];i++){
+      let dice=Math.ceil(Math.random()*a[1]);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=' '+dice.toString();
+    }
+  }
+  //xd
+  else if(inputStr.match(/\d+d/)!=null){
+    let tempMatch=inputStr.match(/\d+d/).toString();
+    let a=tempMatch.match(/\d+/);
+    for(i=0;i<a;i++){
+      let dice+=Math.ceil(Math.random()*6);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=' '+dice.toString();
+    }
+  }
+  /*//dx
+  else if(inputStr.match(/d\d+/)!=null){
+    let tempMatch=inputStr.match(/\d+d\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    for(i=0;i<a[0];i++)
+      dice+=Math.ceil(Math.random()*a[1]);
+  }//*/
+  if(inputStr.match(/\+\d+/)!=null){
+  }
+  if(inputStr.match(/-\d+/)!=null){
+  }
+  returnStr+=' = '+answer.toString();
+  return returnStr;
 }
