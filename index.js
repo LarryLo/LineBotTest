@@ -315,5 +315,11 @@ function claculater(inputStr){
 }
 function claculate(inputStr){
   let tempMatch=inputStr.match(/[^()]+/).toString();
+  while(tempMatch.match(/\d+\*\d+/)!=null){
+    //b[0]*b[1]=a
+    let a = tempMatch.match(/\d+\*\d+/);
+    let b = a.match(/\d+/i);
+    tempMatch=tempMatch.replace(a,b[0]*b[1]);
+  }
   return tempMatch;
 }
