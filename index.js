@@ -308,8 +308,8 @@ function claculater(inputStr){
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    return claculate(target);
     tempMatch.replace(target,claculate(target));
+    return tempMatch;
   }
   returnStr += tempMatch;
   return returnStr;
