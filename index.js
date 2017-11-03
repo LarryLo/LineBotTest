@@ -380,9 +380,9 @@ function basic(inputStr){
       /*
       let dice+=Math.ceil(Math.random()*6);
       answer+=dice;
+      */
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
-      */
     }    
   }
   if(inputStr.match(/\+\d+/)!=null){
