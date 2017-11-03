@@ -212,7 +212,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^峻崴$/)!= null ){
     return GinWay();
   }  
-  if (trigger.match(/^(複雜度|O\(\)|)$/)!= null ){
+  if (trigger.match(/^(複雜度|O\(\))$/)!= null ){
     return '☆逼歐恩平方☆';
   }
   return countStr;
