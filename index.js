@@ -383,11 +383,11 @@ function basic(inputStr){
       returnStr+=' '+dice.toString();
     }
   }
+  */
   if(inputStr.match(/\+\d+/)!=null){
   }
   if(inputStr.match(/-\d+/)!=null){
   }
-  */
   returnStr+=' = '+answer.toString();
   return returnStr;
 }
