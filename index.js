@@ -192,11 +192,11 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
-  //SW2.0 Kx
+  //Kx
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
   }
-  //SW2.0 gr
+  //gr
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
