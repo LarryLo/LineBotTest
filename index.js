@@ -202,7 +202,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
-    return inputStr;
+    return xDx(inputStr);
   }
   //基本運算
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
@@ -357,7 +357,7 @@ function claculate(inputStr){
 }
 
 ////基本骰組
-function basic(inputStr){
+function xDx(inputStr){
   let returnStr='基本骰組：';
   let answer=0;
   let dice=0
@@ -385,8 +385,14 @@ function basic(inputStr){
     }    
   }
   if(inputStr.match(/\+\d+/)!=null){
+    let tempMatch=inputStr.match(/\+\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer+=Number(a[0]);
   }
   if(inputStr.match(/-\d+/)!=null){
+    let tempMatch=inputStr.match(/-\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer-=Number(a[0]);
   }
   returnStr+=' = '+answer.toString();
   return returnStr;
