@@ -372,19 +372,17 @@ function basic(inputStr){
       returnStr+=' '+dice.toString();
     }
   }
-  /*
   //xd
   else if(inputStr.match(/\d+d/)!=null){
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/);
-    for(i=0;i<a;i++){
+    for(i=0;i<a[0];i++){
       let dice+=Math.ceil(Math.random()*6);
       answer+=dice;
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
     }
   }
-  */
   if(inputStr.match(/\+\d+/)!=null){
   }
   if(inputStr.match(/-\d+/)!=null){
