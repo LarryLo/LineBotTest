@@ -308,7 +308,7 @@ function claculater(inputStr){
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    return calculate(target);
+    return target;
     tempMatch.replace(target,calculate(target));
   }
   returnStr += tempMatch;
