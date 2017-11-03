@@ -368,6 +368,7 @@ function claculate(inputStr){
 function xDx(inputStr){
   let returnStr='基本骰組：[';
   let answer=0;
+  let bool=false;
   
   //xDx
   if(inputStr.match(/\d+d\d+/)!=null){
@@ -410,6 +411,17 @@ function xDx(inputStr){
     returnStr+='-'+a[0].toString();
   }
   returnStr+=' = '+answer.toString();
+  if(inputStr.match(/(>=|<=|=|>|<)\d+/)){
+    let tempMatch=inputStr.match(/(>=|<=|=|>|<)\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    if(tempMatch.match(/>/) && Number(answer)>Number(a[0]))
+      returnStr+='→成功';
+    else if(tempMatch.match(/</) && Number(answer)<Number(a[0]))
+      returnStr+='→成功';
+    else if(tempMatch.match(/=/) && Number(answer)==Number(a[0]))
+      returnStr+='→成功';
+    else returnStr+='→失敗';
+  }
   return returnStr;
 }
 ////峻崴骰
