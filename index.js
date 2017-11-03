@@ -204,7 +204,7 @@ function parseInput(rplyToken, inputStr) {
     return inputStr;
   }
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
-    return claculate(inputStr);
+    return claculater(inputStr);
   }
   return countStr;
 }
@@ -302,13 +302,17 @@ function swGr() {
 function claculater(inputStr){
   let returnStr = '基本運算：\n';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
-  let calError=(/((\((\+|-|\*|\/))|((\+|-|\*|\/)\))|((\+|-|\*|\/)(\+|-|\*|\/)))/);
+  let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
   if(tempMatch.match(calError) != null){
-    return 'error:'+tempMatch.match(calError)[0].toString();
+    return undefined;
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
     tempMatch=tempMatch.replace(target,claculate(target));
+  }
+  tempMatch=claculate(tempMatch);
+  if(tempMatch.match(/[^0-9]/)){
+    return undefined;
   }
   returnStr += tempMatch;
   return returnStr;
@@ -328,7 +332,7 @@ function claculate(inputStr){
     //b[0]/b[1]=a
     let a = tempMatch.match(/\d+\/\d+/).toString();
     let b = a.match(/\d+/g);
-    let c = b[0]/b[1];
+    let c = Math.floor(b[0]/b[1]);
     tempMatch=tempMatch.replace(a,c.toString());
   }
   //加
