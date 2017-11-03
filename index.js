@@ -201,7 +201,7 @@ function parseInput(rplyToken, inputStr) {
     return swGr();
   }
   //基本骰組xdx+a>b
-  if (trigger.match(/^(\d+d\d+|\d+d|d\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
+  if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
   }
   //基本運算
