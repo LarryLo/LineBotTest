@@ -357,7 +357,7 @@ function claculate(inputStr){
 }
 
 ////基本骰組
-function xDx(inputStr){
+function basic(inputStr){
   let returnStr='基本骰組：';
   let answer=0;
   //xdx
