@@ -200,8 +200,11 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr/)!= null ){
     return swGr();
   }
-  if (trigger.match(/^(\d|\(|\)|d|\+|-|\*|\/)+/)!= null ){
+  if (trigger.match(/^(d|\d)+/)!= null ){
     return inputStr;
+  }
+  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+/)!= null ){
+    return claculater(inputStr);
   }
   return countStr;
 }
@@ -290,4 +293,20 @@ function swGr() {
   let returnStr = 'SW2.0成長擲骰：\n';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
+}
+
+//基本運算
+function claculater(inputStr){
+  let returnStr = '基本運算：\n';
+  let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
+  let calError=/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?(dd)?((\+|-|\*|\/)(\+|-|\*|\/))?/;
+  if(tempMatch.match(calError)){
+    return undefined;
+  }
+  while(tempMatch.match(/\([^(]+\)/)){
+    tempMatch.replace(/\([^(]+\)/,'');
+  }
+}
+function claculater(inputStr){
+  return inputStr;
 }
