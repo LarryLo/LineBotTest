@@ -200,7 +200,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  if (trigger.match(/^(d|\d)+$/)!= null ){
+  if (trigger.match(/^(\d+d\d+|\d+d|d\d+)(\+\d+)?(>\d+)?$/)!= null ){
     return inputStr;
   }
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
@@ -213,7 +213,7 @@ function parseInput(rplyToken, inputStr) {
 ////SW2.0function開始
 //////sw威力表
 function Kx(inputStr) {
-  let returnStr = 'SW2.0威力表擲骰：\n';
+  let returnStr = 'SW2.0威力表擲骰：';
   let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
@@ -293,14 +293,20 @@ function Kx(inputStr) {
 
 //////成長骰
 function swGr() {
-  let returnStr = 'SW2.0成長擲骰：\n';
+  let returnStr = 'SW2.0成長擲骰：';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
 }
 ////SW2.0function結束
+////基本骰組
+function xDx(inputStr){
+  let returnStr='基本骰組：';
+    
+  return returnStr;
+}
 ////基本運算
 function claculater(inputStr){
-  let returnStr = '基本運算：\n';
+  let returnStr = '基本運算：';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
   let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
   if(tempMatch.match(calError) != null){
