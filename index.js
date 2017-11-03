@@ -1,5 +1,5 @@
 //表格放置區
-  //sw2.0
+////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
                 [0,0,0,1,2,3,3,3,4,4],
@@ -197,15 +197,24 @@ function parseInput(rplyToken, inputStr) {
     return Kx(trigger);
   }
   //gr
-  if (trigger.match(/^gr/)!= null ){
+  if (trigger.match(/^gr$/)!= null ){
     return swGr();
+  }
+  if (trigger.match(/^(d|\d)+$/)!= null ){
+    return inputStr;
+  }
+  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
+    return claculater(inputStr);
   }
   return countStr;
 }
-//SW2.0指令
-function Kx(triggermsg) {
+
+//骰組function
+////SW2.0function開始
+//////sw威力表
+function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：\n';
-  let tempMatch = triggermsg.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
+  let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
   let b=0;
@@ -282,9 +291,65 @@ function Kx(triggermsg) {
   return returnStr;
 }
 
-//成長骰
+//////成長骰
 function swGr() {
   let returnStr = 'SW2.0成長擲骰：\n';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
+}
+////SW2.0function結束
+////基本運算
+function claculater(inputStr){
+  let returnStr = '基本運算：\n';
+  let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
+  let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
+  if(tempMatch.match(calError) != null){
+    return undefined;
+  }
+  while(tempMatch.match(/\([^(]+\)/) != null){
+    let target=tempMatch.match(/\([^(]+\)/)[0].toString();
+    tempMatch=tempMatch.replace(target,claculate(target));
+  }
+  tempMatch=claculate(tempMatch);
+  if(tempMatch.match(/[^0-9]/)){
+    return undefined;
+  }
+  returnStr += tempMatch;
+  return returnStr;
+}
+function claculate(inputStr){
+  let tempMatch=inputStr.match(/[^()]+/).toString();
+  //乘
+  while(tempMatch.match(/\d+\*\d+/)!=null){
+    //b[0]*b[1]=a
+    let a = tempMatch.match(/\d+\*\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]*b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //除
+  while(tempMatch.match(/\d+\/\d+/)!=null){
+    //b[0]/b[1]=a
+    let a = tempMatch.match(/\d+\/\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = Math.floor(b[0]/b[1]);
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //加
+  while(tempMatch.match(/\d+\+\d+/)!=null){
+    //b[0]+b[1]=a
+    let a = tempMatch.match(/\d+\+\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = Number(b[0])+Number(b[1]);
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //減
+  while(tempMatch.match(/\d+-\d+/)!=null){
+    //b[0]-b[1]=a
+    let a = tempMatch.match(/\d+-\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]-b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  return tempMatch;
 }
