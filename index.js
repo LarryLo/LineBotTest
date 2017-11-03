@@ -208,6 +208,13 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
   }
+  //雜項
+  if (trigger.match(/^峻崴$/)!= null ){
+    return GinWay();
+  }  
+  if (trigger.match(/^複雜度$/)!= null ){
+    return '☆逼歐恩平方☆';
+  }
   return countStr;
 }
 
@@ -404,4 +411,8 @@ function xDx(inputStr){
   returnStr+=' = '+answer.toString();
   return returnStr;
 }
-
+////峻崴骰
+function GinWay() {
+  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
+  return GWSheet[Math.floor(Math.random()*GWSheet.length)];
+}
