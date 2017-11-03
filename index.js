@@ -1,5 +1,5 @@
 //表格放置區
-  //sw2.0
+////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
                 [0,0,0,1,2,3,3,3,4,4],
@@ -204,11 +204,14 @@ function parseInput(rplyToken, inputStr) {
     return inputStr;
   }
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
-    return claculater(inputStr);
+    return claculate(inputStr);
   }
   return countStr;
 }
-//SW2.0指令
+
+//骰組function
+////SW2.0function開始
+//////sw威力表
 function Kx(triggermsg) {
   let returnStr = 'SW2.0威力表擲骰：\n';
   let tempMatch = triggermsg.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
@@ -288,14 +291,14 @@ function Kx(triggermsg) {
   return returnStr;
 }
 
-//成長骰
+//////成長骰
 function swGr() {
   let returnStr = 'SW2.0成長擲骰：\n';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
 }
-
-//基本運算
+////SW2.0function結束
+////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：\n';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
