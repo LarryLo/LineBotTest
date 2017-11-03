@@ -299,7 +299,7 @@ function swGr() {
 function claculater(inputStr){
   let returnStr = '基本運算：\n';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
-  let calError=/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?(dd)?((\+|-|\*|\/)(\+|-|\*|\/))?/;
+  let calError=(/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?((\+|-|\*|\/)(\+|-|\*|\/))?/);
   if(tempMatch.match(calError)){
     return 'error';
   }
