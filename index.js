@@ -374,9 +374,9 @@ function basic(inputStr){
   }
   //xd
   else if(inputStr.match(/\d+d/)!=null){
-    /*
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);
+    /*
     for(i=0;i<a[0];i++){
       let dice+=Math.ceil(Math.random()*6);
       answer+=dice;
