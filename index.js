@@ -261,7 +261,8 @@ function Kx(inputStr) {
     returnStr+='k值只支援0~100喔';
     return returnStr;
   }
-  dice1= Math.ceil(Math.random()*6);dice2= Math.ceil(Math.random()*6);
+  dice1= Math.ceil(Math.random()*6);
+  dice2= Math.ceil(Math.random()*6);
   if(sFlag){
     dice=Number(s);
     returnStr+='['+dice+']';
