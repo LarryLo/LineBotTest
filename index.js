@@ -202,7 +202,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //峻崴
   if (trigger.match(/^峻崴$/)!= null ){
-    return inputStr;
+    return GinWay();
   }
   //基本骰組xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -408,4 +408,8 @@ function xDx(inputStr){
   returnStr+=' = '+answer.toString();
   return returnStr;
 }
-
+////峻崴骰
+function GinWay() {
+  let GWSheet=['壁虎','仙人掌','30歲']
+  return GWSheet[Math.floor(Math.random()*GWSheet.length)];
+}
