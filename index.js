@@ -200,10 +200,6 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  //峻崴
-  if (trigger.match(/^峻崴$/)!= null ){
-    return GinWay();
-  }
   //基本骰組xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
@@ -211,6 +207,13 @@ function parseInput(rplyToken, inputStr) {
   //基本運算
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
+  }
+  //雜項
+  if (trigger.match(/^峻崴$/)!= null ){
+    return GinWay();
+  }  
+  if (trigger.match(/^(複雜度|O\(\)|)$/)!= null ){
+    return '\逼歐恩平方/';
   }
   return countStr;
 }
