@@ -301,7 +301,7 @@ function claculater(inputStr){
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
   let calError=(/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?((\+|-|\*|\/)(\+|-|\*|\/))?/);
   if(tempMatch.match(calError) != null){
-    return 'error:'+tempMatch.match(calError)[0];
+    return 'error:'+tempMatch.match(calError)[0].toString();
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
