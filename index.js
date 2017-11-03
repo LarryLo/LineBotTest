@@ -200,10 +200,12 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  if (trigger.match(/^(d|\d)+$/)!= null ){
-    return inputStr;
+  //基本骰組xdx+a>b
+  if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
+    return xDx(inputStr);
   }
-  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
+  //基本運算
+  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
   }
   return countStr;
@@ -213,7 +215,7 @@ function parseInput(rplyToken, inputStr) {
 ////SW2.0function開始
 //////sw威力表
 function Kx(inputStr) {
-  let returnStr = 'SW2.0威力表擲骰：\n';
+  let returnStr = 'SW2.0威力表擲骰：';
   let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
@@ -293,14 +295,14 @@ function Kx(inputStr) {
 
 //////成長骰
 function swGr() {
-  let returnStr = 'SW2.0成長擲骰：\n';
+  let returnStr = 'SW2.0成長擲骰：';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
 }
 ////SW2.0function結束
 ////基本運算
 function claculater(inputStr){
-  let returnStr = '基本運算：\n';
+  let returnStr = '基本運算：';
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
   let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
   if(tempMatch.match(calError) != null){
@@ -353,3 +355,53 @@ function claculate(inputStr){
   }
   return tempMatch;
 }
+
+////基本骰組
+function xDx(inputStr){
+  let returnStr='基本骰組：[';
+  let answer=0;
+  
+  //xDx
+  if(inputStr.match(/\d+d\d+/)!=null){
+    let tempMatch=inputStr.match(/\d+d\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    for(i=0;i<a[0];i++){
+      let dice=Math.ceil(Math.random()*a[1]);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=dice.toString();
+    }
+    returnStr+=']';
+  }
+  //xD
+  else if(inputStr.match(/\d+d/)!=null){
+    let tempMatch=inputStr.match(/\d+d/).toString();
+    let a=tempMatch.match(/\d+/g);    
+    for(i=0;i<a[0];i++){
+      let dice=Math.ceil(Math.random()*6);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=dice.toString();
+    }
+    returnStr+=']';
+  }
+  //Dx
+  else if(inputStr.match(/d\d+/)!=null){
+    return undefined;
+  }
+  if(inputStr.match(/\+\d+/)!=null){
+    let tempMatch=inputStr.match(/\+\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer+=Number(a[0]);
+    returnStr+='+'+a[0].toString();
+  }
+  if(inputStr.match(/-\d+/)!=null){
+    let tempMatch=inputStr.match(/-\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer-=Number(a[0]);
+    returnStr+='-'+a[0].toString();
+  }
+  returnStr+=' = '+answer.toString();
+  return returnStr;
+}
+
