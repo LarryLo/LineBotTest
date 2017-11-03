@@ -204,7 +204,7 @@ function parseInput(rplyToken, inputStr) {
     return inputStr;
   }
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
-    return claculate(inputStr);
+    return claculater(inputStr);
   }
   return countStr;
 }
@@ -308,7 +308,7 @@ function claculater(inputStr){
   }
   while(tempMatch.match(/\([^(]+\)/) != null){
     let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    return calculate(target);
+    return target;
     tempMatch.replace(target,calculate(target));
   }
   returnStr += tempMatch;
