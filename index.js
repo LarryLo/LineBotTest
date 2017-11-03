@@ -410,6 +410,6 @@ function xDx(inputStr){
 }
 ////峻崴骰
 function GinWay() {
-  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴']
+  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
 }
