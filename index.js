@@ -189,9 +189,9 @@ function replyMsgToLine(rplyToken, rplyVal) {
 
 function parseInput(rplyToken, inputStr) {
   let countStr = '';
-  let msgSplitor = ' ';
-  let mainMsg = inputStr.split(msgSplitor);
-  let trigger = mainMsg[0].toString;
+  let msgSplitor = (/\S+/ig);
+  let mainMsg = inputStr.match(msgSplitor);
+  let trigger = mainMsg[0].toString().toLowerCase(); 
   //Kx
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
