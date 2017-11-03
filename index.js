@@ -301,12 +301,16 @@ function claculater(inputStr){
   let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
   let calError=/(\((\+|-|\*|\/))?((\+|-|\*|\/)\))?(dd)?((\+|-|\*|\/)(\+|-|\*|\/))?/;
   if(tempMatch.match(calError)){
-    return undefined;
+    return 'error';
   }
   while(tempMatch.match(/\([^(]+\)/)){
-    tempMatch.replace(/\([^(]+\)/,'');
+    let target=tempMatch.match(/\([^(]+\)/)[0].toString();
+    tempMatch.replace(target,calculate(target));
   }
+  returnStr += tempMatch;
+  return returnStr;
 }
-function claculater(inputStr){
-  return inputStr;
+function claculate(inputStr){
+  let tempMatch=inputStr.match(/[^()]+/).toString();
+  return tempMatch;
 }
