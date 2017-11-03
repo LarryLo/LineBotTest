@@ -197,13 +197,13 @@ function parseInput(rplyToken, inputStr) {
     return Kx(trigger);
   }
   //gr
-  if (trigger.match(/^gr/)!= null ){
+  if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  if (trigger.match(/^(d|\d)+/)!= null ){
+  if (trigger.match(/^(d|\d)+$/)!= null ){
     return inputStr;
   }
-  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+/)!= null ){
+  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null ){
     return claculater(inputStr);
   }
   return countStr;
