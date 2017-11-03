@@ -360,13 +360,14 @@ function claculate(inputStr){
 function basic(inputStr){
   let returnStr='基本骰組：';
   let answer=0;
+  let dice=0
   
   //xdx
   if(inputStr.match(/\d+d\d+/)!=null){
     let tempMatch=inputStr.match(/\d+d\d+/).toString();
     let a=tempMatch.match(/\d+/g);
     for(i=0;i<a[0];i++){
-      let dice=Math.ceil(Math.random()*a[1]);
+      dice+=Math.ceil(Math.random()*a[1]);
       answer+=dice;
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
@@ -377,10 +378,8 @@ function basic(inputStr){
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);    
     for(i=0;i<a[0];i++){
-      /*
-      let dice+=Math.ceil(Math.random()*6);
+      dice+=Math.ceil(Math.random()*6);
       answer+=dice;
-      */
       if(i>0) returnStr+=',';
       returnStr+=' '+dice.toString();
     }    
