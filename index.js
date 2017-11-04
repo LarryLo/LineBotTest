@@ -718,6 +718,10 @@ function help(inputStr){
     returnStr+='\n';
     returnStr+='纏繞表 swTt\n';
     returnStr+='\n';
+    returnStr+='自製流言表 swTt\n';
+    returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
+    returnStr+='內容「非常」有特色 請小心服用\n';
+    returnStr+='\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
