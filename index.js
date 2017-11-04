@@ -583,16 +583,17 @@ function sg(inputStr) {
   }
   if(tempMatch.match(/#\d+/)!=null){
     f=tempMatch.match(/#\d+/).toString();
-    f=t.match(/\d+/).toString();
+    f=f.match(/\d+/).toString();
   }
   if(tempMatch.match(/@\d+/)!=null){
     s=tempMatch.match(/@\d+/).toString();
-    s=t.match(/\d+/).toString();
+    s=s.match(/\d+/).toString();
   }
   if(s<=f){
     s=Number(f)+1;
     s=s.toString();
   }
+  return 'true';
   dice=Math.ceil(Math.random()*6);
   ans+=dice;
   returnStr+=dice+',';
