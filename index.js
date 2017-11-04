@@ -221,6 +221,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^峻崴$/)!= null ){
     return GinWay();
   }  
+  if (trigger.match(/^泡泡$/)!= null ){
+    return '泡泡！泡泡！更多泡泡！';
+  }  
   if (trigger.match(/^複雜度$/)!= null ||
       trigger.match(/^O\(\)$/)!= null){
     return '☆逼歐恩平方☆';
@@ -455,6 +458,10 @@ function help(){
   returnStr+='直接輸入nD則為nD6\n';
   returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
   returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
+  returnStr+='\n';
+  returnStr+='d66骰 d66\n';
+  returnStr+='就d66咩\n';
+  returnStr+='Ex：d66\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='SW2.0骰組\n';
