@@ -453,7 +453,7 @@ function help(){
   returnStr+='======================\n';
   returnStr+='基本骰 nDn+n>n\n';
   returnStr+='直接輸入nD則為nD6\n';
-  returnStr+='大小判斷支援{>,<,>=,<=,=}五種\n';
+  returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
   returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
   returnStr+='\n';
   returnStr+='======================\n';
