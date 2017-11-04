@@ -215,7 +215,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //忍神判定
   if (trigger.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)!= null ){
-    return sg();
+    return sg(inputStr);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
