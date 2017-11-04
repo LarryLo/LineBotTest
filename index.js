@@ -204,10 +204,18 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
   }
-  //基本運算
+  //d66
+  if (trigger.match(/^d66$/)!= null ){
+    return d66();
+  }  
+  /*//基本運算(暫時關閉)
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
-  }
+  }*/
+  //help
+  if (trigger.match(/^(help|幫助)$/)!= null ){
+    return help();
+  }  
   //雜項
   if (trigger.match(/^峻崴$/)!= null ){
     return GinWay();
@@ -219,6 +227,126 @@ function parseInput(rplyToken, inputStr) {
 }
 
 //骰組function
+////基本運算
+function claculater(inputStr){
+  let returnStr = '基本運算：';
+  let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
+  let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
+  if(tempMatch.match(calError) != null){
+    return undefined;
+  }
+  while(tempMatch.match(/\([^(]+\)/) != null){
+    let target=tempMatch.match(/\([^(]+\)/)[0].toString();
+    tempMatch=tempMatch.replace(target,claculate(target));
+  }
+  tempMatch=claculate(tempMatch);
+  if(tempMatch.match(/[^0-9]/)){
+    return undefined;
+  }
+  returnStr += tempMatch;
+  return returnStr;
+}
+function claculate(inputStr){
+  let tempMatch=inputStr.match(/[^()]+/).toString();
+  //乘
+  while(tempMatch.match(/\d+\*\d+/)!=null){
+    //b[0]*b[1]=a
+    let a = tempMatch.match(/\d+\*\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]*b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //除
+  while(tempMatch.match(/\d+\/\d+/)!=null){
+    //b[0]/b[1]=a
+    let a = tempMatch.match(/\d+\/\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = Math.floor(b[0]/b[1]);
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //加
+  while(tempMatch.match(/\d+\+\d+/)!=null){
+    //b[0]+b[1]=a
+    let a = tempMatch.match(/\d+\+\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = Number(b[0])+Number(b[1]);
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  //減
+  while(tempMatch.match(/\d+-\d+/)!=null){
+    //b[0]-b[1]=a
+    let a = tempMatch.match(/\d+-\d+/).toString();
+    let b = a.match(/\d+/g);
+    let c = b[0]-b[1];
+    tempMatch=tempMatch.replace(a,c.toString());
+  }
+  return tempMatch;
+}
+////基本骰組
+function xDx(inputStr){
+  let returnStr='基本骰組：[';
+  let answer=0;
+  let bool=false;
+  
+  //xDx
+  if(inputStr.match(/\d+d\d+/)!=null){
+    let tempMatch=inputStr.match(/\d+d\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    for(i=0;i<a[0];i++){
+      let dice=Math.ceil(Math.random()*a[1]);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=dice.toString();
+    }
+    returnStr+=']';
+  }
+  //xD
+  else if(inputStr.match(/\d+d/)!=null){
+    let tempMatch=inputStr.match(/\d+d/).toString();
+    let a=tempMatch.match(/\d+/g);    
+    for(i=0;i<a[0];i++){
+      let dice=Math.ceil(Math.random()*6);
+      answer+=dice;
+      if(i>0) returnStr+=',';
+      returnStr+=dice.toString();
+    }
+    returnStr+=']';
+  }
+  //Dx
+  else if(inputStr.match(/d\d+/)!=null){
+    return undefined;
+  }
+  if(inputStr.match(/\+\d+/)!=null){
+    let tempMatch=inputStr.match(/\+\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer+=Number(a[0]);
+    returnStr+='+'+a[0].toString();
+  }
+  if(inputStr.match(/-\d+/)!=null){
+    let tempMatch=inputStr.match(/-\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    answer-=Number(a[0]);
+    returnStr+='-'+a[0].toString();
+  }
+  returnStr+=' = '+answer.toString();
+  if(inputStr.match(/(>=|<=|=|>|<)\d+/)){
+    let tempMatch=inputStr.match(/(>=|<=|=|>|<)\d+/).toString();
+    let a=tempMatch.match(/\d+/g);
+    if(tempMatch.match(/>/) && Number(answer)>Number(a[0]))
+      returnStr+='→成功';
+    else if(tempMatch.match(/</) && Number(answer)<Number(a[0]))
+      returnStr+='→成功';
+    else if(tempMatch.match(/=/) && Number(answer)==Number(a[0]))
+      returnStr+='→成功';
+    else returnStr+='→失敗';
+  }
+  return returnStr;
+}
+////d66骰
+function d66(){
+  let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  return returnStr;
+}
 ////SW2.0function開始
 //////sw威力表
 function Kx(inputStr) {
@@ -308,124 +436,41 @@ function swGr() {
   return returnStr;
 }
 ////SW2.0function結束
-////基本運算
-function claculater(inputStr){
-  let returnStr = '基本運算：';
-  let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
-  let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
-  if(tempMatch.match(calError) != null){
-    return undefined;
-  }
-  while(tempMatch.match(/\([^(]+\)/) != null){
-    let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    tempMatch=tempMatch.replace(target,claculate(target));
-  }
-  tempMatch=claculate(tempMatch);
-  if(tempMatch.match(/[^0-9]/)){
-    return undefined;
-  }
-  returnStr += tempMatch;
-  return returnStr;
-}
-function claculate(inputStr){
-  let tempMatch=inputStr.match(/[^()]+/).toString();
-  //乘
-  while(tempMatch.match(/\d+\*\d+/)!=null){
-    //b[0]*b[1]=a
-    let a = tempMatch.match(/\d+\*\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = b[0]*b[1];
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //除
-  while(tempMatch.match(/\d+\/\d+/)!=null){
-    //b[0]/b[1]=a
-    let a = tempMatch.match(/\d+\/\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = Math.floor(b[0]/b[1]);
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //加
-  while(tempMatch.match(/\d+\+\d+/)!=null){
-    //b[0]+b[1]=a
-    let a = tempMatch.match(/\d+\+\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = Number(b[0])+Number(b[1]);
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //減
-  while(tempMatch.match(/\d+-\d+/)!=null){
-    //b[0]-b[1]=a
-    let a = tempMatch.match(/\d+-\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = b[0]-b[1];
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  return tempMatch;
-}
-
-////基本骰組
-function xDx(inputStr){
-  let returnStr='基本骰組：[';
-  let answer=0;
-  let bool=false;
-  
-  //xDx
-  if(inputStr.match(/\d+d\d+/)!=null){
-    let tempMatch=inputStr.match(/\d+d\d+/).toString();
-    let a=tempMatch.match(/\d+/g);
-    for(i=0;i<a[0];i++){
-      let dice=Math.ceil(Math.random()*a[1]);
-      answer+=dice;
-      if(i>0) returnStr+=',';
-      returnStr+=dice.toString();
-    }
-    returnStr+=']';
-  }
-  //xD
-  else if(inputStr.match(/\d+d/)!=null){
-    let tempMatch=inputStr.match(/\d+d/).toString();
-    let a=tempMatch.match(/\d+/g);    
-    for(i=0;i<a[0];i++){
-      let dice=Math.ceil(Math.random()*6);
-      answer+=dice;
-      if(i>0) returnStr+=',';
-      returnStr+=dice.toString();
-    }
-    returnStr+=']';
-  }
-  //Dx
-  else if(inputStr.match(/d\d+/)!=null){
-    return undefined;
-  }
-  if(inputStr.match(/\+\d+/)!=null){
-    let tempMatch=inputStr.match(/\+\d+/).toString();
-    let a=tempMatch.match(/\d+/g);
-    answer+=Number(a[0]);
-    returnStr+='+'+a[0].toString();
-  }
-  if(inputStr.match(/-\d+/)!=null){
-    let tempMatch=inputStr.match(/-\d+/).toString();
-    let a=tempMatch.match(/\d+/g);
-    answer-=Number(a[0]);
-    returnStr+='-'+a[0].toString();
-  }
-  returnStr+=' = '+answer.toString();
-  if(inputStr.match(/(>=|<=|=|>|<)\d+/)){
-    let tempMatch=inputStr.match(/(>=|<=|=|>|<)\d+/).toString();
-    let a=tempMatch.match(/\d+/g);
-    if(tempMatch.match(/>/) && Number(answer)>Number(a[0]))
-      returnStr+='→成功';
-    else if(tempMatch.match(/</) && Number(answer)<Number(a[0]))
-      returnStr+='→成功';
-    else if(tempMatch.match(/=/) && Number(answer)==Number(a[0]))
-      returnStr+='→成功';
-    else returnStr+='→失敗';
-  }
-  return returnStr;
-}
 ////峻崴骰
 function GinWay() {
   let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
+}
+function help(){
+  let returnStr='';
+  returnStr+='泡泡！泡泡！更多泡泡！\n';
+  returnStr+='泡沫排序 ver1.0 現正運作中☆\n';
+  returnStr+='\n';
+  returnStr+='======================\n';
+  returnStr+='基本骰組\n';
+  returnStr+='======================\n';
+  returnStr+='基本骰 nDn+n>n\n';
+  returnStr+='直接輸入nD則為nD6\n';
+  returnStr+='大小判斷支援{>,<,>=,<=,=}五種\n';
+  returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
+  returnStr+='\n';
+  returnStr+='======================\n';
+  returnStr+='SW2.0骰組\n';
+  returnStr+='======================\n';
+  returnStr+='威力骰 Kn+n@n$n\n';
+  returnStr+='Kn為威力 威力10即為K10\n';
+  returnStr+='@n為c值 @8即為c值8\n';
+  returnStr+='$為骰目更改 $±n為增加/減少骰目 $n為指定骰目\n';
+  returnStr+='Ex：K10+3@7$+1\n';
+  returnStr+='\n';
+  returnStr+='成長骰 gr\n';
+  returnStr+='就是個成長骰\n';
+  returnStr+='Ex：gr\n';
+  returnStr+='\n';
+  returnStr+='-----------------------\n';
+  returnStr+='泡沫排序 dice bot\n';
+  returnStr+='以 LarryLo 的 line bot 為基底增加骰組而成\n';
+  returnStr+='\n';
+  returnStr+='製作者為界面活性\n';
+  returnStr+='如果有問題或建議歡迎來聯絡我喔\n';
 }
