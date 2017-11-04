@@ -192,19 +192,23 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
-  //Kx
+  //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
   }
-  //gr
+  //SW2.0 成長骰
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  //基本骰組xdx+a>b
+  //SW2.0 大失敗表
+  if (trigger.match(/^swft$/)!= null ){
+    return swFt();
+  }
+  //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
   }
-  //d66
+  //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
     return d66();
   }  
@@ -213,8 +217,7 @@ function parseInput(rplyToken, inputStr) {
     return claculater(inputStr);
   }*/
   //help
-  if (trigger.match(/^help$/)!= null ||
-      trigger.match(/^幫助$/)!= null ){
+  if (trigger.match(/^(help|幫助)$/)!= null ){
     return help();
   }  
   //雜項
@@ -440,6 +443,18 @@ function swGr() {
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
 }
+//////大失敗
+function swFt() {
+  let returnStr = 'SW2.0大失敗表：';
+  let swFtSheet=['額外擲兩次大失敗表 兩方效果皆適用（不會累加） 另外本次大失敗額外增加50點經驗'
+                ,'傷害增加攻擊者的「劍之碎片」點'
+                ,'傷害增加攻擊者的「等級」點'
+                ,'骰兩次傷害骰 選擇較高者'
+                ,'傷害增加為原本的兩倍'
+                ,'防護點無效'];
+  returnStr+=swFtSheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
 ////SW2.0function結束
 ////峻崴骰
 function GinWay() {
@@ -449,7 +464,7 @@ function GinWay() {
 function help(){
   let returnStr='';
   returnStr+='泡泡！泡泡！更多泡泡！\n';
-  returnStr+='泡沫排序 ver1.0 現正運作中☆\n';
+  returnStr+='泡沫排序 ver1.01beta 現正運作中☆\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='基本骰組\n';
@@ -460,8 +475,6 @@ function help(){
   returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
   returnStr+='\n';
   returnStr+='d66骰 d66\n';
-  returnStr+='就d66咩\n';
-  returnStr+='Ex：d66\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='SW2.0骰組\n';
@@ -473,8 +486,8 @@ function help(){
   returnStr+='Ex：K10+3@7$+1\n';
   returnStr+='\n';
   returnStr+='成長骰 gr\n';
-  returnStr+='就是個成長骰\n';
-  returnStr+='Ex：gr\n';
+  returnStr+='\n';
+  returnStr+='大失敗表 swft\n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
