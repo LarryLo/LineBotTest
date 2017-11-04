@@ -747,6 +747,7 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='判定骰 sg+n>=n#n@n\n';
     returnStr+='>=n為成功值 #n為大失敗值 @n為大成功值\n';
+    returnStr+='Ex：sg>=6,sg+2>=7#4@10\n';
     returnStr+='\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
