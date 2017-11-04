@@ -218,7 +218,7 @@ function parseInput(rplyToken, inputStr) {
     return help();
   }  
   //雜項
-  if (trigger.match(/^峻崴$/)!= null ){
+  if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
   }  
   if (trigger.match(/^泡泡$/)!= null ){
