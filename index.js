@@ -566,6 +566,7 @@ function swRm() {
 ////忍神 function 開始
 //////sg基本判定
 function sg(inputStr) {
+  return 'true';
   let returnStr = '忍神骰組：[';
   let tempMatch=inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)$/)[0].toString();
   let dice=0;
@@ -593,7 +594,6 @@ function sg(inputStr) {
     s=Number(f)+1;
     s=s.toString();
   }
-  return 'true';
   dice=Math.ceil(Math.random()*6);
   ans+=dice;
   returnStr+=dice+',';
