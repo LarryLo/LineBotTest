@@ -602,13 +602,13 @@ function sg(inputStr) {
   ans+=Number(b);
   returnStr+=b;
   if(ans>=s){
-    returnStr+='→☆大成功☆'
+    returnStr+='→☆大成功☆';
   }
   else if(ans<=f){
-    returnStr+='→★大失敗★ 下次見～'
+    returnStr+='→★大失敗★ 下次見～';
   }
   else if(ans>=t){
-    returnStr+='→成功'
+    returnStr+='→成功';
   }
   return returnStr;
 }
