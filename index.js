@@ -209,6 +209,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^swtt$/)!= null ){
     return swTt();
   }
+  //SW2.0 流言表
+  if (trigger.match(/^swrm$/)!= null ){
+    return swRm();
+  }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
@@ -470,6 +474,63 @@ function swTt() {
                 ,'身體：所有行為判定-1'
                 ,'特殊：使用該部位的行為判定-1，失去該部位加值'];
   returnStr+=swTtSheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+//////流言表
+function swRm() {
+  let returnStr = 'SW2.0流言：';
+  let swRmSheet1=['有個領主'
+                 ,'一把守護之劍'
+                 ,'一批走私貨品'
+                 ,'一個德雷克'
+                 ,'一隊暗影傭兵團'
+                 ,'一隊貿易商旅'
+                 ,'一個神官'
+                 ,'一堆狗頭人'
+                 ,'三隻伯格妖'
+                 ,'一個精靈'
+                 ,'一群精靈'
+                 ,'一個矮人'
+                 ,'一群矮人'
+                 ,'一個人類'
+                 ,'一群人類'
+                 ,'一個草原妖精'
+                 ,'一群草原妖精'
+                 ,'一個塔比特'
+                 ,'一群長頸巨龍'
+                 ,'一群哥布林'];
+  let swRmSheet2=['在宴會上'
+                 ,'在冒險者店裡'
+                 ,'在森林裡'
+                 ,'在河邊'
+                 ,'在娼館裡'
+                 ,'在路邊'
+                 ,'在睡覺時'
+                 ,'在領主宅底'
+                 ,'在魔動文明遺跡中'
+                 ,'在一座小島上'
+                 ,'在隔壁城鎮'
+                 ,'在附近的村莊'
+                 ,'在平原上'
+                 ,'在迷宮裡'];
+  let swRmSheet3=['被吃掉了'
+                 ,'爆炸了'
+                 ,'被藏起來了'
+                 ,'失蹤了'
+                 ,'喝醉了'
+                 ,'打起來了'
+                 ,'自殺了'
+                 ,'佔領該處了'
+                 ,'到處施放魔法'
+                 ,'準備睡覺了'
+                 ,'販賣戰利品'
+                 ,'脫手裝備中'
+                 ,'開始遊行了'
+                 ,'展開攻擊了'
+                 ,'被襲擊了'];
+  returnStr+=swRmSheet1[Math.floor(Math.random()*swRmSheet1.length)];
+  returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
+  returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
   return returnStr;
 }
 ////SW2.0function結束
