@@ -452,7 +452,7 @@ function swFt() {
                 ,'骰兩次傷害骰 選擇較高者'
                 ,'傷害增加為原本的兩倍'
                 ,'防護點無效'];
-  returnStr+='['+swFtSheet[Math.floor(Math.random()*6)];
+  returnStr+=swFtSheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 ////SW2.0function結束
@@ -486,6 +486,8 @@ function help(){
   returnStr+='Ex：K10+3@7$+1\n';
   returnStr+='\n';
   returnStr+='成長骰 gr\n';
+  returnStr+='\n';
+  returnStr+='大失敗表 swft\n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
