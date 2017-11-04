@@ -1,4 +1,4 @@
-var version='1.03';
+var version='1.04 忍神beta';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -103,6 +103,157 @@ var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
                 [8,12,15,16,19,20,22,24,27,28],
                 [8,12,15,17,19,20,22,24,27,29],
                 [8,12,15,18,19,20,22,24,27,30]];
+var swRmSheet1=['有個領主'
+               ,'一把守護之劍'
+               ,'一批走私貨品'
+               ,'一個德雷克'
+               ,'一隊暗影傭兵團'
+               ,'一隊貿易商旅'
+               ,'一個神官'
+               ,'一堆狗頭人'
+               ,'三隻伯格妖'
+               ,'一個精靈'
+               ,'一群精靈'
+               ,'一個矮人'
+               ,'一群矮人'
+               ,'一個人類'
+               ,'一群人類'
+               ,'一個草原妖精'
+               ,'一群草原妖精'
+               ,'一個塔比特'
+               ,'一群長頸巨龍'
+               ,'一群哥布林'
+               ,'一個符民'
+               ,'一個未啟動的符民'
+               ,'兩隻巴西利斯克'
+               ,'一大群人馬'
+               ,'一支蠻族軍隊'
+               ,'一個龍人'
+               ,'一個惠人'
+               ,'一個女武神'
+               ,'一個古貓人'
+               ,'一隻兔子'
+               ,'一個吟遊詩人'
+               ,'三萬伯格妖'
+               ,'三億個龍人'
+               ,'一個公會長'
+               ,'一批輕騎兵'
+               ,'一個傭兵團'
+               ,'一批重步兵'
+               ,'一個國王'
+               ,'兩個公爵'
+               ,'三個伯爵'
+               ,'四個男爵'
+               ,'五個子爵'
+               ,'六個侯爵'
+               ,'七個小矮人'
+               ,'八個老太婆'
+               ,'九個太陽傳教士'
+               ,'一個手持雙刀的輕戰士'
+               ,'一個手無縛雞之力的拳鬥士'
+               ,'一個身穿重裝鎧甲的法師'
+               ,'某個工具人'];
+var swRmSheet2=['在宴會上'
+               ,'在冒險者店裡'
+               ,'在森林裡'
+               ,'在河邊'
+               ,'在娼館裡'
+               ,'在路邊'
+               ,'在睡覺時'
+               ,'在領主宅底'
+               ,'在魔動文明遺跡中'
+               ,'在一座小島上'
+               ,'在隔壁城鎮'
+               ,'在附近的村莊'
+               ,'在平原上'
+               ,'在迷宮裡'
+               ,'在城牆上'
+               ,'在船上'
+               ,'在發呆時'
+               ,'在蒐集戰利品時'
+               ,'在貧民窟裡'
+               ,'在攻擊的時候'
+               ,'在洗澡之前，脫光了以後'
+               ,'在櫃台前'
+               ,'在異空間'
+               ,'在戰場中央'
+               ,'在山頂上'
+               ,'在沙漠'
+               ,'在沼澤'
+               ,'在極寒之地'
+               ,'在餐廳'
+               ,'在沙灘上'
+               ,'在湖裡'
+               ,'在洞窟'
+               ,'在王宮'
+               ,'在莊園裡'
+               ,'在旅館'
+               ,'在冒險者公會'
+               ,'在酒館'
+               ,'在教堂'
+               ,'在賭場'
+               ,'在競技場'
+               ,'在火山'
+               ,'在冰河'
+               ,'在哨所中'
+               ,'在堡壘裡'
+               ,'在軍營'
+               ,'在一座高塔上面'
+               ,'在內衣堆上'];
+var swRmSheet3=['被吃掉了'
+               ,'爆炸了'
+               ,'被藏起來了'
+               ,'失蹤了'
+               ,'喝醉了'
+               ,'打起來了'
+               ,'自殺了'
+               ,'佔領該處了'
+               ,'到處施放魔法'
+               ,'準備睡覺了'
+               ,'販賣戰利品'
+               ,'脫手裝備中'
+               ,'開始遊行了'
+               ,'展開攻擊了'
+               ,'被襲擊了'
+               ,'被偷走了'
+               ,'當上領主了'
+               ,'當上神官了'
+               ,'四處搜索著'
+               ,'騎著魔動機車'
+               ,'找到了迷宮入口'
+               ,'看到了貴族的醜聞'
+               ,'孵了一顆蛋'
+               ,'被拿去料理了'
+               ,'下海了'
+               ,'發起革命'
+               ,'膝蓋上中了一箭'
+               ,'組成了聯邦'
+               ,'協議停戰了'
+               ,'叛亂了'
+               ,'得了重病'
+               ,'被埋伏了'
+               ,'開始無差別殺人'
+               ,'解放了奴隸'
+               ,'脫褲子放屁'
+               ,'得了不治之症'
+               ,'暴斃了'
+               ,'腿斷了'
+               ,'瞎了'
+               ,'唱起歌來'
+               ,'無法生育了'
+               ,'受到了詛咒'
+               ,'失智了'
+               ,'精神失常了'
+               ,'撿到了古文明的神奇物品'
+               ,'謀殺行動暴露了'
+               ,'偷情被發現了'
+               ,'去朝聖了'
+               ,'蓋了一座實驗室'
+               ,'重要的東西被偷走了'
+               ,'使用左右開弓打出了1000點傷害'
+               ,'用守護吃下了全部的傷害還沒有死'
+               ,'用石頭打死一個伯格妖'
+               ,'用內褲悶死一隻哥布林'];
 //表格結束
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -212,6 +363,10 @@ function parseInput(rplyToken, inputStr) {
   //SW2.0 流言表
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
+  }
+  //忍神判定
+  if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
+    return sg(inputStr);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -364,7 +519,7 @@ function d66(){
   let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
   return returnStr;
 }
-////SW2.0function開始
+////SW2.0 function 開始
 //////sw威力表
 function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：';
@@ -479,86 +634,67 @@ function swTt() {
 //////流言表
 function swRm() {
   let returnStr = 'SW2.0流言：';
-  let swRmSheet1=['有個領主'
-                 ,'一把守護之劍'
-                 ,'一批走私貨品'
-                 ,'一個德雷克'
-                 ,'一隊暗影傭兵團'
-                 ,'一隊貿易商旅'
-                 ,'一個神官'
-                 ,'一堆狗頭人'
-                 ,'三隻伯格妖'
-                 ,'一個精靈'
-                 ,'一群精靈'
-                 ,'一個矮人'
-                 ,'一群矮人'
-                 ,'一個人類'
-                 ,'一群人類'
-                 ,'一個草原妖精'
-                 ,'一群草原妖精'
-                 ,'一個塔比特'
-                 ,'一群長頸巨龍'
-                 ,'一群哥布林'
-                 ,'一個符民'
-                 ,'一個未啟動的符民'
-                 ,'兩隻巴西利斯克'
-                 ,'一大群人馬'
-                 ,'一支蠻族軍隊'
-                 ,'一個龍人'
-                 ,'一個惠人'
-                 ,'一個女武神'
-                 ,'一個古貓人'];
-  let swRmSheet2=['在宴會上'
-                 ,'在冒險者店裡'
-                 ,'在森林裡'
-                 ,'在河邊'
-                 ,'在娼館裡'
-                 ,'在路邊'
-                 ,'在睡覺時'
-                 ,'在領主宅底'
-                 ,'在魔動文明遺跡中'
-                 ,'在一座小島上'
-                 ,'在隔壁城鎮'
-                 ,'在附近的村莊'
-                 ,'在平原上'
-                 ,'在迷宮裡'
-                 ,'在城牆上'
-                 ,'在船上'
-                 ,'在發呆時'
-                 ,'在蒐集戰利品時'
-                 ,'在貧民窟裡'];
-  let swRmSheet3=['被吃掉了'
-                 ,'爆炸了'
-                 ,'被藏起來了'
-                 ,'失蹤了'
-                 ,'喝醉了'
-                 ,'打起來了'
-                 ,'自殺了'
-                 ,'佔領該處了'
-                 ,'到處施放魔法'
-                 ,'準備睡覺了'
-                 ,'販賣戰利品'
-                 ,'脫手裝備中'
-                 ,'開始遊行了'
-                 ,'展開攻擊了'
-                 ,'被襲擊了'
-                 ,'被偷走了'
-                 ,'當上領主了'
-                 ,'當上神官了'
-                 ,'四處搜索著'
-                 ,'騎著魔動機車'
-                 ,'找到了迷宮入口'
-                 ,'看到了貴族的醜聞'
-                 ,'孵了一顆蛋'
-                 ,'被拿去料理了'
-                 ,'下海了'
-                 ,'發起革命'];
   returnStr+=swRmSheet1[Math.floor(Math.random()*swRmSheet1.length)];
   returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
   return returnStr;
 }
-////SW2.0function結束
+////SW2.0 function 結束
+////忍神 function 開始
+//////sg基本判定
+function sg(inputStr) {
+  let returnStr = '忍神骰組：[';
+  let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
+  let dice=0;
+  let ans=0;
+  let ans2=0;
+  let t=0;
+  let b=0;
+  let f=2;
+  let s=12;
+  if(tempMatch.match(/sg>=\d+/)!=null){
+    t=tempMatch.match(/sg>=\d+/).toString();
+    t=t.match(/\d+/).toString();
+  }
+  if(tempMatch.match(/(\+|-)\d+/)!=null){
+    b=tempMatch.match(/(\+|-)\d+/)[0].toString();
+  }
+  if(tempMatch.match(/#\d+/)!=null){
+    f=tempMatch.match(/#\d+/).toString();
+    f=f.match(/\d+/).toString();
+  }
+  if(tempMatch.match(/@\d+/)!=null){
+    s=tempMatch.match(/@\d+/).toString();
+    s=s.match(/\d+/).toString();
+  }
+  if(Number(s)<=Number(f)){
+    s=Number(f)+1;
+    s=s.toString();
+  }
+  dice=Math.ceil(Math.random()*6);
+  ans+=dice;
+  returnStr+=dice+',';
+  dice=Math.ceil(Math.random()*6);
+  ans+=dice;
+  returnStr+=dice+']';
+  if(Number(b)!=0){
+    ans2=ans+Number(b);
+    returnStr+=b;
+  }
+  returnStr+='='+ans2;
+  if(ans>=s){
+    returnStr+='→☆大成功☆';
+    return returnStr;
+  }
+  else if(ans<=f){
+    returnStr+='→★大失敗★ 下次見～';
+  }
+  else if(ans2>=t){
+    returnStr+='→成功';
+  }
+  return returnStr;
+}
+////忍神 function 結束
 ////峻崴骰
 function GinWay() {
   let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
@@ -593,10 +729,6 @@ function help(){
   returnStr+='大失敗表 swft\n';
   returnStr+='\n';
   returnStr+='纏繞表 swTt\n';
-  returnStr+='\n';
-  returnStr+='流言表 swRm\n';
-  returnStr+='自製表格 在玩家骰探聽判定或者GM沒梗時可以使用\n';
-  returnStr+='很ㄎㄧㄤ 請小心服用\n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
