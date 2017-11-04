@@ -1,3 +1,4 @@
+var version='1.02beta';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -480,7 +481,7 @@ function GinWay() {
 function help(){
   let returnStr='';
   returnStr+='泡泡！泡泡！更多泡泡！\n';
-  returnStr+='泡沫排序 ver1.02beta 現正運作中☆\n';
+  returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='基本骰組\n';
