@@ -451,7 +451,7 @@ function swFt() {
                 ,'傷害增加攻擊者的「等級」點'
                 ,'骰兩次傷害骰 選擇較高者'
                 ,'傷害增加為原本的兩倍'
-                ,'防護點無效']
+                ,'防護點無效'];
   returnStr+='['+swFtSheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
@@ -464,7 +464,7 @@ function GinWay() {
 function help(){
   let returnStr='';
   returnStr+='泡泡！泡泡！更多泡泡！\n';
-  returnStr+='泡沫排序 ver1.0 現正運作中☆\n';
+  returnStr+='泡沫排序 ver1.01beta 現正運作中☆\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='基本骰組\n';
@@ -475,8 +475,6 @@ function help(){
   returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
   returnStr+='\n';
   returnStr+='d66骰 d66\n';
-  returnStr+='就d66咩\n';
-  returnStr+='Ex：d66\n';
   returnStr+='\n';
   returnStr+='======================\n';
   returnStr+='SW2.0骰組\n';
@@ -488,8 +486,6 @@ function help(){
   returnStr+='Ex：K10+3@7$+1\n';
   returnStr+='\n';
   returnStr+='成長骰 gr\n';
-  returnStr+='就是個成長骰\n';
-  returnStr+='Ex：gr\n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
