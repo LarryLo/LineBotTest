@@ -213,14 +213,16 @@ function parseInput(rplyToken, inputStr) {
     return claculater(inputStr);
   }*/
   //help
-  if (trigger.match(/^(help|幫助)$/)!= null ){
+  if (trigger.match(/^help$/)!= null ||
+      trigger.match(/^幫助$/)!= null ){
     return help();
   }  
   //雜項
   if (trigger.match(/^峻崴$/)!= null ){
     return GinWay();
   }  
-  if (trigger.match(/^複雜度$/)!= null ){
+  if (trigger.match(/^複雜度$/)!= null ||
+      trigger.match(/^O\(\)$/)!= null){
     return '☆逼歐恩平方☆';
   }
   return countStr;
