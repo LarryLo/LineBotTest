@@ -570,6 +570,7 @@ function sg(inputStr) {
   let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
   let dice=0;
   let ans=0;
+  let ans2=0;
   let t=0;
   let b=0;
   let f=2;
@@ -600,17 +601,18 @@ function sg(inputStr) {
   ans+=dice;
   returnStr+=dice+']';
   if(Number(b)!=0){
-    ans+=Number(b);
+    ans2=ans+Number(b);
     returnStr+=b;
   }
-  returnStr+='='+ans;
+  returnStr+='='+ans2;
   if(ans>=s){
     returnStr+='→☆大成功☆';
+    return returnStr;
   }
   else if(ans<=f){
     returnStr+='→★大失敗★ 下次見～';
   }
-  else if(ans>=t){
+  else if(ans2>=t){
     returnStr+='→成功';
   }
   return returnStr;
