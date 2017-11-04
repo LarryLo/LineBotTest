@@ -129,7 +129,7 @@ var swRmSheet1=['有個領主'
                ,'一大群人馬'
                ,'一支蠻族軍隊'
                ,'一個龍人'
-               ,'一個惠人'
+               ,'一個慧人'
                ,'一個女武神'
                ,'一個古貓人'
                ,'一隻兔子'
@@ -344,6 +344,10 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
+  //help
+  if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
+    return help();
+  }  
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
@@ -380,10 +384,6 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
   }*/
-  //help
-  if (trigger.match(/^(help|幫助)$/)!= null ){
-    return help();
-  }  
   //雜項
   if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
