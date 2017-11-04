@@ -730,10 +730,6 @@ function help(){
   returnStr+='\n';
   returnStr+='纏繞表 swTt\n';
   returnStr+='\n';
-  returnStr+='流言表 swRm\n';
-  returnStr+='自製表格 在玩家骰探聽判定或者GM沒梗時可以使用\n';
-  returnStr+='很ㄎㄧㄤ 請小心服用\n';
-  returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
   returnStr+='以 LarryLo 的 line bot 為基底增加骰組而成\n';
