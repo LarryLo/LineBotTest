@@ -498,7 +498,16 @@ function swRm() {
                  ,'一群草原妖精'
                  ,'一個塔比特'
                  ,'一群長頸巨龍'
-                 ,'一群哥布林'];
+                 ,'一群哥布林'
+                 ,'一個符民'
+                 ,'一個未啟動的符民'
+                 ,'兩隻巴西利斯克'
+                 ,'一大群人馬'
+                 ,'一支蠻族軍隊'
+                 ,'一個龍人'
+                 ,'一個惠人'
+                 ,'一個女武神'
+                 ,'一個古貓人'];
   let swRmSheet2=['在宴會上'
                  ,'在冒險者店裡'
                  ,'在森林裡'
@@ -512,7 +521,12 @@ function swRm() {
                  ,'在隔壁城鎮'
                  ,'在附近的村莊'
                  ,'在平原上'
-                 ,'在迷宮裡'];
+                 ,'在迷宮裡'
+                 ,'在城牆上'
+                 ,'在船上'
+                 ,'在發呆時'
+                 ,'在蒐集戰利品時'
+                 ,'在貧民窟裡'];
   let swRmSheet3=['被吃掉了'
                  ,'爆炸了'
                  ,'被藏起來了'
@@ -527,7 +541,18 @@ function swRm() {
                  ,'脫手裝備中'
                  ,'開始遊行了'
                  ,'展開攻擊了'
-                 ,'被襲擊了'];
+                 ,'被襲擊了'
+                 ,'被偷走了'
+                 ,'當上領主了'
+                 ,'當上神官了'
+                 ,'四處搜索著'
+                 ,'騎著魔動機車'
+                 ,'找到了迷宮入口'
+                 ,'看到了貴族的醜聞'
+                 ,'孵了一顆蛋'
+                 ,'被拿去料理了'
+                 ,'下海了'
+                 ,'發起革命'];
   returnStr+=swRmSheet1[Math.floor(Math.random()*swRmSheet1.length)];
   returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
@@ -568,6 +593,9 @@ function help(){
   returnStr+='大失敗表 swft\n';
   returnStr+='\n';
   returnStr+='纏繞表 swTt\n';
+  returnStr+='\n';
+  returnStr+='流言表 swRm\n';
+  returnStr+='自製表格 \n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
