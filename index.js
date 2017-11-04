@@ -589,6 +589,7 @@ function sg(inputStr) {
     s=tempMatch.match(/@\d+/).toString();
     s=s.match(/\d+/).toString();
   }
+  return 'true';
   if(s<=f){
     s=Number(f)+1;
     s=s.toString();
