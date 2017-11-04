@@ -214,7 +214,7 @@ function parseInput(rplyToken, inputStr) {
     return swRm();
   }
   //忍神判定
-  if (trigger.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)$/)!= null ){
+  if (trigger.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)!= null ){
     return sg();
   }
   //基本骰組 xdx+a>b
@@ -566,7 +566,6 @@ function swRm() {
 ////忍神 function 開始
 //////sg基本判定
 function sg(inputStr) {
-  return 'true';
   let returnStr = '忍神骰組：[';
   let tempMatch=inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)$/)[0].toString();
   let dice=0;
