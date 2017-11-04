@@ -1,4 +1,4 @@
-var version='1.02';
+var version='1.03beta';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -208,6 +208,10 @@ function parseInput(rplyToken, inputStr) {
   //SW2.0 纏繞表
   if (trigger.match(/^swtt$/)!= null ){
     return swTt();
+  }
+  //SW2.0 流言表
+  if (trigger.match(/^swrm$/)!= null ){
+    return swRm();
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -472,6 +476,88 @@ function swTt() {
   returnStr+=swTtSheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
+//////流言表
+function swRm() {
+  let returnStr = 'SW2.0流言：';
+  let swRmSheet1=['有個領主'
+                 ,'一把守護之劍'
+                 ,'一批走私貨品'
+                 ,'一個德雷克'
+                 ,'一隊暗影傭兵團'
+                 ,'一隊貿易商旅'
+                 ,'一個神官'
+                 ,'一堆狗頭人'
+                 ,'三隻伯格妖'
+                 ,'一個精靈'
+                 ,'一群精靈'
+                 ,'一個矮人'
+                 ,'一群矮人'
+                 ,'一個人類'
+                 ,'一群人類'
+                 ,'一個草原妖精'
+                 ,'一群草原妖精'
+                 ,'一個塔比特'
+                 ,'一群長頸巨龍'
+                 ,'一群哥布林'
+                 ,'一個符民'
+                 ,'一個未啟動的符民'
+                 ,'兩隻巴西利斯克'
+                 ,'一大群人馬'
+                 ,'一支蠻族軍隊'
+                 ,'一個龍人'
+                 ,'一個惠人'
+                 ,'一個女武神'
+                 ,'一個古貓人'];
+  let swRmSheet2=['在宴會上'
+                 ,'在冒險者店裡'
+                 ,'在森林裡'
+                 ,'在河邊'
+                 ,'在娼館裡'
+                 ,'在路邊'
+                 ,'在睡覺時'
+                 ,'在領主宅底'
+                 ,'在魔動文明遺跡中'
+                 ,'在一座小島上'
+                 ,'在隔壁城鎮'
+                 ,'在附近的村莊'
+                 ,'在平原上'
+                 ,'在迷宮裡'
+                 ,'在城牆上'
+                 ,'在船上'
+                 ,'在發呆時'
+                 ,'在蒐集戰利品時'
+                 ,'在貧民窟裡'];
+  let swRmSheet3=['被吃掉了'
+                 ,'爆炸了'
+                 ,'被藏起來了'
+                 ,'失蹤了'
+                 ,'喝醉了'
+                 ,'打起來了'
+                 ,'自殺了'
+                 ,'佔領該處了'
+                 ,'到處施放魔法'
+                 ,'準備睡覺了'
+                 ,'販賣戰利品'
+                 ,'脫手裝備中'
+                 ,'開始遊行了'
+                 ,'展開攻擊了'
+                 ,'被襲擊了'
+                 ,'被偷走了'
+                 ,'當上領主了'
+                 ,'當上神官了'
+                 ,'四處搜索著'
+                 ,'騎著魔動機車'
+                 ,'找到了迷宮入口'
+                 ,'看到了貴族的醜聞'
+                 ,'孵了一顆蛋'
+                 ,'被拿去料理了'
+                 ,'下海了'
+                 ,'發起革命'];
+  returnStr+=swRmSheet1[Math.floor(Math.random()*swRmSheet1.length)];
+  returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
+  returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
+  return returnStr;
+}
 ////SW2.0function結束
 ////峻崴骰
 function GinWay() {
@@ -507,6 +593,10 @@ function help(){
   returnStr+='大失敗表 swft\n';
   returnStr+='\n';
   returnStr+='纏繞表 swTt\n';
+  returnStr+='\n';
+  returnStr+='流言表 swRm\n';
+  returnStr+='自製表格 在玩家骰探聽判定或者GM沒梗時可以使用\n';
+  returnStr+='很ㄎㄧㄤ 請小心服用\n';
   returnStr+='\n';
   returnStr+='-----------------------\n';
   returnStr+='泡沫排序 dice bot\n';
