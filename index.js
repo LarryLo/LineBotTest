@@ -576,18 +576,18 @@ function sg(inputStr) {
   let s=12;
   if(tempMatch.match(/sg>=\d+/)!=null){
     t=tempMatch.match(/sg>=\d+/).toString();
-    t=t.match(/\d+/).toString;
+    t=t.match(/\d+/).toString();
   }
   if(tempMatch.match(/(\+|-)\d+/)!=null){
     b=tempMatch.match(/(\+|-)\d+/)[0].toString();
   }
   if(tempMatch.match(/#\d+/)!=null){
     f=tempMatch.match(/#\d+/).toString();
-    f=t.match(/\d+/).toString;
+    f=t.match(/\d+/).toString();
   }
   if(tempMatch.match(/@\d+/)!=null){
     s=tempMatch.match(/@\d+/).toString();
-    s=t.match(/\d+/).toString;
+    s=t.match(/\d+/).toString();
   }
   if(s<=f){
     s=Number(f)+1;
