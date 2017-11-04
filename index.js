@@ -574,6 +574,7 @@ function sg(inputStr) {
   let b=0;
   let f=2;
   let s=12;
+  return 'true';
   if(tempMatch.match(/sg>=\d+/)!=null){
     t=tempMatch.match(/sg>=\d+/).toString();
     t=t.match(/\d+/).toString();
@@ -589,7 +590,6 @@ function sg(inputStr) {
     s=tempMatch.match(/@\d+/).toString();
     s=s.match(/\d+/).toString();
   }
-  return 'true';
   if(s<=f){
     s=Number(f)+1;
     s=s.toString();
