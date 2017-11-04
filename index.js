@@ -192,19 +192,23 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
-  //Kx
+  //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
   }
-  //gr
+  //SW2.0 成長骰
   if (trigger.match(/^gr$/)!= null ){
     return swGr();
   }
-  //基本骰組xdx+a>b
+  //SW2.0 大失敗表
+  if (trigger.match(/^swft$/)!= null ){
+    return sFt();
+  }
+  //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
   }
-  //d66
+  //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
     return d66();
   }  
@@ -213,8 +217,7 @@ function parseInput(rplyToken, inputStr) {
     return claculater(inputStr);
   }*/
   //help
-  if (trigger.match(/^help$/)!= null ||
-      trigger.match(/^幫助$/)!= null ){
+  if (trigger.match(/^(help|幫助)$/)!= null ){
     return help();
   }  
   //雜項
@@ -438,6 +441,18 @@ function Kx(inputStr) {
 function swGr() {
   let returnStr = 'SW2.0成長擲骰：';
   returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
+  return returnStr;
+}
+//////大失敗
+function swFt() {
+  let returnStr = 'SW2.0大失敗表：';
+  let swFtSheet=['在擲兩次大失敗表 兩方效果皆適用 另外本次大失敗額外增加50點經驗'
+                ,'傷害增加攻擊者的「劍之碎片」點'
+                ,'傷害增加攻擊者的「等級」點'
+                ,'骰兩次傷害骰 選擇較高者'
+                ,'傷害增加為原本的兩倍'
+                ,'防護點無效']
+  returnStr+='['+swFtSheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 ////SW2.0function結束
