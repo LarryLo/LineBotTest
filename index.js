@@ -202,7 +202,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //SW2.0 大失敗表
   if (trigger.match(/^swft$/)!= null ){
-    return sFt();
+    return swFt();
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
