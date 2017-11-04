@@ -288,7 +288,7 @@ function parseInput(rplyToken, inputStr) {
     return swRm();
   }
   //忍神判定
-  if (trigger.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)!= null ){
+  if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
     return sg(inputStr);
   }
   //基本骰組 xdx+a>b
@@ -567,7 +567,7 @@ function swRm() {
 //////sg基本判定
 function sg(inputStr) {
   let returnStr = '忍神骰組：[';
-  let tempMatch = inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)[0].toString();
+  let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
   let dice=0;
   let ans=0;
   let t=0;
@@ -599,8 +599,11 @@ function sg(inputStr) {
   dice=Math.ceil(Math.random()*6);
   ans+=dice;
   returnStr+=dice+']';
-  ans+=Number(b);
-  returnStr+=b;
+  if(Number(b)!=0){
+    ans+=Number(b);
+    returnStr+=b;
+  }
+  returnStr+='='+ans;
   if(ans>=s){
     returnStr+='→☆大成功☆';
   }
