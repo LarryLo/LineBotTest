@@ -1,4 +1,4 @@
-var version='1.04 忍神beta';
+var version='1.04';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -346,7 +346,7 @@ function parseInput(rplyToken, inputStr) {
   let trigger = mainMsg[0].toString().toLowerCase(); 
   //help
   if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
-    return help();
+    return help(trigger);
   }  
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
@@ -370,11 +370,11 @@ function parseInput(rplyToken, inputStr) {
   }
   //忍神判定
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
-    return sg(inputStr);
+    return sg(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
-    return xDx(inputStr);
+    return xDx(trigger);
   }
   //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
@@ -700,41 +700,56 @@ function GinWay() {
   let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
 }
-function help(){
+function help(inputStr){
   let returnStr='';
-  returnStr+='泡泡！泡泡！更多泡泡！\n';
-  returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
-  returnStr+='\n';
-  returnStr+='======================\n';
-  returnStr+='基本骰組\n';
-  returnStr+='======================\n';
-  returnStr+='基本骰 nDn+n>n\n';
-  returnStr+='直接輸入nD則為nD6\n';
-  returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
-  returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
-  returnStr+='\n';
-  returnStr+='d66骰 d66\n';
-  returnStr+='\n';
-  returnStr+='======================\n';
-  returnStr+='SW2.0骰組\n';
-  returnStr+='======================\n';
-  returnStr+='威力骰 Kn+n@n$n\n';
-  returnStr+='Kn為威力 威力10即為K10\n';
-  returnStr+='@n為c值 @8即為c值8\n';
-  returnStr+='$為骰目更改 $±n為增加/減少骰目 $n為指定骰目\n';
-  returnStr+='Ex：K10+3@7$+1\n';
-  returnStr+='\n';
-  returnStr+='成長骰 gr\n';
-  returnStr+='\n';
-  returnStr+='大失敗表 swft\n';
-  returnStr+='\n';
-  returnStr+='纏繞表 swTt\n';
-  returnStr+='\n';
-  returnStr+='-----------------------\n';
-  returnStr+='泡沫排序 dice bot\n';
-  returnStr+='以 LarryLo 的 line bot 為基底增加骰組而成\n';
-  returnStr+='\n';
-  returnStr+='製作者為界面活性\n';
-  returnStr+='如果有問題或建議歡迎來聯絡我喔\n';
+  if(inputStr.match(/sw/)!=null){
+    returnStr+='======================\n';
+    returnStr+='SW2.0骰組\n';
+    returnStr+='======================\n';
+    returnStr+='威力骰 Kn+n@n$n\n';
+    returnStr+='Kn為威力 威力10即為K10\n';
+    returnStr+='@n為c值 @8即為c值8\n';
+    returnStr+='$為骰目更改 $±n為增加/減少骰目 $n為指定骰目\n';
+    returnStr+='Ex：K10+3@7$+1\n';
+    returnStr+='\n';
+    returnStr+='成長骰 gr\n';
+    returnStr+='\n';
+    returnStr+='大失敗表 swft\n';
+    returnStr+='\n';
+    returnStr+='纏繞表 swTt\n';
+    returnStr+='\n';
+  }
+  else{
+    returnStr+='泡泡！泡泡！更多泡泡！\n';
+    returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
+    returnStr+='\n';
+    returnStr+='======================\n';
+    returnStr+='基本骰組\n';
+    returnStr+='======================\n';
+    returnStr+='基本骰 nDn+n>n\n';
+    returnStr+='直接輸入nD則為nD6\n';
+    returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
+    returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
+    returnStr+='\n';
+    returnStr+='d66骰 d66\n';
+    returnStr+='\n';
+    returnStr+='======================\n';
+    returnStr+='SW2.0骰組\n';
+    returnStr+='======================\n';
+    returnStr+='詳見 swhelp\n';
+    returnStr+='\n';
+    returnStr+='======================\n';
+    returnStr+='忍神骰組\n';
+    returnStr+='======================\n';
+    returnStr+='判定骰 sg+n>=n#n@n\n';
+    returnStr+='>=n為成功值 #n為大失敗值 @n為大成功值\n';
+    returnStr+='\n';
+    returnStr+='-----------------------\n';
+    returnStr+='泡沫排序 dice bot\n';
+    returnStr+='以 LarryLo 的 line bot 為基底增加骰組而成\n';
+    returnStr+='\n';
+    returnStr+='製作者為界面活性\n';
+    returnStr+='如果有問題或建議歡迎來聯絡我喔\n';
+  }
   return returnStr;
 }
