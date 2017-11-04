@@ -475,4 +475,5 @@ function help(){
   returnStr+='\n';
   returnStr+='製作者為界面活性\n';
   returnStr+='如果有問題或建議歡迎來聯絡我喔\n';
+  return returnStr;
 }
