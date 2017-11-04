@@ -567,8 +567,12 @@ function swRm() {
 //////sg基本判定
 function sg(inputStr) {
   let returnStr = '忍神骰組：[';
-  let tempMatch = inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)[0].toString();
-  return 'O';
+  try{
+    let tempMatch = inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)?$/)[0].toString();
+  }
+  catch(error){
+    return error.toString();
+  }  
   let dice=0;
   let ans=0;
   let t=0;
