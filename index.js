@@ -1,4 +1,4 @@
-var version='1.03';
+var version='1.04 忍神beta';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -213,6 +213,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
   }
+  //忍神判定
+  if (trigger.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)$/)!= null ){
+    return sg();
+  }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(inputStr);
@@ -364,7 +368,7 @@ function d66(){
   let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
   return returnStr;
 }
-////SW2.0function開始
+////SW2.0 function 開始
 //////sw威力表
 function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：';
@@ -558,7 +562,57 @@ function swRm() {
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
   return returnStr;
 }
-////SW2.0function結束
+////SW2.0 function 結束
+////忍神 function 開始
+//////sg基本判定
+function sg(inputStr) {
+  let returnStr = '忍神骰組：[';
+  let tempMatch=inputStr.match(/^sg>=\d+(\+\d+|-\d+)?(#\d+)?(@\d+)$/)[0].toString();
+  let dice=0;
+  let ans=0;
+  let t=0;
+  let b=0;
+  let f=2;
+  let s=12;
+  if(tempMatch.match(/sg>=\d+/)!=null){
+    t=tempMatch.match(/sg>=\d+/).toString();
+    t=t.match(/\d+/).toString;
+  }
+  if(tempMatch.match(/(\+|-)\d+/)!=null){
+    b=tempMatch.match(/(\+|-)\d+/)[0].toString();
+  }
+  if(tempMatch.match(/#\d+/)!=null){
+    f=tempMatch.match(/#\d+/).toString();
+    f=t.match(/\d+/).toString;
+  }
+  if(tempMatch.match(/@\d+/)!=null){
+    s=tempMatch.match(/@\d+/).toString();
+    s=t.match(/\d+/).toString;
+  }
+  if(s<=f){
+    s=Number(f)+1;
+    s=s.toString();
+  }
+  dice=Math.ceil(Math.random()*6);
+  ans+=dice;
+  returnStr+=dice+',';
+  dice=Math.ceil(Math.random()*6);
+  ans+=dice;
+  returnStr+=dice+']';
+  ans+=Number(b);
+  returnStr+=b;
+  if(ans>=s){
+    returnStr+='→☆大成功☆'
+  }
+  else if(ans<=f){
+    returnStr+='→★大失敗★ 下次見～'
+  }
+  else if(ans>=t){
+    returnStr+='→成功'
+  }
+  return returnStr;
+}
+////忍神 function 結束
 ////峻崴骰
 function GinWay() {
   let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
