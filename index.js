@@ -350,7 +350,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //test
   if (trigger.match(/^#/)!= null ){
-    return srand(trigger);
+    return srand(trigger.match(/\d+/).toString());
   }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
