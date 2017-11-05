@@ -1,4 +1,4 @@
-var version='1.05 城鎮beta';
+var version='1.05';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
