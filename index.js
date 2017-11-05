@@ -347,7 +347,7 @@ function parseInput(rplyToken, inputStr) {
   //help
   if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
     return help(trigger);
-  }  
+  }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
@@ -399,6 +399,19 @@ function parseInput(rplyToken, inputStr) {
 }
 
 //骰組function
+////seed random
+function srand(seed){
+  seed='0.'+Math.sin(seed).toString().substr(6);
+  return seed.toString();
+}
+////strToSeed
+function strToSeed(inputStr){
+  let seed=1;
+  for(let i=0;i<inputStr.length;i++){
+  	seed=seed*inputStr.charCodeAt(0)%29973;
+  }
+  return seed.toString();
+}
 ////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：';
@@ -464,7 +477,7 @@ function xDx(inputStr){
   if(inputStr.match(/\d+d\d+/)!=null){
     let tempMatch=inputStr.match(/\d+d\d+/).toString();
     let a=tempMatch.match(/\d+/g);
-    for(i=0;i<a[0];i++){
+    for(let i=0;i<a[0];i++){
       let dice=Math.ceil(Math.random()*a[1]);
       answer+=dice;
       if(i>0) returnStr+=',';
@@ -476,7 +489,7 @@ function xDx(inputStr){
   else if(inputStr.match(/\d+d/)!=null){
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);    
-    for(i=0;i<a[0];i++){
+    for(let i=0;i<a[0];i++){
       let dice=Math.ceil(Math.random()*6);
       answer+=dice;
       if(i>0) returnStr+=',';
@@ -518,10 +531,6 @@ function xDx(inputStr){
 function d66(){
   let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
   return returnStr;
-}
-////seed random
-function srand(seed){
-  return ('0.'+Math.sin(seed).toString().substr(6));
 }
 ////SW2.0 function 開始
 //////sw威力表
