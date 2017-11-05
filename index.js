@@ -344,7 +344,7 @@ function parseInput(rplyToken, inputStr) {
   let msgSplitor = (/\S+/ig);
   let mainMsg = inputStr.match(msgSplitor);
   let trigger = mainMsg[0].toString().toLowerCase(); 
-  let trigger2 = mainMsg[1].toString().toLowerCase(); 
+  //let trigger2 = mainMsg[1].toString().toLowerCase(); 
   //help
   if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
     return help(trigger);
@@ -371,7 +371,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //SW2.0 流言表
   if (trigger.match(/^swtw$/)!= null ){
-    return swTw(trigger2);
+    //return swTw(trigger2);
   }
   //忍神判定
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
