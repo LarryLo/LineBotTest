@@ -349,7 +349,7 @@ function parseInput(rplyToken, inputStr) {
     return help(trigger);
   }
   //test
-  if (trigger.match(/^\d+$/)!= null ){
+  if (trigger.match(/^&/)!= null ){
     return srand(trigger);
   }
   //SW2.0 威力骰
@@ -524,8 +524,17 @@ function d66(){
   return returnStr;
 }
 ////seed random
-function srand(seed){
-  return ('0.'+Math.sin(seed).toString().substr(6));
+function srand(seed_o){
+  let seed=srand(1);
+  if(seed.match(/\D/)!=null){
+    for(let i=0;i<seed.length;i++){
+      seed=Number(seed)+Number(seed_o.charCodeAt(i));
+      seed=srand(seed);
+    }
+  }
+  else{
+    return ('0.'+Math.sin(seed_o).toString().substr(6));  
+  } 
 }
 ////SW2.0 function 開始
 //////sw威力表
