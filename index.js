@@ -349,7 +349,7 @@ function parseInput(rplyToken, inputStr) {
     return help(trigger);
   }
   //test
-  if (trigger.match(/^&/)!= null ){
+  if (trigger.match(/^$/)!= null ){
     return srand(trigger);
   }
   //SW2.0 威力骰
@@ -531,6 +531,7 @@ function srand(seed_o){
       seed=Number(seed)+Number(seed_o.charCodeAt(i));
       seed=srand(seed);
     }
+    return seed;
   }
   else{
     return ('0.'+Math.sin(seed_o).toString().substr(6));  
