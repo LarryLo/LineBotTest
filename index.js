@@ -696,6 +696,9 @@ function sg(inputStr) {
   else if(ans2>=t){
     returnStr+='→成功';
   }
+  else{
+    returnStr+='→失敗';
+  }
   return returnStr;
 }
 ////忍神 function 結束
