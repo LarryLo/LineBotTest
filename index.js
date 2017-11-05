@@ -677,8 +677,8 @@ function sg(inputStr) {
   dice=Math.ceil(Math.random()*6);
   ans+=dice;
   returnStr+=dice+']';
+  ans2=ans+Number(b);
   if(Number(b)!=0){
-    ans2=ans+Number(b);
     returnStr+=b;
   }
   returnStr+='='+ans2;
