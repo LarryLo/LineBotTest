@@ -350,7 +350,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //test
   if (trigger.match(/^#/)!= null ){
-    return srand(trigger);
+    return strToSeed(trigger.match(/[^#]+/).toString());
   }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
@@ -406,6 +406,14 @@ function parseInput(rplyToken, inputStr) {
 ////seed random
 function srand(seed){
   seed='0.'+Math.sin(seed).toString().substr(6);
+  return seed.toString();
+}
+////strToSeed
+function strToSeed(inputStr){
+  let seed=1;
+  for(let i=0;i<inputStr.length;i++){
+  	seed=seed*inputStr.charCodeAt(0)%29973;
+  }
   return seed.toString();
 }
 ////基本運算
