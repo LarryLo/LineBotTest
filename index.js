@@ -409,10 +409,10 @@ function srand(seed_o){
   try{
   //
   let seed=srand(1);
-  if(seed.match(/\D/)!=null){
+  if(!isNaN(Number(seed))){
     for(let i=0;i<seed.length;i++){
       seed=Number(seed)+Number(seed_o.charCodeAt(i));
-      seed=srand(seed);
+      seed=srand(Number(seed));
     }
     return seed;
   }
