@@ -519,6 +519,10 @@ function d66(){
   let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
   return returnStr;
 }
+////seed random
+function srand(seed){
+  return ('0.'+Math.sin(seed).toString().substr(6));
+}
 ////SW2.0 function 開始
 //////sw威力表
 function Kx(inputStr) {
