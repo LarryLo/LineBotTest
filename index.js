@@ -403,6 +403,21 @@ function parseInput(rplyToken, inputStr) {
 }
 
 //骰組function
+////seed random
+function srand(seed_o){
+  let seed=srand(1);
+  if(seed.match(/\D/)!=null){
+    for(let i=0;i<seed.length;i++){
+      seed=Number(seed)+Number(seed_o.charCodeAt(i));
+      seed=srand(seed);
+    }
+    return seed;
+  }
+  else{
+    seed='0.'+Math.sin(seed_o).toString().substr(6);
+    return seed.toString();  
+  } 
+}
 ////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：';
@@ -522,20 +537,6 @@ function xDx(inputStr){
 function d66(){
   let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
   return returnStr;
-}
-////seed random
-function srand(seed_o){
-  let seed=srand(1);
-  if(seed.match(/\D/)!=null){
-    for(let i=0;i<seed.length;i++){
-      seed=Number(seed)+Number(seed_o.charCodeAt(i));
-      seed=srand(seed);
-    }
-    return seed;
-  }
-  else{
-    return ('0.'+Math.sin(seed_o).toString().substr(6));  
-  } 
 }
 ////SW2.0 function 開始
 //////sw威力表
