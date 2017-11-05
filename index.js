@@ -473,7 +473,7 @@ function xDx(inputStr){
   if(inputStr.match(/\d+d\d+/)!=null){
     let tempMatch=inputStr.match(/\d+d\d+/).toString();
     let a=tempMatch.match(/\d+/g);
-    for(i=0;i<a[0];i++){
+    for(let i=0;i<a[0];i++){
       let dice=Math.ceil(Math.random()*a[1]);
       answer+=dice;
       if(i>0) returnStr+=',';
@@ -485,7 +485,7 @@ function xDx(inputStr){
   else if(inputStr.match(/\d+d/)!=null){
     let tempMatch=inputStr.match(/\d+d/).toString();
     let a=tempMatch.match(/\d+/g);    
-    for(i=0;i<a[0];i++){
+    for(let i=0;i<a[0];i++){
       let dice=Math.ceil(Math.random()*6);
       answer+=dice;
       if(i>0) returnStr+=',';
