@@ -349,7 +349,7 @@ function parseInput(rplyToken, inputStr) {
     return help(trigger);
   }
   //test
-  if (trigger.match(/^$/)!= null ){
+  if (trigger.match(/^#/)!= null ){
     return srand(trigger);
   }
   //SW2.0 威力骰
