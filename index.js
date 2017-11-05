@@ -387,7 +387,10 @@ function parseInput(rplyToken, inputStr) {
   //雜項
   if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
-  }  
+  }
+  if (trigger.match(/^霍普rm$/)!= null ){
+    return GinWayRm();
+  }
   if (trigger.match(/^泡泡$/)!= null ){
     return '泡泡！泡泡！更多泡泡！';
   }  
@@ -711,11 +714,22 @@ function sg(inputStr) {
   return returnStr;
 }
 ////忍神 function 結束
-////峻崴骰
+////雜項
+//////峻崴骰
 function GinWay() {
   let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
 }
+//////峻崴流言表
+function GinWayRm() {
+  let returnStr = 'SW2.0流言：';
+  returnStr+='霍普';
+  returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
+  returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
+  return returnStr;
+}
+////雜項結束
+////幫助
 function help(inputStr){
   let returnStr='';
   if(inputStr.match(/sw/)!=null){
