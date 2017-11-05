@@ -405,6 +405,9 @@ function parseInput(rplyToken, inputStr) {
 //骰組function
 ////seed random
 function srand(seed_o){
+  //
+  try{
+  //
   let seed=srand(1);
   if(seed.match(/\D/)!=null){
     for(let i=0;i<seed.length;i++){
@@ -416,7 +419,13 @@ function srand(seed_o){
   else{
     seed='0.'+Math.sin(seed_o).toString().substr(6);
     return seed.toString();  
-  } 
+  }
+  //
+  }
+  catch(error){
+  return error.toString();
+  }
+  //
 }
 ////基本運算
 function claculater(inputStr){
