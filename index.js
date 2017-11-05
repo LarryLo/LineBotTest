@@ -350,7 +350,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //test
   if (trigger.match(/^#/)!= null ){
-    return srand(trigger.match(/\d+/).toString());
+    return srand(trigger);
   }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
@@ -411,9 +411,9 @@ function srand(seed_o){
   let seed=srand(1);
   if(!isNaN(Number(seed))){
     for(let i=0;i<seed.length;i++){
-      seed=Number(seed)+Number(seed_o.charCodeAt(i));
-      seed=srand(Number(seed));
+      seed=(Number(seed)*Number(seed_o.charCodeAt(i)))%29947;
     }
+    seed=srand(Number(seed));
     return seed;
   }
   else{
