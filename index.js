@@ -347,7 +347,11 @@ function parseInput(rplyToken, inputStr) {
   //help
   if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
     return help(trigger);
-  }  
+  }
+  //test
+  if (trigger.match(/^\d+$/)!= null ){
+    return srand(trigger);
+  }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
     return Kx(trigger);
