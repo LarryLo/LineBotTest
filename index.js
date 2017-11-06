@@ -371,7 +371,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //SW2.0 城鎮生成
   if (trigger.match(/^swtw/)!= null ){
-    return swTw(trigger);
+    return 'swtw';
   }
   //忍神判定
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
