@@ -410,7 +410,7 @@ function parseInput(rplyToken, inputStr) {
 ////seed random
 function srand(seed){
   seed='0.'+Math.sin(seed).toString().substr(6);
-  return seed.toString();
+  return Number(seed);
 }
 ////strToSeed
 function strToSeed(inputStr){
@@ -662,8 +662,8 @@ function swRm() {
 }
 //////城鎮生成
 function swTw(inputStr){
-  let seed=inputStr.replace(/^swtw/,'');
-  seed=strToSeed(seed);
+  inputStr=inputStr.replace(/^swtw/,'');
+  let seed=strToSeed(inputStr);
   let level=0;
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
