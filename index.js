@@ -1,4 +1,4 @@
-var version='1.06';
+var version='1.07β 忍神更新';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -631,25 +631,25 @@ function swGr() {
 //////大失敗表
 function swFt() {
   let returnStr = 'SW2.0大失敗表：';
-  let swFtSheet=['額外擲兩次大失敗表，兩方效果皆適用（不會累加），另外本次大失敗額外增加50點經驗'
-                ,'傷害增加攻擊者的「劍之碎片」點'
-                ,'傷害增加攻擊者的「等級」點'
-                ,'骰兩次傷害骰，選擇較高者'
-                ,'傷害增加為原本的兩倍'
-                ,'防護點無效化'];
-  returnStr+=swFtSheet[Math.floor(Math.random()*6)];
+  let sheet=['[1]額外擲兩次大失敗表，兩方效果皆適用（不會累加），另外本次大失敗額外增加50點經驗'
+            ,'[2]傷害增加攻擊者的「劍之碎片」點'
+            ,'[3]傷害增加攻擊者的「等級」點'
+            ,'[4]骰兩次傷害骰，選擇較高者'
+            ,'[5]傷害增加為原本的兩倍'
+            ,'[6]防護點無效化'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 //////纏繞表
 function swTt() {
   let returnStr = 'SW2.0纏繞表：';
-  let swTtSheet=['頭或臉：使用牙齒的命中判定-2，魔法行使判定-2'
-                ,'武器：武器無法使用，盾牌加值無效化'
-                ,'手腕：命中判定-2，盾牌加值無效化'
-                ,'腳：迴避判定-2'
-                ,'身體：所有行為判定-1'
-                ,'特殊：使用該部位的行為判定-1，失去該部位加值'];
-  returnStr+=swTtSheet[Math.floor(Math.random()*6)];
+  let sheet=['[1]頭或臉：使用牙齒的命中判定-2，魔法行使判定-2'
+            ,'[2]武器：武器無法使用，盾牌加值無效化'
+            ,'[3]手腕：命中判定-2，盾牌加值無效化'
+            ,'[4]腳：迴避判定-2'
+            ,'[5]身體：所有行為判定-1'
+            ,'[6]特殊：使用該部位的行為判定-1，失去該部位加值'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 //////流言表
@@ -734,6 +734,28 @@ function sg(inputStr) {
   else{
     returnStr+='→失敗';
   }
+  return returnStr;
+}
+function sgFt() {
+  let returnStr = 'SW2.0纏繞表：';
+  let sheet=['[1]不太對勁！該輪所有行為判定受到-1修正'
+            ,'[2]大事不妙！損失一個任意忍具'
+            ,'[3]情報洩漏！你以外的角色可以知曉你的【祕密】或【居所】任意一個'
+            ,'[4]太大意了！術式操作失敗，任選【生命力】流失一點'
+            ,'[5]敵人的陰謀？落入陷阱中，隨機受到一個變調'
+            ,'[6]呼，真是危險，還好沒有發生什麼事'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgEt() {
+  let returnStr = 'SW2.0纏繞表：';
+  let sheet=['[1]共感＼不信'
+            ,'[2]友情＼憤怒'
+            ,'[3]愛情＼忌妒'
+            ,'[4]忠誠＼侮辱'
+            ,'[5]憧憬＼自卑'
+            ,'[6]狂信＼殺意'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 ////忍神 function 結束
