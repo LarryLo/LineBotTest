@@ -662,6 +662,9 @@ function swRm() {
 }
 //////城鎮生成
 function swTw(inputStr){
+  //
+  try{
+  //
   let seed=strToSeed(inputStr);
   let level=0;
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
@@ -675,7 +678,9 @@ function swTw(inputStr){
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
   returnStr+='規模：'+townLvSheet[level]+' 約'+'人\n';
   returnStr='';
-  return returnStr;  
+  return returnStr;
+  //
+  }catch(exception){return exception.toString();}
 }
 ////SW2.0 function 結束
 ////忍神 function 開始
