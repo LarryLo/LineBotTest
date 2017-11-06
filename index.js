@@ -671,7 +671,7 @@ function swTw(inputStr){
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
   else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*5);
   else level=Math.floor(srand(seed)*10);
-  let population=Math.floor(popuSheet[level]*(2+srand(seed+1)+srand(seed+2))/3);
+  let population=Math.floor(popuSheet[level]*(2+Number(srand(seed+1))+Number(srand(seed+2)))/3);
   
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
   returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人';
