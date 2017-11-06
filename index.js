@@ -414,7 +414,7 @@ function parseInput(rplyToken, inputStr) {
     return GinWay();
   }
   if (trigger.match(/^霍普投人機$/)!= null ){
-    return '咻～！飛了'+Math.exp(10,Math.random()*6)+'公尺！';
+    return '咻～！飛了'+Math.random()*10000+'公尺！';
   }
   if (trigger.match(/^霍普rm$/)!= null ){
     return GinWayRm();
