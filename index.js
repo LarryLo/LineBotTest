@@ -346,7 +346,7 @@ function parseInput(rplyToken, inputStr) {
   let trigger = mainMsg[0].toString().toLowerCase(); 
   //let trigger2 = mainMsg[1].toString().toLowerCase(); 
   //help
-  if (trigger.match(/^(sw)?(help|幫助)$/)!= null ){
+  if (trigger.match(/^(sw|sg)?(help|幫助)$/)!= null ){
     return help(trigger);
   }
   //SW2.0 威力骰
@@ -737,7 +737,7 @@ function sg(inputStr) {
   return returnStr;
 }
 function sgFt() {
-  let returnStr = 'SW2.0纏繞表：';
+  let returnStr = '忍神逆風表：';
   let sheet=['[1]不太對勁！該輪所有行為判定受到-1修正'
             ,'[2]大事不妙！損失一個任意忍具'
             ,'[3]情報洩漏！你以外的角色可以知曉你的【祕密】或【居所】任意一個'
@@ -748,13 +748,35 @@ function sgFt() {
   return returnStr;
 }
 function sgEt() {
-  let returnStr = 'SW2.0纏繞表：';
+  let returnStr = '忍神感情表：';
   let sheet=['[1]共感＼不信'
             ,'[2]友情＼憤怒'
             ,'[3]愛情＼忌妒'
             ,'[4]忠誠＼侮辱'
             ,'[5]憧憬＼自卑'
             ,'[6]狂信＼殺意'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgWt() {
+  let returnStr = '忍神變調表：';
+  let sheet=['[1]故障：所有的忍具變為無法使用，每輪結束時可以進行【絡繰術】判定嘗試解除此狀態'
+            ,'[2]麻痺：從已學得的特技中隨機選擇1個，受到此變調影響時該特技視為未習得狀態，每輪結束時可以進行【身體操術】判定嘗試解除此狀態'
+            ,'[3]重傷：進行命中、情報、感情判定時受到1點接近戰傷害，每輪結束時可以進行【生存術】判定嘗試解除此狀態。本效果不可累積'
+            ,'[4]行蹤不明：主要階段時、不是自己主場的場景變為無法出場，每輪結束時可以進行【經濟力】判定嘗試解除此狀態'
+            ,'[5]忘卻：從已獲得感情中隨機選擇1個，受到此變調影響時該感情視為未獲得狀態，每輪結束時可以進行【記憶術】判定嘗試解除此狀態'
+            ,'[6]詛咒：從已習得的忍法中隨機選擇1個，受到此變調影響時該忍法視為未習得狀態，每輪結束時可以進行【咒術】判定嘗試解除此狀態'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgGWt() {
+  let returnStr = '忍神戰國變調表：';
+  let sheet=['[1]催眠：戰鬥開始時擁有此變調或得到此變調的當下，若不減少1點【生命力】則立刻從戰鬥中脫落，每輪結束時可以進行【意氣】判定嘗試解除此狀態。本效果不可累積'
+            ,'[2]火達摩：受到本變調影響者大失敗值+1、且大失敗時受到1點【接近戰傷害】，場景結束時自動解除。疊加後大失敗值與傷害值都會增加'
+            ,'[3]猛毒：若受到了本變調，回合結束丟1D6(猛毒和飢餓共用此判定)，奇數則減少1點【生命力】，每輪結束可進行【毒術】判定嘗試解除此狀態。疊加後傷害值會增加'
+            ,'[4]飢餓：若受到了本變調，回合結束時1D6(猛毒和飢餓共用此判定)，偶數則減少1點【生命力】，每輪結束可進行【兵糧術】判定嘗試解除此狀態。疊加後傷害值會增加'
+            ,'[5]殘刃：若受到了本變調影響，回復判定、忍法、忍具與背景的回復生命效果無效化，每輪結束時可以進行【拷問術】判定嘗試解除此狀態。本效果不可累積'
+            ,'[6]野望：命中判定+1，除此之外的所有判定-1，每輪結束時可以進行【憑依術】判定嘗試解除此狀態。本效果不可累積'];
   returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
@@ -789,14 +811,27 @@ function help(inputStr){
     returnStr+='\n';
     returnStr+='成長骰 gr\n';
     returnStr+='\n';
-    returnStr+='大失敗表 swft\n';
+    returnStr+='大失敗表 swFt\n';
     returnStr+='\n';
     returnStr+='纏繞表 swTt\n';
     returnStr+='\n';
-    returnStr+='自製流言表 swTt\n';
+    returnStr+='自製流言表 swRm\n';
     returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
     returnStr+='內容「非常」有特色 請小心服用\n';
     returnStr+='\n';
+  }
+  else if(inputStr.match(/sg/)!=null){
+    returnStr+='======================\n';
+    returnStr+='忍神骰組\n';
+    returnStr+='======================\n';
+    returnStr+='判定骰 sg+n>=n#n@n\n';
+    returnStr+='>=n為成功值 #n為大失敗值 @n為大成功值\n';
+    returnStr+='Ex：sg>=6,sg+2>=7#4@10\n';
+    returnStr+='\n';
+    returnStr+='情感表 sgEt\n';
+    returnStr+='逆風表 sgFt\n';
+    returnStr+='變調表 sgWt\n';
+    returnStr+='戰國變調表 sgGwt\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
@@ -815,14 +850,12 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='SW2.0骰組\n';
     returnStr+='======================\n';
-    returnStr+='詳見 swhelp\n';
+    returnStr+='詳見 swHelp\n';
     returnStr+='\n';
     returnStr+='======================\n';
     returnStr+='忍神骰組\n';
     returnStr+='======================\n';
-    returnStr+='判定骰 sg+n>=n#n@n\n';
-    returnStr+='>=n為成功值 #n為大失敗值 @n為大成功值\n';
-    returnStr+='Ex：sg>=6,sg+2>=7#4@10\n';
+    returnStr+='詳見 sgHelp\n';
     returnStr+='\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
