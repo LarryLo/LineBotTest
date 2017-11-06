@@ -377,6 +377,22 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
     return sg(trigger);
   }
+  //忍神情感表
+  if (trigger.match(/^sget$/)!= null ){
+    return sgEt();
+  }
+  //忍神逆風表
+  if (trigger.match(/^sgft$/)!= null ){
+    return sgFt();
+  }
+  //忍神變調表
+  if (trigger.match(/^sgwt$/)!= null ){
+    return sgWt();
+  }
+  //忍神戰國變調表
+  if (trigger.match(/^sggwt$/)!= null ){
+    return sgGWt();
+  }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(trigger);
