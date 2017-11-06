@@ -673,12 +673,11 @@ function swTw(inputStr){
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
   else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*5);
   else level=Math.floor(srand(seed)*10);
-  return '2';
   //let population=popuSheet[level]*2/3+srand(seed)
   
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
   returnStr+='規模：'+townLvSheet[level]+' 約'+'人\n';
-  returnStr='';
+  returnStr+='';
   return returnStr;
   //
   }catch(exception){return exception.toString();}
