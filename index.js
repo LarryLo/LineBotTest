@@ -369,9 +369,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
   }
-  //SW2.0 流言表
-  if (trigger.match(/^swtw$/)!= null ){
-    //return swTw(trigger2);
+  //SW2.0 城鎮生成
+  if (trigger.match(/^swtw/)!= null ){
+    return swTw(trigger);
   }
   //忍神判定
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
