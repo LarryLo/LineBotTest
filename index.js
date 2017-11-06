@@ -666,15 +666,15 @@ function swTw(inputStr){
   let level=0;
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
-  if(inputStr.match(/村$/)) level=Math.floor(srand(seed)*2);
-  else if(inputStr.match(/鎮$/)) level=2+Math.floor(srand(seed)*3);
-  else if(inputStr.match(/城$/)) level=5+Math.floor(srand(seed)*5);
+  if(inputStr.match(/村$/)!=null) level=Math.floor(srand(seed)*2);
+  else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
+  else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*5);
   else level=Math.floor(srand(seed)*10);
   //let population=popuSheet[level]*2/3+srand(seed)
   
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
-  let returnStr='規模：'+townLvSheet[level]+' 約'+'人\n';
-  let returnStr='SW2.0城鎮：'+inputStr+'\n';
+  returnStr+='規模：'+townLvSheet[level]+' 約'+'人\n';
+  returnStr='';
   return returnStr;  
 }
 ////SW2.0 function 結束
