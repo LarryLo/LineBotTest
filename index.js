@@ -381,7 +381,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sget$/)!= null ){
     return sgEt();
   }
-  //忍神逆風表
+  //忍神大失敗表
   if (trigger.match(/^sgft$/)!= null ){
     return sgFt();
   }
@@ -392,6 +392,10 @@ function parseInput(rplyToken, inputStr) {
   //忍神戰國變調表
   if (trigger.match(/^sggwt$/)!= null ){
     return sgGWt();
+  }
+  //忍神場景表
+  if (trigger.match(/^sgst$/)!= null ){
+    return sgSt();
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -753,7 +757,7 @@ function sg(inputStr) {
   return returnStr;
 }
 function sgFt() {
-  let returnStr = '忍神逆風表：';
+  let returnStr = '忍神大失敗表：';
   let sheet=['[1]不太對勁！該輪所有行為判定受到-1修正。'
             ,'[2]大事不妙！損失一個任意忍具。'
             ,'[3]情報洩漏！你以外的角色可以知曉你的【祕密】或【居所】任意一個。'
@@ -794,6 +798,22 @@ function sgGWt() {
             ,'[5]殘刃：若受到了本變調影響，回復判定、忍法、忍具與背景的回復生命效果無效化，每輪結束時可以進行【拷問術】判定嘗試解除此狀態。本效果不可累積。'
             ,'[6]野望：命中判定+1，除此之外的所有判定-1，每輪結束時可以進行【憑依術】判定嘗試解除此狀態。本效果不可累積。'];
   returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgSt() {
+  let returnStr = '忍神場景表：';
+  let sheet=['[2]周圍充滿了血的氣息，似乎有進行過戰鬥的氣息。不對，戰鬥還在繼續嗎？'
+            ,'[3]這是…夢嗎？那是本應結束了的過去，但確無法忘懷。'
+            ,'[4]眺望著眼前展開的城市。在這裡的話就可以將一街一物盡收眼底…'
+            ,'[5]像是世界末日般的黑暗。黑暗之中你們在低低私語。'
+            ,'[6]度過了悠閒的時光，幾乎要忘卻影之世界的一切。'
+            ,'[7]空氣清新的森林裡，鳥兒婉轉歌唱，清風拂過樹葉嘩嘩地作響。'
+            ,'[8]人群如山海湧動而喧囂，毫不知曉影之世界的單純人們高談闊論，喋喋不休。'
+            ,'[9]大雨傾盆。人們慌張的奔向避雨之所。'
+            ,'[10]大風呼嘯。頭髮跟衣服被吹的搖曳。似乎有什麼事要發生了…'
+            ,'[11]醉漢大吼著，攬客聲呼喚著，女人們嬌聲著，這是繁華街道常見的畫面。'
+            ,'[12]太陽的微笑包裹著你，那對於影之世界的住民來說太過於耀眼。'];
+  returnStr+=sheet[Math.floor(Math.random()*6)+Math.floor(Math.random()*6)];
   return returnStr;
 }
 ////忍神 function 結束
@@ -845,7 +865,7 @@ function help(inputStr){
     returnStr+='Ex：sg>=6,sg+2>=7#4@10\n';
     returnStr+='\n';
     returnStr+='情感表 sgEt\n';
-    returnStr+='逆風表 sgFt\n';
+    returnStr+='大失敗表 sgFt\n';
     returnStr+='變調表 sgWt\n';
     returnStr+='戰國變調表 sgGwt\n';
   }
