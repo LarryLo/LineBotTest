@@ -846,11 +846,8 @@ function help(inputStr){
     returnStr+='Ex：K10+3@7$+1\n';
     returnStr+='\n';
     returnStr+='成長骰 gr\n';
-    returnStr+='\n';
     returnStr+='大失敗表 swFt\n';
-    returnStr+='\n';
     returnStr+='纏繞表 swTt\n';
-    returnStr+='\n';
     returnStr+='自製流言表 swRm\n';
     returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
     returnStr+='內容「非常」有特色 請小心服用\n';
@@ -868,6 +865,7 @@ function help(inputStr){
     returnStr+='大失敗表 sgFt\n';
     returnStr+='變調表 sgWt\n';
     returnStr+='戰國變調表 sgGwt\n';
+    returnStr+='場景表 sgSt\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
