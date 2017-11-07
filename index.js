@@ -437,9 +437,9 @@ function srand(seed){
 }
 ////strToSeed
 function strToSeed(inputStr){
-  let seed=1;
+  let seed=7;
   for(let i=0;i<inputStr.length;i++){
-  	seed=seed*inputStr.charCodeAt(i);
+  	seed=seed/7*inputStr.charCodeAt(i);
   }
   return Number(seed);
 }
