@@ -441,7 +441,7 @@ function strToSeed(inputStr){
   for(let i=0;i<inputStr.length;i++){
   	seed=seed*inputStr.charCodeAt(i);
   }
-  return seed.toString();
+  return Number(seed);
 }
 ////基本運算
 function claculater(inputStr){
