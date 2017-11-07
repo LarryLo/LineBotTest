@@ -597,8 +597,8 @@ function Kx(inputStr) {
       sFlag=true;
     s=s.match(/-?\d+/).toString();
   }
-  if(c<7){
-    returnStr+='c值不能小於7喔';
+  if(c<2){
+    returnStr+='c值不能小於2喔';
     return returnStr;
   }
   if(k<0||k>100){
