@@ -439,7 +439,7 @@ function srand(seed){
 function strToSeed(inputStr){
   let seed=1;
   for(let i=0;i<inputStr.length;i++){
-  	seed=seed*inputStr.charCodeAt(0)%29973;
+  	seed=seed*inputStr.charCodeAt(i);
   }
   return seed.toString();
 }
