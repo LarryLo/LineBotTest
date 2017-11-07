@@ -831,9 +831,9 @@ function GinWay() {
 }
 //////投人機
 function terbuchet(inputStr) {
-  let returnStr='咻～！飛了';
+  let returnStr='咻～！';
   if(inputStr.match(/(泡泡|活性|界面)/)!=null) return undefined;
-  returnStr+=inputStr.replace(/投人機$/, '');
+  returnStr+=inputStr.replace(/投人機$/, '飛了');
   returnStr+=Math.pow(10,Math.random()*8-2).toFixed(2)+'公尺！';
   return returnStr;
 }
