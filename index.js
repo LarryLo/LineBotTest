@@ -413,8 +413,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
   }
-  if (trigger.match(/^霍普投人機$/)!= null ){
-    return '咻～！飛了'+Math.random()*10000+'公尺！';
+  if (trigger.match(/投人機$/)!= null ){
+    return terbuchet(trigger);
   }
   if (trigger.match(/^霍普rm$/)!= null ){
     return GinWayRm();
@@ -826,8 +826,13 @@ function sgSt() {
 ////雜項
 //////峻崴骰
 function GinWay() {
-  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
+  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈'];
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
+}
+//////投人機
+function terbuchet(inputStr) {
+  let returnStr='咻～！飛了'+Math.random()*10000+'公尺！';
+  return returnStr;
 }
 //////峻崴流言表
 function GinWayRm() {
