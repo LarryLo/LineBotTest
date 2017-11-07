@@ -1,4 +1,4 @@
-var version='1.07';
+var version='1.07+';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -350,7 +350,7 @@ function parseInput(rplyToken, inputStr) {
     return help(trigger);
   }
   //SW2.0 威力骰
-  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
+  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
     return Kx(trigger);
   }
   //SW2.0 成長骰
@@ -606,7 +606,8 @@ function Kx(inputStr) {
     return returnStr;
   }
   dice1= Math.ceil(Math.random()*6);
-  dice2= Math.ceil(Math.random()*6);
+  if(tempMatch.match(/gf$/)!=null)  dice2=dice1;
+  else dice2= Math.ceil(Math.random()*6);
   if(sFlag){
     dice=Number(s);
     returnStr+='['+dice+']';
@@ -629,7 +630,8 @@ function Kx(inputStr) {
   while(dice>=c){
     count++;
     dice1= Math.ceil(Math.random()*6);
-    dice2= Math.ceil(Math.random()*6);
+    if(tempMatch.match(/gf$/)!=null)  dice2=dice1;
+    else dice2= Math.ceil(Math.random()*6);
     dice=dice1+dice2;returnStr+=',['+dice1+','+dice2+']';
     if(dice>2){
       damage+=powerSheet[k][dice-3];
