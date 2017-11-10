@@ -695,8 +695,8 @@ function swTw(inputStr){
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
   if(inputStr.match(/村$/)!=null) level=Math.floor(srand(seed)*2);
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
-  else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*5);
-  else level=Math.floor(srand(seed)*10);
+  else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*4.2);
+  else level=Math.floor(srand(seed)*9.2);
   let population=Math.floor(popuSheet[level]*(2+srand(seed+1)+srand(seed+2))/3);
   
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
