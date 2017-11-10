@@ -442,6 +442,15 @@ function strToSeed(inputStr){
   }
   return Number(seed);
 }
+function extract(rate,num){
+  let num=num*rate.reduce(function(a,b){return a+b;},0);
+  let sum=0;
+  for(let i=0;i<rate.length,i++){
+    sum+=rate[i];
+    if(sum>num) return i;
+  }
+  return undefined;
+}
 ////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：';
@@ -690,9 +699,17 @@ function swRm() {
 function swTw(inputStr){
   inputStr=inputStr.replace(/^swtw/,'');
   let seed=strToSeed(inputStr);
-  let level=0;
+  let randNum=0;
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
+  //信仰組成機率:村莊多為單一、城鎮較為多樣
+  let riligionComRate=[[9,4,1],[3,2,1],[1,1,1]];
+  //信仰組成:單一、雙重、多重
+  let riligionComSheet=[[90],[50,40],[30,20,20,10]];
+  let riligionSheet=['a','b','c','d','e','f'];
+  let riligionRate=[1,2,1,4,1,3];
+  
+  let level=0;
   if(inputStr.match(/村$/)!=null) level=Math.floor(srand(seed)*2);
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
   else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*4.2);
@@ -702,6 +719,14 @@ function swTw(inputStr){
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
   returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人';
   returnStr+='';
+  
+  let type=0;
+  if(level<2) type=0;
+  else if(level<5) type=1;
+  else if(level<10) type=2;
+  
+  let 
+  
   return returnStr;
 }
 ////SW2.0 function 結束
