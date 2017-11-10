@@ -418,7 +418,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^霍普rm$/)!= null ){
     return GinWayRm();
   }
-  if (trigger.match(/^泡泡$/)!= null ){
+  if (trigger.match(/^\\泡泡\/$/)!= null ){
     return '泡泡！泡泡！更多泡泡！';
   }  
   if (trigger.match(/^複雜度$/)!= null ||
