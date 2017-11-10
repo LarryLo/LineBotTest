@@ -1,4 +1,4 @@
-var version='1.07';
+var version='1.07+';
 //表格放置區
 ////sw2.0
 var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
@@ -350,7 +350,7 @@ function parseInput(rplyToken, inputStr) {
     return help(trigger);
   }
   //SW2.0 威力骰
-  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)!= null ){
+  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
     return Kx(trigger);
   }
   //SW2.0 成長骰
@@ -413,8 +413,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
   }
-  if (trigger.match(/^霍普投人機$/)!= null ){
-    return '咻～！飛了'+Math.random()*10000+'公尺！';
+  if (trigger.match(/投人機$/)!= null ){
+    return terbuchet(trigger);
   }
   if (trigger.match(/^霍普rm$/)!= null ){
     return GinWayRm();
@@ -437,11 +437,11 @@ function srand(seed){
 }
 ////strToSeed
 function strToSeed(inputStr){
-  let seed=1;
+  let seed=7;
   for(let i=0;i<inputStr.length;i++){
-  	seed=seed*inputStr.charCodeAt(0)%29973;
+  	seed=seed/7*inputStr.charCodeAt(i);
   }
-  return seed.toString();
+  return Number(seed);
 }
 ////基本運算
 function claculater(inputStr){
@@ -567,7 +567,7 @@ function d66(){
 //////sw威力表
 function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：';
-  let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?$/)[0].toString();
+  let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)[0].toString();
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
   let b=0;
@@ -597,16 +597,18 @@ function Kx(inputStr) {
       sFlag=true;
     s=s.match(/-?\d+/).toString();
   }
-  if(c<7){
-    returnStr+='c值不能小於7喔';
-    return returnStr;
+  if(c<3){
+    //returnStr+='c值不能小於2喔';
+    //return returnStr;
+    c=3;
   }
   if(k<0||k>100){
     returnStr+='k值只支援0~100喔';
     return returnStr;
   }
   dice1= Math.ceil(Math.random()*6);
-  dice2= Math.ceil(Math.random()*6);
+  if(tempMatch.match(/gf$/)!=null)  dice2=dice1;
+  else dice2= Math.ceil(Math.random()*6);
   if(sFlag){
     dice=Number(s);
     returnStr+='['+dice+']';
@@ -629,7 +631,8 @@ function Kx(inputStr) {
   while(dice>=c){
     count++;
     dice1= Math.ceil(Math.random()*6);
-    dice2= Math.ceil(Math.random()*6);
+    if(tempMatch.match(/gf$/)!=null)  dice2=dice1;
+    else dice2= Math.ceil(Math.random()*6);
     dice=dice1+dice2;returnStr+=',['+dice1+','+dice2+']';
     if(dice>2){
       damage+=powerSheet[k][dice-3];
@@ -823,8 +826,16 @@ function sgSt() {
 ////雜項
 //////峻崴骰
 function GinWay() {
-  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈']
+  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈'];
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
+}
+//////投人機
+function terbuchet(inputStr) {
+  let returnStr='咻～！';
+  if(inputStr.match(/(活性|界面|^投人機$)/)!=null) return undefined;
+  returnStr+=inputStr.replace(/投人機$/, '飛了');
+  returnStr+=Math.pow(10,Math.random()*8-2).toFixed(2)+'公尺！';
+  return returnStr;
 }
 //////峻崴流言表
 function GinWayRm() {
@@ -842,10 +853,11 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='SW2.0骰組\n';
     returnStr+='======================\n';
-    returnStr+='威力骰 Kn+n@n$n\n';
+    returnStr+='威力骰 Kn+n@n$nGF\n';
     returnStr+='Kn為威力 威力10即為K10\n';
     returnStr+='@n為c值 @8即為c值8\n';
     returnStr+='$為骰目更改 $±n為增加/減少骰目 $n為指定骰目\n';
+    returnStr+='GF為極限命運\n';
     returnStr+='Ex：K10+3@7$+1\n';
     returnStr+='\n';
     returnStr+='成長骰 gr\n';
