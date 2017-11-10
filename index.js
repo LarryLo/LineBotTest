@@ -725,7 +725,13 @@ function swTw(inputStr){
   else if(level<5) type=1;
   else if(level<10) type=2;
   
-  let 
+  let rCType=extract(riligionComRate[type],sRand(seed+3));
+  rCtype=riligionComSheet[rCtype];
+  
+  randNum=srand(seed+3);
+  for(let i=0;i<rCType.length;i++){
+    rCType[i]=rCType[i];
+  }
   
   return returnStr;
 }
