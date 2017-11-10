@@ -832,7 +832,7 @@ function GinWay() {
 //////投人機
 function terbuchet(inputStr) {
   let returnStr='咻～！';
-  if(inputStr.match(/(泡泡|活性|界面|^投人機$)/)!=null) return undefined;
+  if(inputStr.match(/(活性|界面|^投人機$)/)!=null) return undefined;
   returnStr+=inputStr.replace(/投人機$/, '飛了');
   returnStr+=Math.pow(10,Math.random()*8-2).toFixed(2)+'公尺！';
   return returnStr;
@@ -853,10 +853,11 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='SW2.0骰組\n';
     returnStr+='======================\n';
-    returnStr+='威力骰 Kn+n@n$n\n';
+    returnStr+='威力骰 Kn+n@n$nGF\n';
     returnStr+='Kn為威力 威力10即為K10\n';
     returnStr+='@n為c值 @8即為c值8\n';
     returnStr+='$為骰目更改 $±n為增加/減少骰目 $n為指定骰目\n';
+    returnStr+='GF為極限命運\n';
     returnStr+='Ex：K10+3@7$+1\n';
     returnStr+='\n';
     returnStr+='成長骰 gr\n';
