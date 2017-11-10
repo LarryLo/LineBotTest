@@ -1,7 +1,6 @@
-var version='1.07+';
+var version='1.08beta tw2';
 //表格放置區
 ////sw2.0
-var swGrSheet=['靈巧','敏捷','力量','生命','智力','精神'];
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
                 [0,0,0,1,2,3,3,3,4,4],
                 [0,0,0,1,2,3,4,4,4,4],
@@ -651,7 +650,8 @@ function Kx(inputStr) {
 //////成長骰
 function swGr() {
   let returnStr = 'SW2.0成長擲骰：';
-  returnStr+='['+swGrSheet[Math.floor(Math.random()*6)]+', '+swGrSheet[Math.floor(Math.random()*6)]+']';
+  let sheet=['靈巧','敏捷','力量','生命','智力','精神'];
+  returnStr+='['+sheet[Math.floor(Math.random()*6)]+', '+sheet[Math.floor(Math.random()*6)]+']';
   return returnStr;
 }
 //////大失敗表
