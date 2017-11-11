@@ -803,7 +803,7 @@ function swTw(inputStr){
   }
   returnStr+='\n興盛產業：';
   for(let i=0;i<industrySheet.length;i++){
-    if(srand(++seed)<level) returnStr+=industrySheet[i]+'  ';
+    if(srand(++seed)*10<level) returnStr+=industrySheet[i]+'  ';
   }  
   return returnStr;
 }
