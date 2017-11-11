@@ -716,7 +716,8 @@ function swTw(inputStr){
   //信仰組成機率:村莊多為單一、城鎮較為多樣
   let comRate=[[9,4,1],[3,2,1],[1,1,1]];
   //信仰組成:單一、雙重、多重
-  let comSheet=[[90],[50,40],[30,20,20,10]];
+  let populationComSheet=[[90],[50,40],[30,20,20,10]];
+  let riligionComSheet=[[90],[50,40],[30,20,20,10]];
   let populationSheet=[[200,'人類'],[160,'精靈'],[160,'矮人'],[100,'塔比特'],[20,'符民'],
                        [5,'夢魘'],[80,'暗影'],[100,'龍人'],[20,'草原妖精'],[20,'慧人'],
                        [5,'瓦爾基里'],[0.1,'仙靈'],[0.1,'螢石人'],[5,'古貓人'],[20,'旭日'],
@@ -740,9 +741,8 @@ function swTw(inputStr){
   else if(level<10) type=2;
   //種族
   //populationComType處理
-  seed=srand(seed);
   let pCType=extract(comRate[type],srand(++seed));
-  pCType=comSheet[pCType];
+  pCType=populationComSheet[pCType];
   for(let i=0;i<pCType.length;i++){
     pCType[i]=pCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
@@ -771,14 +771,13 @@ function swTw(inputStr){
   if(populationCom[0]=='塔比特')  riligionSheet[19][0]+=14; //提高塔比特對於無特定信仰出現率
   //riligionComType處理
   let rCType=extract(comRate[type],srand(++seed));
-  rCType=comSheet[rCType];
+  rCType=riligionComSheet[rCType];
   for(let i=0;i<rCType.length;i++){
     rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
   rCType=rCType.sort(function(a,b){return b-a}); //排序信仰
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0)); //加入其他信仰
   //riligionCom處理
-  seed=srand(seed);
   let riligionCom=[];
   for(let i=0;i<rCType.length-1;i++){
     let r=extractStr(riligionSheet,srand(++seed));
