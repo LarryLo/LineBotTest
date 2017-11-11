@@ -698,8 +698,8 @@ function swRm() {
 //////城鎮生成
 function swTw(inputStr){
   inputStr=inputStr.replace(/^swtw/,'');
-  let seed=strToSeed(inputStr);
-  let randNum=0;
+  let seedO=strToSeed(inputStr);
+  let seed=seedO;
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
   //信仰組成機率:村莊多為單一、城鎮較為多樣
@@ -714,23 +714,27 @@ function swTw(inputStr){
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
   else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*4.2);
   else level=Math.floor(srand(seed)*9.2);
-  let population=Math.floor(popuSheet[level]*(2+srand(seed+1)+srand(seed+2))/3);
+  let population=Math.floor(popuSheet[level]*(2+srand(++seed)+srand((seed++)+1))/3);
   
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
-  returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人';
-  returnStr+='';
+  returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人\n';
   
   let type=0;
   if(level<2) type=0;
   else if(level<5) type=1;
   else if(level<10) type=2;
   
-  let rCType=extract(riligionComRate[type],sRand(seed+3));
+  let rCType=extract(riligionComRate[type],sRand(++seed));
   rCtype=riligionComSheet[rCtype];
   
   randNum=srand(seed+3);
   for(let i=0;i<rCType.length;i++){
-    rCType[i]=rCType[i];
+    rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
+  }
+  rCType=rCType.sort().reverse();
+  rCType.push(100-rCType.reduce(function(a,b){return a+b;},0));
+  for(let i=0;i<rCType.length;i++){
+    returnStr+=riligionSheet[i]+'：'+rCType[i]+'%；';
   }
   
   return returnStr;
