@@ -714,13 +714,17 @@ function swTw(inputStr){
   let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
   //信仰組成機率:村莊多為單一、城鎮較為多樣
-  let riligionComRate=[[9,4,1],[3,2,1],[1,1,1]];
+  let comRate=[[9,4,1],[3,2,1],[1,1,1]];
   //信仰組成:單一、雙重、多重
-  let riligionComSheet=[[90],[50,40],[30,20,20,10]];
-  let riligionSheet=[[50,'始祖神'],[40,'太陽神'],[25,'賢神'],[5,'妖精神'],[25,'炎武帝'],
-                     [18,'騎士神'],[10,'月神'],[10,'酒幸神'],[8,'慈雨神'],[10,'隱密神'],
+  let comSheet=[[90],[50,40],[30,20,20,10]];
+  let populationSheet=[[200,'人類'],[160,'精靈'],[160,'矮人'],[100,'塔比特'],[20,'符民'],
+                       [5,'夢魘'],[80,'暗影'],[100,'龍人'],[20,'草原妖精'],[20,'慧人'],
+                       [5,'瓦爾基里'],[0.1,'仙靈'],[0.1,'螢石人'],[5,'古貓人'],[20,'旭日'],
+                       [20,'狗頭人'],[1,'人族側蠻族']],
+  let riligionSheet=[[25,'始祖神'],[20,'太陽神'],[15,'賢神'],[10,'妖精神'],[15,'炎武帝'],
+                     [11,'騎士神'],[8,'月神'],[8,'酒幸神'],[6,'慈雨神'],[8,'隱密神'],
                      [5,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
-                     [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'韋馱天']];
+                     [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'無特定信仰']];
   
   //人口
   let level=0;
@@ -734,38 +738,66 @@ function swTw(inputStr){
   if(level<2) type=0;
   else if(level<5) type=1;
   else if(level<10) type=2;
-  
-  let rCType=extract(riligionComRate[type],srand(++seed));
-  rCType=riligionComSheet[rCType];
-  
+  //種族
+  //populationComType處理
+  let pCType=extract(comRate[type],srand(++seed));
+  pCType=comSheet[pCType];
+  for(let i=0;i<pCType.length;i++){
+    pCType[i]=pCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
+  }
+  pCType=pCType.sort(function(a,b){return b-a}); //排序種族
+  pCType.push(100-pCType.reduce(function(a,b){return a+b;},0)); //加入其他種族
+  //populationCom處理
+  let populationCom=[];
+  for(let i=0;i<pCType.length-1;i++){
+    let r=extractStr(populationSheet,srand(++seed));
+    while(populationCom.some(function(a){return a==r;})){
+      r=extractStr(populationSheet,srand(++seed));
+    }
+    populationCom.push(r);
+  }
+  populationCom.push('其他');
   
   //信仰
   //信仰調整
+  if(type==0) { //提高慈雨神、妖精神於村出現率
+    riligionSheet[8][0]+=12;
+    riligionSheet[3][0]+=10;
+  }
+  if(type==1) riligionSheet[8][0]+=4; //提高慈雨神於鎮出現率
+  if(populationCom[0]=='矮人')  riligionSheet[4][0]+=15; //提高矮人對於炎武帝出現率
+  if(populationCom[0]=='精靈')  riligionSheet[3][0]+=10; //提高精靈對於妖精神出現率
+  if(populationCom[0]=='塔比特')  riligionSheet[19][0]+=14; //提高塔比特對於無特定信仰出現率
   //riligionComType處理
-  randNum=srand(seed+3);
+  let rCType=extract(comRate[type],srand(++seed));
+  rCType=comSheet[rCType];
   for(let i=0;i<rCType.length;i++){
     rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
   rCType=rCType.sort(function(a,b){return b-a}); //排序信仰
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0)); //加入其他信仰
-  //riligion處理
-  let riligion=[];
+  //riligionCom處理
+  let riligionCom=[];
   for(let i=0;i<rCType.length-1;i++){
     let r=extractStr(riligionSheet,srand(++seed));
-    while(riligion.some(function(a){return a==r;})){
+    while(riligionCom.some(function(a){return a==r;})){
       r=extractStr(riligionSheet,srand(++seed));
     }
-    riligion.push(r);
+    riligionCom.push(r);
   }
-  riligion.push('其他');
-    
+  riligionCom.push('其他');
+  
+  //輸出
   let returnStr='SW2.0城鎮：'+inputStr+'\n';
   returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人\n';
+  returnStr+='人口組成：';
+  for(let i=0;i<pCType.length;i++){
+    returnStr+=populationCom[i]+pCType[i]+'%  ';
+  }
   returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
-    returnStr+=riligion[i]+rCType[i]+'%  ';
-  }
-  
+    returnStr+=riligionCom[i]+rCType[i]+'%  ';
+  }  
   return returnStr;
 }
 ////SW2.0 function 結束
