@@ -369,7 +369,7 @@ function parseInput(rplyToken, inputStr) {
     return swRm();
   }
   //SW2.0 城鎮生成
-  if (trigger.match(/^swtw\B/)!= null ){
+  if (trigger.match(/^swtw/)!= null ){
     return swTw(trigger);
   }
   //忍神判定
