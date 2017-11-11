@@ -1,4 +1,4 @@
-var version='1.09β 產業';
+var version='1.09';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -963,27 +963,30 @@ function help(inputStr){
     returnStr+='GF為極限命運\n';
     returnStr+='Ex：K10+3@7$+1\n';
     returnStr+='\n';
-    returnStr+='成長骰 gr\n';
-    returnStr+='大失敗表 swFt\n';
-    returnStr+='纏繞表 swTt\n';
-    returnStr+='自製流言表 swRm\n';
+    returnStr+='成長骰 GR\n';
+    returnStr+='大失敗表 SWFT\n';
+    returnStr+='纏繞表 SWTT\n';
+    returnStr+='自製流言表 SWRM\n';
     returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
     returnStr+='內容「非常」有特色 請小心服用\n';
+    returnStr+='\n';
+    returnStr+='城鎮生成 SWTW城鎮名\n';
+    returnStr+='結尾可加「村」、「鎮」、「城」 若沒加則為隨機\n';
     returnStr+='\n';
   }
   else if(inputStr.match(/sg/)!=null){
     returnStr+='======================\n';
     returnStr+='忍神骰組\n';
     returnStr+='======================\n';
-    returnStr+='判定骰 sg+n>=n#n@n\n';
+    returnStr+='判定骰 SG+n>=n#n@n\n';
     returnStr+='>=n為成功值 #n為大失敗值 @n為大成功值\n';
-    returnStr+='Ex：sg>=6,sg+2>=7#4@10\n';
+    returnStr+='Ex：SG>=6,SG+2>=7#4@10\n';
     returnStr+='\n';
-    returnStr+='情感表 sgEt\n';
-    returnStr+='大失敗表 sgFt\n';
-    returnStr+='變調表 sgWt\n';
-    returnStr+='戰國變調表 sgGwt\n';
-    returnStr+='場景表 sgSt\n';
+    returnStr+='情感表 SGET\n';
+    returnStr+='大失敗表 SGRT\n';
+    returnStr+='變調表 SGWT\n';
+    returnStr+='戰國變調表 SGGWT\n';
+    returnStr+='場景表 SGST\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
