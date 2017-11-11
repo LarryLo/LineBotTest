@@ -444,8 +444,8 @@ function strToSeed(inputStr){
 }
 ////extract
 function extract(rate,num){
-  num=num*rate.reduce(function(a,b){return a+b;},0);
   let sum=0;
+  num=num*rate.reduce(function(a,b){return a+b;},0);
   for(let i=0;i<rate.length;i++){
     sum+=rate[i];
     if(sum>num) return i;
@@ -455,11 +455,7 @@ function extract(rate,num){
 ////extractStr
 function extractStr(rate,num){
   let sum=0;
-  for(let i=0;i<rate.length;i++){
-    sum+=rate[i][0];
-  }
-  num=num*sum;
-  sum=0;
+  num=num*rate.reduce(function(a,b){return a+b[0];},0);
   for(let i=0;i<rate.length;i++){
     sum+=rate[i][0];
     if(sum>num) return rate[i][1];
@@ -744,12 +740,20 @@ function swTw(inputStr){
   let rCType=extract(riligionComRate[type],srand(++seed));
   rCType=riligionComSheet[rCType];
   
+  //信仰組成
+  //riligionComType處理
   randNum=srand(seed+3);
   for(let i=0;i<rCType.length;i++){
     rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
   rCType=rCType.sort(function(a,b){return b-a});
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0));
+  //riligion處理
+  let riligion=['error'];
+  for(let i=0;i<rCType.length-1;i++){
+    
+  }
+  
   returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
     returnStr+=riligionSheet[i]+'：'+rCType[i]+'%  ';
