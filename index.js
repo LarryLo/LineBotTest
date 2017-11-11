@@ -746,17 +746,19 @@ function swTw(inputStr){
   for(let i=0;i<rCType.length;i++){
     rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
-  rCType=rCType.sort(function(a,b){return b-a});
-  rCType.push(100-rCType.reduce(function(a,b){return a+b;},0));
+  rCType=rCType.sort(function(a,b){return b-a}); //排序信仰
+  rCType.push(100-rCType.reduce(function(a,b){return a+b;},0)); //加入其他信仰
   //riligion處理
-  let riligion=['error'];
+  let riligion=[];
   for(let i=0;i<rCType.length-1;i++){
-    
+    let r=extractStr(riligionSheet,srand(++seed));
+    riligion.push(r);
   }
+  riligion.push('其他');
   
   returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
-    returnStr+=riligionSheet[i]+'：'+rCType[i]+'%  ';
+    returnStr+=riligion[i]+'：'+rCType[i]+'%  ';
   }
   
   return returnStr;
