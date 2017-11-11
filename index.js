@@ -438,7 +438,7 @@ function srand(seed){
 function strToSeed(inputStr){
   let seed=7;
   for(let i=0;i<inputStr.length;i++){
-  	seed=seed/7*inputStr.charCodeAt(i);
+  	seed=(seed/7*inputStr.charCodeAt(i))%65535;
   }
   return Number(seed);
 }
