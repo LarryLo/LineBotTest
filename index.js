@@ -794,7 +794,7 @@ function swTw(inputStr){
   for(let i=0;i<pCType.length;i++){
     returnStr+=populationCom[i]+pCType[i]+'%  ';
   }
-  returnStr+='信仰組成：';
+  returnStr+='\n信仰組成：';
   for(let i=0;i<rCType.length;i++){
     returnStr+=riligionCom[i]+rCType[i]+'%  ';
   }  
