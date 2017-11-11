@@ -711,7 +711,7 @@ function swTw(inputStr){
   inputStr=inputStr.replace(/^swtw/,'');
   let seedO=strToSeed(inputStr);
   let seed=seedO;
-  let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都'];
+  let townLvSheet=['小型村','中型村','小型鎮','中型鎮','大型鎮','小型城市','中型城市','大型城市（經濟樞紐級）','巨型城都（王城級）','超巨型城都(世界都市級)'];
   let popuSheet=[25,80,200,500,1000,2000,5000,10000,20000,60000];
   //信仰組成機率:村莊多為單一、城鎮較為多樣
   let comRate=[[9,4,1],[3,2,1],[1,1,1]];
