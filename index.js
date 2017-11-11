@@ -442,10 +442,11 @@ function strToSeed(inputStr){
   }
   return Number(seed);
 }
+////extract
 function extract(rate,num){
-  let num=num*rate.reduce(function(a,b){return a+b;},0);
+  num=num*rate.reduce(function(a,b){return a+b;},0);
   let sum=0;
-  for(let i=0;i<rate.length,i++){
+  for(let i=0;i<rate.length;i++){
     sum+=rate[i];
     if(sum>num) return i;
   }
