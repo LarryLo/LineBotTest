@@ -732,7 +732,7 @@ function swTw(inputStr){
   for(let i=0;i<rCType.length;i++){
     rCType[i]=rCType[i]+Math.floor(srand(++seed)*6)-Math.floor(srand((seed++)+1)*6);
   }
-  rCType=rCType.sort().reverse();
+  rCType=rCType.sort(function(a,b){return b-a});
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0));
   for(let i=0;i<rCType.length;i++){
     returnStr+=riligionSheet[i]+'：'+rCType[i]+'%；';
