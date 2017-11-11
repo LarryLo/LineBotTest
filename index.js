@@ -1,4 +1,4 @@
-var version='1.08';
+var version='1.09β 產業';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -438,7 +438,7 @@ function srand(seed){
 function strToSeed(inputStr){
   let seed=7;
   for(let i=0;i<inputStr.length;i++){
-  	seed=seed/7*inputStr.charCodeAt(i);
+  	seed=(seed/7*inputStr.charCodeAt(i))%65535;
   }
   return Number(seed);
 }
@@ -726,6 +726,8 @@ function swTw(inputStr){
                      [11,'騎士神'],[8,'月神'],[8,'酒幸神'],[6,'慈雨神'],[8,'隱密神'],
                      [5,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
                      [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'無特定信仰']];
+  let industrySheet=['農業','畜牧業','漁業','礦業','林業','貿易','皮革加工','金屬加工','煉金','宗教','紡織業',
+                     '魔法道具加工','學院'];
   
   //人口
   let level=0;
@@ -798,6 +800,10 @@ function swTw(inputStr){
   returnStr+='\n信仰組成：';
   for(let i=0;i<rCType.length;i++){
     returnStr+=riligionCom[i]+rCType[i]+'%  ';
+  }
+  returnStr+='\n興盛產業：';
+  for(let i=0;i<industrySheet.length;i++){
+    if(srand(++seed)*10<level) returnStr+=industrySheet[i]+'  ';
   }  
   return returnStr;
 }
