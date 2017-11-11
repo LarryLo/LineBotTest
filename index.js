@@ -717,8 +717,8 @@ function swTw(inputStr){
   let riligionComRate=[[9,4,1],[3,2,1],[1,1,1]];
   //信仰組成:單一、雙重、多重
   let riligionComSheet=[[90],[50,40],[30,20,20,10]];
-  let riligionSheet=[[4,'始祖神'],[1,'太陽神'],[1,'賢神'],[1,'妖精神'],[1,'炎武帝'],
-                     [1,'騎士神'],[1,'月神'],[1,'酒幸神'],[1,'慈雨神'],[1,'隱密神'],
+  let riligionSheet=[[8,'始祖神'],[6,'太陽神'],[4,'賢神'],[4,'妖精神'],[4,'炎武帝'],
+                     [2,'騎士神'],[2,'月神'],[2,'酒幸神'],[2,'慈雨神'],[2,'隱密神'],
                      [1,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
                      [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'韋馱天']];
   
@@ -752,13 +752,16 @@ function swTw(inputStr){
   let riligion=[];
   for(let i=0;i<rCType.length-1;i++){
     let r=extractStr(riligionSheet,srand(++seed));
+    while(riligion.some(function(a){return a==r;})){
+      r=extractStr(riligionSheet,srand(++seed));
+    }
     riligion.push(r);
   }
   riligion.push('其他');
   
   returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
-    returnStr+=riligion[i]+'：'+rCType[i]+'%  ';
+    returnStr+=riligion[i]+rCType[i]+'%  ';
   }
   
   return returnStr;
