@@ -717,20 +717,18 @@ function swTw(inputStr){
   let riligionComRate=[[9,4,1],[3,2,1],[1,1,1]];
   //信仰組成:單一、雙重、多重
   let riligionComSheet=[[90],[50,40],[30,20,20,10]];
-  let riligionSheet=[[8,'始祖神'],[6,'太陽神'],[4,'賢神'],[4,'妖精神'],[4,'炎武帝'],
-                     [2,'騎士神'],[2,'月神'],[2,'酒幸神'],[2,'慈雨神'],[2,'隱密神'],
-                     [1,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
+  let riligionSheet=[[50,'始祖神'],[40,'太陽神'],[25,'賢神'],[5,'妖精神'],[25,'炎武帝'],
+                     [18,'騎士神'],[10,'月神'],[10,'酒幸神'],[8,'慈雨神'],[10,'隱密神'],
+                     [5,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
                      [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'韋馱天']];
   
+  //人口
   let level=0;
   if(inputStr.match(/村$/)!=null) level=Math.floor(srand(seed)*2);
   else if(inputStr.match(/鎮$/)!=null) level=2+Math.floor(srand(seed)*3);
   else if(inputStr.match(/城$/)!=null) level=5+Math.floor(srand(seed)*4.2);
   else level=Math.floor(srand(seed)*9.2);
   let population=Math.floor(popuSheet[level]*(2+srand(++seed)+srand((seed++)+1))/3);
-  
-  let returnStr='SW2.0城鎮：'+inputStr+'\n';
-  returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人\n';
   
   let type=0;
   if(level<2) type=0;
@@ -740,7 +738,9 @@ function swTw(inputStr){
   let rCType=extract(riligionComRate[type],srand(++seed));
   rCType=riligionComSheet[rCType];
   
-  //信仰組成
+  
+  //信仰
+  //信仰調整
   //riligionComType處理
   randNum=srand(seed+3);
   for(let i=0;i<rCType.length;i++){
@@ -758,7 +758,9 @@ function swTw(inputStr){
     riligion.push(r);
   }
   riligion.push('其他');
-  
+    
+  let returnStr='SW2.0城鎮：'+inputStr+'\n';
+  returnStr+='規模：'+townLvSheet[level]+' 約'+population+'人\n';
   returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
     returnStr+=riligion[i]+rCType[i]+'%  ';
