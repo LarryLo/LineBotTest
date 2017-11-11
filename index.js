@@ -740,6 +740,7 @@ function swTw(inputStr){
   else if(level<10) type=2;
   //種族
   //populationComType處理
+  seed=srand(seed);
   let pCType=extract(comRate[type],srand(++seed));
   pCType=comSheet[pCType];
   for(let i=0;i<pCType.length;i++){
@@ -777,6 +778,7 @@ function swTw(inputStr){
   rCType=rCType.sort(function(a,b){return b-a}); //排序信仰
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0)); //加入其他信仰
   //riligionCom處理
+  seed=srand(seed);
   let riligionCom=[];
   for(let i=0;i<rCType.length-1;i++){
     let r=extractStr(riligionSheet,srand(++seed));
