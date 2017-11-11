@@ -452,6 +452,20 @@ function extract(rate,num){
   }
   return undefined;
 }
+////extractStr
+function extractStr(rate,num){
+  let sum=0;
+  for(let i=0;i<rate.length;i++){
+    sum+=rate[i][0];
+  }
+  num=num*sum;
+  sum=0;
+  for(let i=0;i<rate.length;i++){
+    sum+=rate[i][0];
+    if(sum>num) return rate[i][1];
+  }
+  return undefined;
+}
 ////基本運算
 function claculater(inputStr){
   let returnStr = '基本運算：';
@@ -707,8 +721,10 @@ function swTw(inputStr){
   let riligionComRate=[[9,4,1],[3,2,1],[1,1,1]];
   //信仰組成:單一、雙重、多重
   let riligionComSheet=[[90],[50,40],[30,20,20,10]];
-  let riligionSheet=['a','b','c','d','e','f'];
-  let riligionRate=[1,2,1,4,1,3];
+  let riligionSheet=[[4,'始祖神'],[1,'太陽神'],[1,'賢神'],[1,'妖精神'],[1,'炎武帝'],
+                     [1,'騎士神'],[1,'月神'],[1,'酒幸神'],[1,'慈雨神'],[1,'隱密神'],
+                     [1,'水神'],[1,'融合神'],[1,'纏衣神'],[1,'劍神'],[1,'韋馱天'],
+                     [1,'器械神'],[1,'刃神'],[1,'鐵鎚神'],[1,'龍帝神'],[1,'韋馱天']];
   
   let level=0;
   if(inputStr.match(/村$/)!=null) level=Math.floor(srand(seed)*2);
@@ -734,8 +750,9 @@ function swTw(inputStr){
   }
   rCType=rCType.sort(function(a,b){return b-a});
   rCType.push(100-rCType.reduce(function(a,b){return a+b;},0));
+  returnStr+='信仰組成：';
   for(let i=0;i<rCType.length;i++){
-    returnStr+=riligionSheet[i]+'：'+rCType[i]+'%；';
+    returnStr+=riligionSheet[i]+'：'+rCType[i]+'%  ';
   }
   
   return returnStr;
