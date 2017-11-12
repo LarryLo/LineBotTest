@@ -1,4 +1,4 @@
-var version='1.09';
+var version='1.09+';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -708,6 +708,7 @@ function swRm() {
 }
 //////城鎮生成
 function swTw(inputStr){
+  if(inputStr.match(/^swtw$/)!=null)  return undefined;
   inputStr=inputStr.replace(/^swtw/,'');
   let seedO=strToSeed(inputStr);
   let seed=seedO;
