@@ -812,7 +812,7 @@ function swTw(inputStr){
 ////忍神 function 開始
 //////sg基本判定
 function sg(inputStr) {
-  if(inputStr.match(/^sg$/)) return sg('sg>=5');
+  if(inputStr.match(/^sg$/)) inputStr='sg>=5';
   let returnStr = '忍神骰組：[';
   let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
   let dice=0;
