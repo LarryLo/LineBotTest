@@ -421,8 +421,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^\\泡泡\/$/)!= null ){
     return '泡泡！泡泡！更多泡泡！';
   }  
-  if (trigger.match(/^複雜度$/)!= null ||
-      trigger.match(/^O\(\)$/)!= null){
+  if (inputStr.match(/複雜度/)!= null ||
+      inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
   }
   return countStr;
@@ -812,6 +812,7 @@ function swTw(inputStr){
 ////忍神 function 開始
 //////sg基本判定
 function sg(inputStr) {
+  if(inputStr.match(/^sg$/)) return sg('sg>=5');
   let returnStr = '忍神骰組：[';
   let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
   let dice=0;
