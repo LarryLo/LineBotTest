@@ -1,4 +1,4 @@
-var version='1.09+';
+var version='1.10 coc beta';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -398,6 +398,10 @@ function parseInput(rplyToken, inputStr) {
   //忍神場景表
   if (trigger.match(/^sgst$/)!= null ){
     return sgSt();
+  }
+  //CoC基本骰組
+  if (trigger.match(/^cc<=\d+$/)!= null ){
+    return d66();
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
