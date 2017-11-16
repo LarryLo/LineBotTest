@@ -376,6 +376,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)!= null ){
     return sg(trigger);
   }
+  if (trigger.match(/^sg$/)!= null ){
+    return sg('sg>=5');
+  }
   //忍神情感表
   if (trigger.match(/^sget$/)!= null ){
     return sgEt();
@@ -421,8 +424,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^\\泡泡\/$/)!= null ){
     return '泡泡！泡泡！更多泡泡！';
   }  
-  if (trigger.match(/^複雜度$/)!= null ||
-      trigger.match(/^O\(\)$/)!= null){
+  if (inputStr.match(/複雜度/)!= null ||
+      inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
   }
   return countStr;
