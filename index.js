@@ -403,7 +403,7 @@ function parseInput(rplyToken, inputStr) {
     return sgSt();
   }
   //CoC7基本骰組
-  if (trigger.match(/^cc<=\d+$/)!= null ){
+  if (trigger.match(/^cc<=\d+(\(\d+\))?$/)!= null ){
     return cc(trigger);
   }
   //基本骰組 xdx+a>b
@@ -941,6 +941,15 @@ function sgSt() {
 //////CoC基本判定
 function cc(inputStr) {
   let returnStr='CoC7th擲骰：';
+  let tempMatch=inputStr.match(/<=\d+/).toString();
+  let target=Number(tempMatch.match(/\d+/));
+  let credit=0;
+  if(inputStr.match(/\(\d+\)/)!=null){
+    let tempMatch=inputStr.match(/\(\d+\)/).toString();
+    credit=Number(tempMatch.match(/\d+/));
+  }
+  let dice1=[Math.ceil(Math.random()*10)];
+  let dice2=Math.ceil(Math.random()*10);
   return returnStr;
 }
 ////CoC7 function 結束
