@@ -402,9 +402,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sgst$/)!= null ){
     return sgSt();
   }
-  //CoC基本骰組
+  //CoC7基本骰組
   if (trigger.match(/^cc<=\d+$/)!= null ){
-    return d66();
+    return cc(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -937,6 +937,13 @@ function sgSt() {
   return returnStr;
 }
 ////忍神 function 結束
+////CoC7 function 開始
+//////CoC基本判定
+function cc(inputStr) {
+  let returnStr='CoC7th擲骰：';
+  return returnStr;
+}
+////CoC7 function 結束
 ////雜項
 //////峻崴骰
 function GinWay() {
