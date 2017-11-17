@@ -348,6 +348,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(sw|sg)?(help|幫助)$/)!= null ){
     return help(trigger);
   }
+  if (trigger.match(/^ver$/)!= null ){
+    return version;
+  }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
     return Kx(trigger);
