@@ -959,7 +959,7 @@ function cc(inputStr) {
   }
   if(credit>0) dice1=dice1.sort(function(a,b){return a-b});
   if(credit<0) dice1=dice1.sort(function(a,b){return b-a});
-  returnStr+='→'dice1[i]+'<='+target;
+  returnStr+='→'dice1[0]+'<='+target;
   if(dice1[0]==1) returnStr+='→☆大成功☆';
   else if(dice1[0]==100) returnStr+='→★大失敗★';
   else if(target<50&&dice1[0]>95) returnStr+='→★大失敗★';
