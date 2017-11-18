@@ -948,12 +948,12 @@ function cc(inputStr) {
     let tempMatch=inputStr.match(/\(-?\d+\)/).toString();
     credit=Number(tempMatch.match(/-?\d+/));
   }
-  let dice1=[Math.ceil(Math.random()*10)];
-  for(let i=0;i<Math.abs(credit);i++) dice1.push(Math.ceil(Math.random()*10));
-  let dice2=Math.ceil(Math.random()*10);
+  let dice1=[Math.floor(Math.random()*10)];
+  for(let i=0;i<Math.abs(credit);i++) dice1.push(Math.floor(Math.random()*10));
+  let dice2=Math.floor(Math.random()*10);
   for(let i=0;i<dice1.length;i++){
     dice1[i]=dice1[i]*10+dice2;
-    if(dice1[i]>100) dice1[i]%=100;
+    if(dice1[i]==0) dice1[i]=100;
     if(i>0) returnStr+=',';
     returnStr+=dice1[i].toString();
   }
