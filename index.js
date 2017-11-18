@@ -957,14 +957,20 @@ function cc(inputStr) {
     if(i>0) returnStr+=',';
     returnStr+=dice1[i].toString();
   }
-  if(credit>0) dice1=dice1.sort(function(a,b){return b-a});
-  if(credit<0) dice1=dice1.sort(function(a,b){return a-b});
+  if(credit>0) dice1=dice1.sort(function(a,b){return a-b});
+  if(credit<0) dice1=dice1.sort(function(a,b){return b-a});
   if(dice1[0]==1) returnStr+='→☆大成功☆';
+  else if(dice1[0]==100) returnStr+='→★大失敗★';
+  else if(target<50&&dice1[0]>95) returnStr+='→★大失敗★';
   else if(dice1[0]<=Math.floor(target/5)) returnStr+='→極限成功';
   else if(dice1[0]<=Math.floor(target/2)) returnStr+='→困難成功';
   else if(dice1[0]<=target) returnStr+='→一般成功';
   else returnStr+='→失敗';
   
+  if(dice1[0]>=96){
+    if(Math.floor(target/2)<50) returnStr+='（困難大失敗）';
+    else if(Math.floor(target/5)<50) returnStr+='（極限大失敗）';
+  }
   return returnStr;
 }
 ////CoC7 function 結束
