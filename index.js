@@ -403,7 +403,7 @@ function parseInput(rplyToken, inputStr) {
     return sgSt();
   }
   //CoC7基本骰組
-  if (trigger.match(/^cc<=\d+(\(\d+\))?$/)!= null ){
+  if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
     return cc(trigger);
   }
   //基本骰組 xdx+a>b
@@ -944,11 +944,12 @@ function cc(inputStr) {
   let tempMatch=inputStr.match(/<=\d+/).toString();
   let target=Number(tempMatch.match(/\d+/));
   let credit=0;
-  if(inputStr.match(/\(\d+\)/)!=null){
-    let tempMatch=inputStr.match(/\(\d+\)/).toString();
-    credit=Number(tempMatch.match(/\d+/));
+  if(inputStr.match(/\(-?\d+\)/)!=null){
+    let tempMatch=inputStr.match(/\(-?\d+\)/).toString();
+    credit=Number(tempMatch.match(/-?\d+/));
   }
   let dice1=[Math.ceil(Math.random()*10)];
+  for(let i=0;i<Math.abs(credit);i++) dice1.push(Math.ceil(Math.random()*10));
   let dice2=Math.ceil(Math.random()*10);
   for(let i=0;i<dice1.length;i++){
     dice1[i]=dice1[i]*10+dice2;
