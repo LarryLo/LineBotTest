@@ -950,6 +950,20 @@ function cc(inputStr) {
   }
   let dice1=[Math.ceil(Math.random()*10)];
   let dice2=Math.ceil(Math.random()*10);
+  for(let i=0;i<dice1.length;i++){
+    dice1[i]=dice1[i]*10+dice2;
+    if(dice1[i]>100) dice1[i]%=100;
+    if(i>0) returnStr+=',';
+    returnStr+=dice1[i].toString();
+  }
+  if(credit>0) dice1=dice1.sort(function(a,b){return b-a});
+  if(credit<0) dice1=dice1.sort(function(a,b){return a-b});
+  if(dice1[0]==1) returnStr+='→☆大成功☆';
+  else if(dice1[0]<=Math.floor(target/5)) returnStr+='→極限成功';
+  else if(dice1[0]<=Math.floor(target/2)) returnStr+='→困難成功';
+  else if(dice1[0]<=target) returnStr+='→一般成功';
+  else returnStr+='→失敗';
+  
   return returnStr;
 }
 ////CoC7 function 結束
