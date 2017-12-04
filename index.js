@@ -1,4 +1,4 @@
-var version='1.09+';
+var version='1.10 coc beta';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -348,6 +348,9 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(sw|sg)?(help|幫助)$/)!= null ){
     return help(trigger);
   }
+  if (trigger.match(/^ver$/)!= null ){
+    return version;
+  }
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
     return Kx(trigger);
@@ -398,6 +401,10 @@ function parseInput(rplyToken, inputStr) {
   //忍神場景表
   if (trigger.match(/^sgst$/)!= null ){
     return sgSt();
+  }
+  //CoC7基本骰組
+  if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
+    return cc(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -930,6 +937,43 @@ function sgSt() {
   return returnStr;
 }
 ////忍神 function 結束
+////CoC7 function 開始
+//////CoC基本判定
+function cc(inputStr) {
+  let returnStr='CoC7th擲骰：';
+  let tempMatch=inputStr.match(/<=\d+/).toString();
+  let target=Number(tempMatch.match(/\d+/));
+  let credit=0;
+  if(inputStr.match(/\(-?\d+\)/)!=null){
+    let tempMatch=inputStr.match(/\(-?\d+\)/).toString();
+    credit=Number(tempMatch.match(/-?\d+/));
+  }
+  let dice1=[Math.floor(Math.random()*10)];
+  for(let i=0;i<Math.abs(credit);i++) dice1.push(Math.floor(Math.random()*10));
+  let dice2=Math.floor(Math.random()*10);
+  for(let i=0;i<dice1.length;i++){
+    dice1[i]=dice1[i]*10+dice2;
+    if(dice1[i]==0) dice1[i]=100;
+    if(i>0) returnStr+=',';
+    returnStr+=dice1[i].toString();
+  }
+  if(credit>0) dice1=dice1.sort(function(a,b){return a-b});
+  if(credit<0) dice1=dice1.sort(function(a,b){return b-a});
+  if(dice1[0]==1) returnStr+='→☆大成功☆';
+  else if(dice1[0]==100) returnStr+='→★大失敗★';
+  else if(target<50&&dice1[0]>95) returnStr+='→★大失敗★';
+  else if(dice1[0]<=Math.floor(target/5)) returnStr+='→極限成功';
+  else if(dice1[0]<=Math.floor(target/2)) returnStr+='→困難成功';
+  else if(dice1[0]<=target) returnStr+='→一般成功';
+  else returnStr+='→失敗';
+  
+  if(dice1[0]>=96){
+    if(Math.floor(target/2)<50) returnStr+='（困難大失敗）';
+    else if(Math.floor(target/5)<50) returnStr+='（極限大失敗）';
+  }
+  return returnStr;
+}
+////CoC7 function 結束
 ////雜項
 //////峻崴骰
 function GinWay() {
@@ -1007,15 +1051,17 @@ function help(inputStr){
     returnStr+='d66骰 d66\n';
     returnStr+='\n';
     returnStr+='======================\n';
-    returnStr+='SW2.0骰組\n';
+    returnStr+='CoC7th骰組\n';
     returnStr+='======================\n';
-    returnStr+='詳見 swHelp\n';
+    returnStr+='CC<=n(n)\n';
+    returnStr+='(n)為獎勵骰 負數為懲罰骰\n';
     returnStr+='\n';
     returnStr+='======================\n';
-    returnStr+='忍神骰組\n';
+    returnStr+='SW2.0骰組  詳見 swHelp\n';
     returnStr+='======================\n';
-    returnStr+='詳見 sgHelp\n';
-    returnStr+='\n';
+    returnStr+='======================\n';
+    returnStr+='忍神骰組  詳見 sgHelp\n';
+    returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
     returnStr+='以 LarryLo 的 line bot 為基底增加骰組而成\n';
