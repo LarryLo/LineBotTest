@@ -1054,12 +1054,13 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='基本骰組\n';
     returnStr+='======================\n';
-    returnStr+='基本骰 nDn+n>n\n';
+    returnStr+='基本骰|nDn+n>n\n';
     returnStr+='直接輸入nD則為nD6\n';
     returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
     returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
     returnStr+='\n';
-    returnStr+='d66骰 d66\n';
+    returnStr+='d66骰|d66\n';
+    returnStr+='隨機選取|choice a b c d\n';
     returnStr+='\n';
     returnStr+='======================\n';
     returnStr+='CoC7th骰組\n';
@@ -1068,10 +1069,10 @@ function help(inputStr){
     returnStr+='(n)為獎勵骰 負數為懲罰骰\n';
     returnStr+='\n';
     returnStr+='======================\n';
-    returnStr+='SW2.0骰組  詳見 swHelp\n';
+    returnStr+='SW2.0骰組|詳見 swHelp\n';
     returnStr+='======================\n';
     returnStr+='======================\n';
-    returnStr+='忍神骰組  詳見 sgHelp\n';
+    returnStr+='忍神骰組|詳見 sgHelp\n';
     returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
