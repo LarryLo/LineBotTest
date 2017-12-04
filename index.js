@@ -413,7 +413,11 @@ function parseInput(rplyToken, inputStr) {
   //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
     return d66();
-  }  
+  }
+  //基本骰組 d66
+  if (trigger.match(/^choice$/)!= null ){
+    return choice(inputStr);
+  }
   /*//基本運算(暫時關閉)
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
@@ -529,7 +533,7 @@ function claculate(inputStr){
 }
 ////基本骰組
 function xDx(inputStr){
-  let returnStr='基本骰組：[';
+  let returnStr='基本擲骰：[';
   let answer=0;
   let bool=false;
   
@@ -589,7 +593,14 @@ function xDx(inputStr){
 }
 ////d66骰
 function d66(){
-  let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  let returnStr='基本擲骰：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  return returnStr;
+}
+////choice
+function choice(inputStr){
+  inputStr=inputStr.replace('choice ','');
+  let option=inputStr.split(' ');
+  let returnStr='隨機選取：'+option[Math.floor(Math.random()*option.length)];
   return returnStr;
 }
 ////SW2.0 function 開始
