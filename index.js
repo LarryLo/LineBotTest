@@ -598,7 +598,7 @@ function d66(){
 }
 ////choice
 function choice(inputStr){
-  inputStr=inputStr.replace('choice ','');
+  inputStr=inputStr.toLowerCase().replace('choice ','');
   let option=inputStr.split(' ');
   let returnStr='隨機選取：'+option[Math.floor(Math.random()*option.length)];
   return returnStr;
