@@ -1,4 +1,4 @@
-var version='1.10';
+var version='1.11 choice beta';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
