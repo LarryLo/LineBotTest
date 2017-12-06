@@ -1,4 +1,4 @@
-var version='1.10';
+var version='1.11 choice beta';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -413,7 +413,11 @@ function parseInput(rplyToken, inputStr) {
   //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
     return d66();
-  }  
+  }
+  //基本骰組 d66
+  if (trigger.match(/^choice$/)!= null ){
+    return choice(inputStr);
+  }
   /*//基本運算(暫時關閉)
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
@@ -529,7 +533,7 @@ function claculate(inputStr){
 }
 ////基本骰組
 function xDx(inputStr){
-  let returnStr='基本骰組：[';
+  let returnStr='基本擲骰：[';
   let answer=0;
   let bool=false;
   
@@ -589,7 +593,14 @@ function xDx(inputStr){
 }
 ////d66骰
 function d66(){
-  let returnStr='基本骰組：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  let returnStr='基本擲骰：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  return returnStr;
+}
+////choice
+function choice(inputStr){
+  inputStr=inputStr.toLowerCase().replace('choice ','');
+  let option=inputStr.split(' ');
+  let returnStr='隨機選取：'+option[Math.floor(Math.random()*option.length)];
   return returnStr;
 }
 ////SW2.0 function 開始
@@ -1043,12 +1054,13 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='基本骰組\n';
     returnStr+='======================\n';
-    returnStr+='基本骰 nDn+n>n\n';
+    returnStr+='基本骰|nDn+n>n\n';
     returnStr+='直接輸入nD則為nD6\n';
     returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
     returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
     returnStr+='\n';
-    returnStr+='d66骰 d66\n';
+    returnStr+='d66骰|d66\n';
+    returnStr+='隨機選取|choice a b c d\n';
     returnStr+='\n';
     returnStr+='======================\n';
     returnStr+='CoC7th骰組\n';
@@ -1057,10 +1069,10 @@ function help(inputStr){
     returnStr+='(n)為獎勵骰 負數為懲罰骰\n';
     returnStr+='\n';
     returnStr+='======================\n';
-    returnStr+='SW2.0骰組  詳見 swHelp\n';
+    returnStr+='SW2.0骰組|詳見 swHelp\n';
     returnStr+='======================\n';
     returnStr+='======================\n';
-    returnStr+='忍神骰組  詳見 sgHelp\n';
+    returnStr+='忍神骰組|詳見 sgHelp\n';
     returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
