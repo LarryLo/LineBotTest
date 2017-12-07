@@ -406,6 +406,18 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
     return cc(trigger);
   }
+  //死亡flag flag表
+  if (trigger.match(/^df$/)!= null ){
+    return d66();
+  }
+  //死亡flag 場景表
+  if (trigger.match(/^dfs$/)!= null ){
+    return d66();
+  }
+  //死亡flag 關係表
+  if (trigger.match(/^dfr$/)!= null ){
+    return d66();
+  }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(trigger);
@@ -414,7 +426,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^d66$/)!= null ){
     return d66();
   }
-  //基本骰組 d66
+  //基本骰組 choice
   if (trigger.match(/^choice$/)!= null ){
     return choice(inputStr);
   }
