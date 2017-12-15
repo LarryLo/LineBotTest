@@ -438,8 +438,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(峻崴|霍普)$/)!= null ){
     return GinWay();
   }
-  if (trigger.match(/^紅炎的/)!= null ){
-    return '\蓮帝/';
+  if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
+    return '\\蓮帝/';
   }
   if (trigger.match(/投人機$/)!= null ){
     return terbuchet(trigger);
