@@ -857,8 +857,8 @@ function sg(inputStr) {
   let b=0;
   let f=2;
   let s=12;
-  if(tempMatch.match(/sg>=\d+/)!=null){
-    t=tempMatch.match(/sg>=\d+/).toString();
+  if(tempMatch.match(/>=\d+/)!=null){
+    t=tempMatch.match(/>=\d+/).toString();
     t=t.match(/\d+/).toString();
   }
   if(tempMatch.match(/(\+|-)\d+/)!=null){
