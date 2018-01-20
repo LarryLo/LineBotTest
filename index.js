@@ -402,6 +402,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sgst$/)!= null ){
     return sgSt();
   }
+  //忍神分野表
+  if (trigger.match(/^sgst$/)!= null ){
+    return sgRtt();
+  }
   //CoC7基本骰組
   if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
     return cc(trigger);
@@ -960,6 +964,17 @@ function sgSt() {
             ,'[11]醉漢大吼著，攬客聲呼喚著，女人們嬌聲著，這是繁華街道常見的畫面。'
             ,'[12]太陽的微笑包裹著你，那對於影之世界的住民來說太過於耀眼。'];
   returnStr+=sheet[Math.floor(Math.random()*6)+Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgRtt() {
+  let returnStr = '忍神分野表：';
+  let sheet=['器術'
+            ,'體術'
+            ,'忍術'
+            ,'謀術'
+            ,'戰術'
+            ,'妖術'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
 ////忍神 function 結束
