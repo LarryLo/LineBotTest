@@ -403,7 +403,7 @@ function parseInput(rplyToken, inputStr) {
     return sgSt();
   }
   //忍神分野表
-  if (trigger.match(/^sgst$/)!= null ){
+  if (trigger.match(/^sgrtt$/)!= null ){
     return sgRtt();
   }
   //CoC7基本骰組
