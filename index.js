@@ -370,6 +370,10 @@ function parseInput(rplyToken, inputStr) {
   //SW2.0 流言表
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
+  }  
+  //SW2.0 掉落表
+  if (trigger.match(/^swdi$/)!= null ){
+    return swDi();
   }
   //SW2.0 城鎮生成
   if (trigger.match(/^swtw/)!= null ){
@@ -744,6 +748,16 @@ function swRm() {
   returnStr+=swRmSheet1[Math.floor(Math.random()*swRmSheet1.length)];
   returnStr+=swRmSheet2[Math.floor(Math.random()*swRmSheet2.length)];
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
+  return returnStr;
+}
+//////掉落表
+function swDi() {
+  let returnStr = 'SW2.0掉落表：';
+  let dropSheet=[[1,'劍'],[1,'斧'],[1,'槍'],[1,'釘頭錘'],[1,'連枷'],[1,'戰錘'],[1,'纏繞'],[1,'格鬥'],[1,'投擲'],[1,'弓'],[1,'十字弓'],
+                 [1,'銃'],[1,'箭、子彈'],[7,'非金屬甲'],[7,'金屬甲'],[1,'盾'],[1,'職業專用道具'],[14,'裝飾品'],[7,'消耗品'],[7,'其他道具']];
+  let rankSheet=[[64,'B'],[16,'A'],[4,'S'],[1,'SS']];
+  let magicSheet=[[64,''],[16,'+'],[4,'++'],[1,'+++']];
+  returnStr+=extractStr(dropSheet,Math.random());
   return returnStr;
 }
 //////城鎮生成
