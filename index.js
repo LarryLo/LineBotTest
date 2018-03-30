@@ -1085,11 +1085,12 @@ function help(inputStr){
     returnStr+='成長骰 GR\n';
     returnStr+='大失敗表 SWFT\n';
     returnStr+='纏繞表 SWTT\n';
+    returnStr+='自製寶物表 SWDI\n';
     returnStr+='自製流言表 SWRM\n';
     returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
     returnStr+='內容「非常」有特色 請小心服用\n';
     returnStr+='\n';
-    returnStr+='城鎮生成 SWTW城鎮名\n';
+    returnStr+='自製城鎮生成 SWTW城鎮名\n';
     returnStr+='結尾可加「村」、「鎮」、「城」 若沒加則為隨機\n';
     returnStr+='\n';
   }
