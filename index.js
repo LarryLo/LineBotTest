@@ -752,11 +752,11 @@ function swRm() {
 }
 //////掉落表
 function swDi() {
-  let returnStr = 'SW2.0掉落表：';
+  let returnStr = 'SW2.0寶物表：';
   let dropSheet=[[1,'劍'],[1,'斧'],[1,'槍'],[1,'釘頭錘'],[1,'連枷'],[1,'戰錘'],[1,'纏繞'],[1,'格鬥'],[1,'投擲'],[1,'弓'],[1,'十字弓'],
                  [1,'銃'],[1,'箭、子彈'],[7,'非金屬甲'],[7,'金屬甲'],[1,'盾'],[1,'職業專用道具'],[14,'裝飾品'],[7,'消耗品'],[7,'其他道具']];
-  let rankSheet=[[64,'B'],[16,'A'],[4,'S'],[1,'SS']];
-  let magicSheet=[[64,''],[16,'+'],[4,'++'],[1,'+++']];
+  let rankSheet=[[27,'B'],[9,'A'],[3,'S'],[1,'SS']];
+  let magicSheet=[[27,''],[9,'+'],[3,'++'],[1,'+++']];
   returnStr+=extractStr(dropSheet,Math.random());
   returnStr+=extractStr(rankSheet,Math.random());
   returnStr+=extractStr(magicSheet,Math.random());
