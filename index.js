@@ -1,4 +1,4 @@
-var version='1.14 sgβ';
+var version='1.15β swDI';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -370,6 +370,10 @@ function parseInput(rplyToken, inputStr) {
   //SW2.0 流言表
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
+  }  
+  //SW2.0 寶物表
+  if (trigger.match(/^swdi$/)!= null ){
+    return swDi();
   }
   //SW2.0 城鎮生成
   if (trigger.match(/^swtw/)!= null ){
@@ -746,6 +750,18 @@ function swRm() {
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
   return returnStr;
 }
+//////掉落表
+function swDi() {
+  let returnStr = 'SW2.0寶物表：';
+  let dropSheet=[[1,'劍'],[1,'斧'],[1,'槍'],[1,'釘頭錘'],[1,'連枷'],[1,'戰錘'],[1,'纏繞'],[1,'格鬥'],[1,'投擲'],[1,'弓'],[1,'十字弓'],
+                 [1,'銃'],[1,'箭、子彈'],[7,'非金屬甲'],[7,'金屬甲'],[1,'盾'],[1,'職業專用道具'],[14,'裝飾品'],[7,'消耗品'],[7,'其他道具']];
+  let rankSheet=[[27,'B'],[9,'A'],[3,'S'],[1,'SS']];
+  let magicSheet=[[27,''],[9,'+'],[3,'++'],[1,'+++']];
+  returnStr+=extractStr(dropSheet,Math.random());
+  returnStr+=extractStr(rankSheet,Math.random());
+  returnStr+=extractStr(magicSheet,Math.random());
+  return returnStr;
+}
 //////城鎮生成
 function swTw(inputStr){
   if(inputStr.match(/^swtw$/)!=null)  return undefined;
@@ -1069,11 +1085,12 @@ function help(inputStr){
     returnStr+='成長骰 GR\n';
     returnStr+='大失敗表 SWFT\n';
     returnStr+='纏繞表 SWTT\n';
+    returnStr+='自製寶物表 SWDI\n';
     returnStr+='自製流言表 SWRM\n';
     returnStr+='在PC使用探聽判定或GM沒梗時使用\n';
     returnStr+='內容「非常」有特色 請小心服用\n';
     returnStr+='\n';
-    returnStr+='城鎮生成 SWTW城鎮名\n';
+    returnStr+='自製城鎮生成 SWTW城鎮名\n';
     returnStr+='結尾可加「村」、「鎮」、「城」 若沒加則為隨機\n';
     returnStr+='\n';
   }
