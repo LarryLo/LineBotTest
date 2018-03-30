@@ -371,7 +371,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^swrm$/)!= null ){
     return swRm();
   }  
-  //SW2.0 掉落表
+  //SW2.0 寶物表
   if (trigger.match(/^swdi$/)!= null ){
     return swDi();
   }
