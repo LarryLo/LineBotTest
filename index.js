@@ -758,6 +758,8 @@ function swDi() {
   let rankSheet=[[64,'B'],[16,'A'],[4,'S'],[1,'SS']];
   let magicSheet=[[64,''],[16,'+'],[4,'++'],[1,'+++']];
   returnStr+=extractStr(dropSheet,Math.random());
+  returnStr+=extractStr(rankSheet,Math.random());
+  returnStr+=extractStr(magicSheet,Math.random());
   return returnStr;
 }
 //////城鎮生成
