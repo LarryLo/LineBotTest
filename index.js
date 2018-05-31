@@ -356,8 +356,8 @@ function parseInput(rplyToken, inputStr) {
     return Kx(trigger);
   }
   //SW2.0 成長骰
-  if (trigger.match(/^gr$/)!= null ){
-    return swGr();
+  if (trigger.match(/^gr\d*$/)!= null ){
+    return swGr(trigger);
   }
   //SW2.0 大失敗表
   if (trigger.match(/^swft$/)!= null ){
@@ -712,10 +712,19 @@ function Kx(inputStr) {
 }
 
 //////成長骰
-function swGr() {
+function swGr(inputStr) {
   let returnStr = 'SW2.0成長擲骰：';
   let sheet=['靈巧','敏捷','力量','生命','智力','精神'];
-  returnStr+='['+sheet[Math.floor(Math.random()*6)]+', '+sheet[Math.floor(Math.random()*6)]+']';
+  let count=0;
+  if(inputStr.match(/\d+/)==null){
+    count=1;
+  }
+  else{
+    count=Number(inputStr.match(/\d+/)[0].toString());
+  }
+  for(let i=0;i<count;i++){
+    returnStr+='['+sheet[Math.floor(Math.random()*6)]+', '+sheet[Math.floor(Math.random()*6)]+']';
+  }
   return returnStr;
 }
 //////大失敗表
@@ -827,7 +836,8 @@ function swTw(inputStr){
   if(type==1) riligionSheet[8][0]+=4; //提高慈雨神於鎮出現率
   if(populationCom[0]=='矮人')  riligionSheet[4][0]+=15; //提高矮人對於炎武帝出現率
   if(populationCom[0]=='精靈')  riligionSheet[3][0]+=10; //提高精靈對於妖精神出現率
-  if(populationCom[0]=='塔比特')  riligionSheet[19][0]+=14; //提高塔比特對於無特定信仰出現率
+  if(populationCom[0]=='塔比特')  riligionSheet[2][0]+=14; //提高塔比特對於賢神出現率
+  if(populationCom[0]=='旭日')  riligionSheet[1][0]+=14; //提高旭日對於太陽神出現率
   //riligionComType處理
   let rCType=extract(comRate[type],srand(++seed));
   rCType=riligionComSheet[rCType];
