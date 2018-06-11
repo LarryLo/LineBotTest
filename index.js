@@ -435,7 +435,7 @@ function parseInput(rplyToken, inputStr) {
     return d66();
   }
   //基本骰組 choice
-  if (trigger.match(/^choice$/)!= null ){
+  if (trigger.match(/^choice\d+$/)!= null ){
     return choice(inputStr);
   }
   /*//基本運算(暫時關閉)
@@ -617,6 +617,23 @@ function xDx(inputStr){
 ////d66骰
 function d66(){
   let returnStr='基本擲骰：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  return returnStr;
+}
+////choiceN
+function choiceN(inputStr){
+  let c=1;
+  let returnStr='隨機選取：';
+  c=inputStr.toLowerCase().match(/^choice\d+/).toString();
+  c=c.match(/\d+/).toString();
+  if(c<1){
+    returnStr+='不能選取少於一個選項喔';
+    return returnStr;
+  }
+  inputStr=inputStr.toLowerCase().replace('choice ','');
+  let option=inputStr.split(' ');
+  for(;c>0;c--){
+    returnStr+=' '+option.splice(Math.floor(Math.random()*option.length),1);
+  }
   return returnStr;
 }
 ////choice
