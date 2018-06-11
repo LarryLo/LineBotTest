@@ -436,7 +436,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組 choice
   if (trigger.match(/^choice\d+$/)!= null ){
-    return choice(inputStr);
+    return choiceN(inputStr);
   }
   /*//基本運算(暫時關閉)
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
@@ -631,6 +631,9 @@ function choiceN(inputStr){
   }
   inputStr=inputStr.toLowerCase().replace('choice ','');
   let option=inputStr.split(' ');
+  if(c>option.length){
+    c=option.length+1;
+  }
   for(;c>0;c--){
     returnStr+=' '+option.splice(Math.floor(Math.random()*option.length),1);
   }
