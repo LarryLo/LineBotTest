@@ -434,8 +434,12 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^d66$/)!= null ){
     return d66();
   }
-  //基本骰組 choice
+  //基本骰組 choiceN
   if (trigger.match(/^choice\d+$/)!= null ){
+    return choiceN(inputStr);
+  }
+  //基本骰組 choice
+  if (trigger.match(/^choice$/)!= null ){
     return choiceN(inputStr);
   }
   /*//基本運算(暫時關閉)
