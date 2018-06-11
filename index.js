@@ -629,7 +629,7 @@ function choiceN(inputStr){
     returnStr+='不能選取少於一個選項喔';
     return returnStr;
   }
-  inputStr=inputStr.toLowerCase().replace('choice\d+ ','');
+  inputStr=inputStr.toLowerCase().replace(/choice\d+ /,'');
   let option=inputStr.split(' ');
   if(c>option.length){
     c=option.length+1;
