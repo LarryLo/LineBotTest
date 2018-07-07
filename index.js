@@ -1155,7 +1155,11 @@ function help(inputStr){
     returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
     returnStr+='\n';
     returnStr+='d66骰|d66\n';
-    returnStr+='隨機選取|choice a b c d\n';
+    returnStr+='隨機選取|CHOICE a b c d\n';
+    returnStr+='\n';
+    returnStr+='多數隨機選取|CHOICEn a b c d\n';
+    returnStr+='選取其中n個選項\n';
+    returnStr+='Ex:CHOICE2 力量 敏捷 智力 生命\n';
     returnStr+='\n';
     returnStr+='======================\n';
     returnStr+='CoC7th骰組\n';
