@@ -436,7 +436,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組 choice
   if (trigger.match(/^choice$/)!= null ){
-    return choiceN(inputStr);
+    return choice(inputStr);
   }
   //基本骰組 choiceN
   if (trigger.match(/^choice\d+$/)!= null ){
