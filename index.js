@@ -1,4 +1,4 @@
-var version='1.16 gr';
+var version='1.17β choice';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -438,6 +438,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^choice$/)!= null ){
     return choice(inputStr);
   }
+  //基本骰組 choiceN
+  if (trigger.match(/^choice\d+$/)!= null ){
+    return choiceN(inputStr);
+  }
   /*//基本運算(暫時關閉)
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
@@ -617,6 +621,26 @@ function xDx(inputStr){
 ////d66骰
 function d66(){
   let returnStr='基本擲骰：'+Math.ceil(Math.random()*6)+Math.ceil(Math.random()*6);
+  return returnStr;
+}
+////choiceN
+function choiceN(inputStr){
+  let c=1;
+  let returnStr='隨機選取：';
+  c=inputStr.toLowerCase().match(/^choice\d+/).toString();
+  c=c.match(/\d+/).toString();
+  if(c<1){
+    returnStr+='不能選取少於一個選項喔';
+    return returnStr;
+  }
+  inputStr=inputStr.toLowerCase().replace(/choice\d+ /,'');
+  let option=inputStr.split(' ');
+  if(c>option.length){
+    c=option.length+1;
+  }
+  for(;c>0;c--){
+    returnStr+=' '+option.splice(Math.floor(Math.random()*option.length),1);
+  }
   return returnStr;
 }
 ////choice
@@ -1131,7 +1155,11 @@ function help(inputStr){
     returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
     returnStr+='\n';
     returnStr+='d66骰|d66\n';
-    returnStr+='隨機選取|choice a b c d\n';
+    returnStr+='隨機選取|CHOICE a b c d\n';
+    returnStr+='\n';
+    returnStr+='多數隨機選取|CHOICEn a b c d\n';
+    returnStr+='選取其中n個選項\n';
+    returnStr+='Ex:CHOICE2 力量 敏捷 智力 生命\n';
     returnStr+='\n';
     returnStr+='======================\n';
     returnStr+='CoC7th骰組\n';
