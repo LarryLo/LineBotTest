@@ -772,8 +772,9 @@ function swFc(inputStr) {
   }
   dice+=b;
   if(count){
-    returnStr=returnStr+'→'+count+'迴轉→'+dice;
+    returnStr=returnStr+'→'+count+'迴轉';
   }
+  returnStr+='→'+dice;
   if(successFlag){
     returnStr+='→★大成功★';
   }
