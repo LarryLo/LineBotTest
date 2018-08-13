@@ -1,4 +1,4 @@
-var version='1.17 swfcβ';
+var version='1.18 swfcβ';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -354,6 +354,10 @@ function parseInput(rplyToken, inputStr) {
   //SW2.0 威力骰
   if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
     return Kx(trigger);
+  }
+  //SW2.0 超越判定
+  if (trigger.match(/^swfc((\+|-)\d+)?$/)!= null ){
+    return swFc(trigger);
   }
   //SW2.0 成長骰
   if (trigger.match(/^gr\d*$/)!= null ){
@@ -734,7 +738,49 @@ function Kx(inputStr) {
   }
   return returnStr;
 }
-
+//////超越判定
+function swFc(inputStr) {
+  let returnStr = 'SW2.0超越判定：';
+  let successFlag = false;
+  let successFlag2 = false;
+  let b = 0;
+  let count = 0;
+  let dice = 0;
+  let dice1 = Math.ceil(Math.random()*6);
+  let dice2 = Math.ceil(Math.random()*6);
+  returnStr+='['+dice1+','+dice2+']';
+  if(dice1+dice2==2){
+     return returnStr+'→☆大失敗☆ 回家領50囉～';
+  }
+  else if(dice1+dice2==12){
+    successFlag=true;
+  }
+  if(inputStr.match(/(\+|-)\d+/)!=null){
+    b=inputStr.match(/(\+|-)\d+/)[0].toString();
+    b=b.match(/-?\d+/).toString();
+  }
+  while(dice1+dice2>=10){
+    dice+=dice1+dice2;
+    dice1 = Math.ceil(Math.random()*6);
+    dice2 = Math.ceil(Math.random()*6);
+    returnStr+='['+dice1+','+dice2+']';
+    count++;
+  }
+  dice+=dice1+dice2;
+  if(dice>=40){
+    successFlag2=true;
+  }
+  if(count){
+    returnStr=returnStr+'→'+count+'迴轉→'+dice+b;
+  }
+  if(successFlag){
+    returnStr+='→★大成功★';
+  }
+  if(successFlag){
+    returnStr+='→★超成功★';
+  }
+  return returnStr;
+}
 //////成長骰
 function swGr(inputStr) {
   let returnStr = 'SW2.0成長擲骰：';
