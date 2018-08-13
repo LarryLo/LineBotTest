@@ -759,7 +759,7 @@ function swFc(inputStr) {
     b=inputStr.match(/(\+|-)\d+/)[0].toString();
     b=b.match(/-?\d+/).toString();
   }
-  while(dice1+dice2>=6){
+  while(dice1+dice2>=10){
     dice+=dice1+dice2;
     dice1 = Math.ceil(Math.random()*6);
     dice2 = Math.ceil(Math.random()*6);
