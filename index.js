@@ -770,7 +770,7 @@ function swFc(inputStr) {
   if(dice>=40){
     successFlag2=true;
   }
-  dice+=b;
+  dice+=Number(b);
   if(count){
     returnStr=returnStr+'→'+count+'迴轉';
   }
