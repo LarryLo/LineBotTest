@@ -1164,6 +1164,7 @@ function help(inputStr){
     returnStr+='GF為極限命運\n';
     returnStr+='Ex：K10+3@7$+1\n';
     returnStr+='\n';
+    returnStr+='超越判定 SWFC+n\n';
     returnStr+='成長骰 GR\n';
     returnStr+='大失敗表 SWFT\n';
     returnStr+='纏繞表 SWTT\n';
