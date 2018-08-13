@@ -759,7 +759,7 @@ function swFc(inputStr) {
     b=inputStr.match(/(\+|-)\d+/)[0].toString();
     b=b.match(/-?\d+/).toString();
   }
-  while(dice1+dice2>=10){
+  while(dice1+dice2>=6){
     dice+=dice1+dice2;
     dice1 = Math.ceil(Math.random()*6);
     dice2 = Math.ceil(Math.random()*6);
@@ -778,7 +778,7 @@ function swFc(inputStr) {
   if(successFlag){
     returnStr+='→★大成功★';
   }
-  if(successFlag){
+  if(successFlag2){
     returnStr+='→★超成功★';
   }
   return returnStr;
