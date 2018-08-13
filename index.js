@@ -770,8 +770,9 @@ function swFc(inputStr) {
   if(dice>=40){
     successFlag2=true;
   }
+  dice+=b;
   if(count){
-    returnStr=returnStr+'→'+count+'迴轉→'+dice+b;
+    returnStr=returnStr+'→'+count+'迴轉→'+dice;
   }
   if(successFlag){
     returnStr+='→★大成功★';
