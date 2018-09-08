@@ -1186,7 +1186,8 @@ function help(inputStr){
     returnStr+='Ex：SG>=6,SG+2>=7#4@10\n';
     returnStr+='\n';
     returnStr+='情感表 SGET\n';
-    returnStr+='大失敗表 SGRT\n';
+    returnStr+='大失敗表 SGFT\n';
+    returnStr+='分野表 SGRTT\n';
     returnStr+='變調表 SGWT\n';
     returnStr+='戰國變調表 SGGWT\n';
     returnStr+='場景表 SGST\n';
