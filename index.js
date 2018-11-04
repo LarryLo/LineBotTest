@@ -1,4 +1,4 @@
-var version='1.18 swfc';
+var version='1.19β sgbt';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
