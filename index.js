@@ -1,4 +1,4 @@
-var version='1.18 swfc';
+var version='1.19β sgbt';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -413,6 +413,10 @@ function parseInput(rplyToken, inputStr) {
   //忍神分野表
   if (trigger.match(/^sgrtt$/)!= null ){
     return sgRtt();
+  }
+  //忍神戰場表
+  if (trigger.match(/^sgbt$/)!= null ){
+    return sgBt();
   }
   //CoC7基本骰組
   if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
@@ -1075,6 +1079,17 @@ function sgRtt() {
   returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
+function sgBt() {
+  let returnStr = '忍神戰場表：';
+  let sheet=['平地—無效果'
+            ,'水中—所有角色迴避判定-2'
+            ,'高所—大失敗時額外受到1點接近戰傷害'
+            ,'惡天候—攻擊忍法間隔+1'
+            ,'雜踏—大失敗值變更為謀位值+1'
+            ,'極地—回合結束時擲骰1d6，若小於等於經過回合數，則所有角色受到1點近接戰傷害。此外脫離戰鬥者額外得到一個變調'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
 ////忍神 function 結束
 ////CoC7 function 開始
 //////CoC基本判定
@@ -1191,6 +1206,7 @@ function help(inputStr){
     returnStr+='變調表 SGWT\n';
     returnStr+='戰國變調表 SGGWT\n';
     returnStr+='場景表 SGST\n';
+    returnStr+='戰場表 SGBT\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
