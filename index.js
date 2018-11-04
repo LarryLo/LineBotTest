@@ -414,6 +414,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^sgrtt$/)!= null ){
     return sgRtt();
   }
+  //忍神戰場表
+  if (trigger.match(/^sgbt$/)!= null ){
+    return sgBt();
+  }
   //CoC7基本骰組
   if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/)!= null ){
     return cc(trigger);
@@ -1072,6 +1076,17 @@ function sgRtt() {
             ,'謀術'
             ,'戰術'
             ,'妖術'];
+  returnStr+=sheet[Math.floor(Math.random()*6)];
+  return returnStr;
+}
+function sgBt() {
+  let returnStr = '忍神戰場表：';
+  let sheet=['平地：無效果'
+            ,'水中：所有角色迴避判定-2'
+            ,'高所：大失敗時額外受到1點接近戰傷害'
+            ,'惡天候：攻擊忍法間隔+1'
+            ,'雜踏：大失敗值變更為謀位值+1'
+            ,'極地：回合結束時擲骰1d6，若小於等於經過回合數，則所有角色受到1點近接戰傷害。此外脫離戰鬥者額外得到一個變調。'];
   returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
