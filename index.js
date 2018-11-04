@@ -1086,7 +1086,7 @@ function sgBt() {
             ,'高所—大失敗時額外受到1點接近戰傷害'
             ,'惡天候—攻擊忍法間隔+1'
             ,'雜踏—大失敗值變更為謀位值+1'
-            ,'極地—回合結束時擲骰1d6，若小於等於經過回合數，則所有角色受到1點近接戰傷害。此外脫離戰鬥者額外得到一個變調。'];
+            ,'極地—回合結束時擲骰1d6，若小於等於經過回合數，則所有角色受到1點近接戰傷害。此外脫離戰鬥者額外得到一個變調'];
   returnStr+=sheet[Math.floor(Math.random()*6)];
   return returnStr;
 }
@@ -1206,6 +1206,7 @@ function help(inputStr){
     returnStr+='變調表 SGWT\n';
     returnStr+='戰國變調表 SGGWT\n';
     returnStr+='場景表 SGST\n';
+    returnStr+='戰場表 SGBT\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
