@@ -1145,7 +1145,7 @@ function dfr() {
 ////雜項
 //////峻崴骰
 function GinWay() {
-  let GWSheet=['壁虎','仙人掌','30歲','烤塑膠','嘴對嘴','尾頭彈'];
+  let GWSheet=['哼','閉嘴','機掰','過份','嗯哼哼:('];
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
 }
 //////投人機
