@@ -455,7 +455,7 @@ function parseInput(rplyToken, inputStr) {
     return claculater(inputStr);
   }*/
   //雜項
-  if (inputStr.match(/(峻崴|霍普)/)!= null ){
+  if (inputStr.match(/(峻崴|霍普|哼|機掰|G8|閉嘴)/)!= null ){
     return GinWay();
   }
   if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
@@ -1145,7 +1145,7 @@ function dfr() {
 ////雜項
 //////峻崴骰
 function GinWay() {
-  let GWSheet=['哼','閉嘴','機掰','過份','嗯哼哼:(','閉嘴閉嘴閉嘴閉嘴','你們真的很機掰','霍普難過 霍普哀傷 霍普心痛痛','你們都欺負可憐的霍普'];
+  let GWSheet=['哼','口亨','閉嘴','閉嘴閉嘴閉嘴閉嘴','機掰','機掰機掰機掰機掰','G8','過份','嗯哼哼:(','你們真的很機掰','霍普難過 霍普哀傷 霍普心痛痛','你們都欺負可憐的霍普','你們這樣欺負霍普心都不會痛嗎？'];
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
 }
 //////投人機
