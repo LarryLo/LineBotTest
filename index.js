@@ -455,7 +455,7 @@ function parseInput(rplyToken, inputStr) {
     return claculater(inputStr);
   }*/
   //雜項
-  if (trigger.match(/^(峻崴|霍普)$/)!= null ){
+  if (inputStr.match(/(峻崴|霍普)/)!= null ){
     return GinWay();
   }
   if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
