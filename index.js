@@ -352,7 +352,7 @@ function parseInput(rplyToken, inputStr) {
     return version;
   }
   //SW2.0 威力骰
-  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
+  if (trigger.match(/^(k)(\d+)(((\+|-)\d+)|(@\d+)|(\$(\+|-)?\d+)|(gf))*$/)!= null ){
     return Kx(trigger);
   }
   //SW2.0 超越判定
