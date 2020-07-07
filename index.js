@@ -1504,11 +1504,6 @@ function GinWayMonster() {
                 '長尾巨鼠',
                 '公主'];
   let rare=Math.floor(Math.random()*rareSheet.length);
-  if(inputStr.match(/^hpm\d+$/)!=null){
-    rare=Number(inputStr.match(/\d+/)[0].toString());
-    rare=Math.max(rare,1);
-    rare=Math.min(rare,rareSheet.length);
-  }
   for(let i=0;i<=rare;i++){
     returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
   }
