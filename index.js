@@ -1187,7 +1187,7 @@ function GinWayMonster() {
                 '戰爭',
                 '巨石',
                 '迷你',
-                '資料',
+                '共產',
                 '複製',
                 '雙生',
                 '狂暴',
@@ -1304,7 +1304,7 @@ function GinWayMonster() {
                 '九尾',
                 '閃光',
                 '接頭',
-                '魔天裁罰',
+                '天罰',
                 '迷幻',
                 '閉嘴',
                 '哼哼哼',
@@ -1350,7 +1350,10 @@ function GinWayMonster() {
                 '轉生',
                 '急速',
                 '異世界',
-                '狂化'];
+                '狂化',
+                '狂犬病',
+                '奶油',
+                '五奈米'];
   let monSheet=['蝙蝠',
                 '犀牛',
                 '龍',
@@ -1532,7 +1535,13 @@ function GinWayMonster() {
                 '吟遊詩人',
                 '匕首',
                 '血滴子',
-                '音樂盒'];
+                '音樂盒',
+                '納粹',
+                '法西斯',
+                '墨索里尼',
+                '礦工',
+                '牛郎',
+                '親子丼'];
   let rare=Math.floor(Math.random()*rareSheet.length);
   for(let i=0;i<=rare;i++){
     returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
