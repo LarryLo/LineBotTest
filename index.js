@@ -1546,6 +1546,7 @@ function GinWayMonster() {
   for(let i=Math.random()*Math.pow(2,rareSheet.length);i>1;i=i/2){
     rare++;
   }
+  rare=rareSheet.length-rare;
   for(let i=0;i<=rare;i++){
     returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
   }
