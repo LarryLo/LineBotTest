@@ -1170,7 +1170,7 @@ function GinWayRm() {
 //////峻崴怪物表
 function GinWayMonster() {
   let returnStr = '隨機怪物：';
-  let rareSheet=['N','R','SR','SSR','UR'];
+  let rareSheet=['N','R','SR','SSR','UR','LR','XLR'];
   let porSheet=['曲速',
                 '量子',
                 '機械',
@@ -1340,7 +1340,17 @@ function GinWayMonster() {
                 '愛吹冷氣',
                 '木訥寡言',
                 '口吃',
-                '殘破不堪'];
+                '殘破不堪',
+                '愉悅',
+                '無償退費',
+                '吃到飽',
+                '眩光',
+                '青海',
+                '極黑',
+                '轉生',
+                '急速',
+                '異世界',
+                '狂化'];
   let monSheet=['蝙蝠',
                 '犀牛',
                 '龍',
@@ -1439,7 +1449,7 @@ function GinWayMonster() {
                 '鯊魚',
                 '大麻',
                 '碎花棋盤腳',
-                'scp 173',
+                'scp-173',
                 '通訊衛星',
                 '太空梭',
                 '精靈',
@@ -1502,7 +1512,27 @@ function GinWayMonster() {
                 '嬰兒',
                 '邪神',
                 '長尾巨鼠',
-                '公主'];
+                '公主',
+                '棘皮星',
+                '教父',
+                '機械帝雉',
+                '無口海豚',
+                '北極熊',
+                '艾莉絲',
+                '路易斯',
+                '小豬佩琪',
+                '奇術師',
+                '神鳥鳳凰',
+                '火爆奶奶',
+                '巨峰葡萄',
+                '黏菌',
+                '編年史',
+                '轉生者',
+                '狐狸',
+                '吟遊詩人',
+                '匕首',
+                '血滴子',
+                '音樂盒'];
   let rare=Math.floor(Math.random()*rareSheet.length);
   for(let i=0;i<=rare;i++){
     returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
