@@ -1542,8 +1542,8 @@ function GinWayMonster() {
                 '礦工',
                 '牛郎',
                 '親子丼'];
-  let rare=0;
-  for(let i=Math.random()*Math.pow(1.3,rareSheet.length);i>1;i=i/1.3){
+  let rare=1;
+  for(let i=Math.random()*Math.pow(1.3,rareSheet.length-1);i>1;i=i/1.3){
     rare++;
   }
   rare=rareSheet.length-rare;
