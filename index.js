@@ -1513,10 +1513,10 @@ function GinWayMonster() {
   returnStr+=rareSheet[rare];
   returnStr+='\n';
   returnStr+='HP：';
-  returnStr+=Math.floor(Math.pow(10,Math.random()*6+1).toFixed(2));
+  returnStr+=Math.floor(Math.pow(10,Math.random()*rare+1).toFixed(2));
   returnStr+='\n';
   returnStr+='MP：';
-  returnStr+=Math.floor(Math.pow(10,Math.random()*6+1).toFixed(2));
+  returnStr+=Math.floor(Math.pow(10,Math.random()*rare+1).toFixed(2));
   returnStr+='\n';
   
   return returnStr;
