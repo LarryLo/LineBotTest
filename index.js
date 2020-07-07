@@ -1,4 +1,4 @@
-var version='1.21β ';
+var version='1.22β refact';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -352,7 +352,7 @@ function parseInput(rplyToken, inputStr) {
     return version;
   }
   //SW2.0 威力骰
-  if (trigger.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)!= null ){
+  if (trigger.match(/^(k)(\d+)(((\+|-)\d+)|(@\d+)|(\$(\+|-)?\d+)|(gf))*$/)!= null ){
     return Kx(trigger);
   }
   //SW2.0 超越判定
