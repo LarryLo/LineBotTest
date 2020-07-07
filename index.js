@@ -1542,7 +1542,10 @@ function GinWayMonster() {
                 '礦工',
                 '牛郎',
                 '親子丼'];
-  let rare=Math.floor(Math.random()*rareSheet.length);
+  let rare=0;
+  for(let i=Math.random()*pow(2,rareSheet.length);i<1;i/2){
+    rare++;
+  }
   for(let i=0;i<=rare;i++){
     returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
   }
