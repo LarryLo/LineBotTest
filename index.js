@@ -1,4 +1,4 @@
-var version='1.23 hpm';
+var version='1.24 hpc';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -469,6 +469,9 @@ function parseInput(rplyToken, inputStr) {
   }
   if (trigger.match(/^hpm\d*$/)!= null ){
     return GinWayMonster();
+  }
+  if (trigger.match(/^hpc$/)!= null ){
+    return GinWayCharacter();
   }
   if (trigger.match(/^\\泡泡\/$/)!= null ){
     return '泡泡！泡泡！更多泡泡！';
@@ -1569,6 +1572,40 @@ function GinWayMonster() {
   returnStr+='\n';
   
   return returnStr;
+}
+//////峻崴角色表
+function GinWayCharacter() {
+    let returnStr = '隨機霍普角色：';
+    let colourSheet=['紅','黃','藍','綠','金','黑','紫','橘','白','銀','青'];
+    let describeSheet=['沉著','陽光','長髮','俐落','爽朗','溫和','冷酷'];
+    let motionSheet=['手中拿著書','手中拿著魯特琴','背著大劍','粘著正太','帶著眼鏡','瞪著你們','笑著看你們'];
+    let mode=Math.floor(Math.random()*7);
+    
+    returnStr+='一名';
+    if(mode==0){
+        returnStr+='女性。';
+    }
+    else{
+        returnStr+=colourSheet[Math.floor(Math.random()*colourSheet.length)];
+        returnStr+='色頭髮';
+        returnStr+=colourSheet[Math.floor(Math.random()*colourSheet.length)];
+        returnStr+='色眼睛';
+        returnStr+='的';
+        if(mode==1){
+            returnStr+='可愛正太，天才聰穎弱氣崇高偉大無上，相比之下你們的角色都是下等人，手上拿著一本書。';
+        }
+        else{
+            returnStr+=describeSheet[Math.floor(Math.random()*describeSheet.length)];
+            returnStr+='男性，';
+            if(Math.random()>0.5){
+                returnStr+=motionSheet[Math.floor(Math.random()*motionSheet.length)];
+            returnStr+='，';
+            }
+            returnStr+='長得很帥。';
+            
+        }
+    }
+    return returnStr;
 }
 ////雜項結束
 ////幫助
