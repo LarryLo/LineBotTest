@@ -454,10 +454,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
     return claculater(inputStr);
   }*/
-  /*//雜項
+  ///雜項
   if (inputStr.match(/(峻崴|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
     return GinWay();
-  }*/
+  }
   if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
     return '\\蓮帝/';
   }
