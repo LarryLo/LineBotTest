@@ -470,7 +470,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^hpm\d*$/)!= null ){
     return GinWayMonster();
   }
-  if (trigger.match(/^hpc$/)!= null ){
+  if (trigger.match(/^生成霍普角色$/)!= null ){
     return GinWayCharacter();
   }
   if (trigger.match(/^\\泡泡\/$/)!= null ){
