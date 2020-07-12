@@ -1592,7 +1592,7 @@ function GinWayCharacter() {
         returnStr+='色眼睛';
         returnStr+='的';
         if(mode==1){
-            returnStr+='可愛正太，天才聰穎弱氣崇高偉大無上，相比之下你們的角色都是下等人，手上拿著一本書。';
+            returnStr+='可愛正太，天才聰穎弱氣崇高偉大無上，相比之下你們都自慚形穢，手上拿著一本書。';
         }
         else{
             returnStr+=describeSheet[Math.floor(Math.random()*describeSheet.length)];
