@@ -462,10 +462,11 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^choice\d+$/)!= null ){
     return choiceN(inputStr);
   }
-  /*//基本運算(暫時關閉)
-  if (trigger.match(/^(\d|\(|\)|\+|-|\*|\/)+$/)!= null && trigger.match(/\D/)!=null){
-    return claculater(inputStr);
-  }*/
+  ///基本運算(暫時關閉)
+  if (trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/)!= null){
+    return claculate(inputStr);
+  }
+  //*/
   //雜項
   /*
   if (inputStr.match(/(峻崴|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
@@ -531,59 +532,32 @@ function extractStr(rate,num){
   return undefined;
 }
 ////基本運算
-function claculater(inputStr){
-  let returnStr = '基本運算：';
-  let tempMatch=inputStr.match(/^(\d|\(|\)|\+|-|\*|\/)+/)[0].toString();
-  let calError=(/((\((\+|-|\*|\/))|\d\(|((\+|-|\*|\/)\))|\)\d|((\+|-|\*|\/)(\+|-|\*|\/)))/);
-  if(tempMatch.match(calError) != null){
-    return undefined;
-  }
-  while(tempMatch.match(/\([^(]+\)/) != null){
-    let target=tempMatch.match(/\([^(]+\)/)[0].toString();
-    tempMatch=tempMatch.replace(target,claculate(target));
-  }
-  tempMatch=claculate(tempMatch);
-  if(tempMatch.match(/[^0-9]/)){
-    return undefined;
-  }
-  returnStr += tempMatch;
-  return returnStr;
-}
 function claculate(inputStr){
-  let tempMatch=inputStr.match(/[^()]+/).toString();
-  //乘
-  while(tempMatch.match(/\d+\*\d+/)!=null){
-    //b[0]*b[1]=a
-    let a = tempMatch.match(/\d+\*\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = b[0]*b[1];
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //除
-  while(tempMatch.match(/\d+\/\d+/)!=null){
-    //b[0]/b[1]=a
-    let a = tempMatch.match(/\d+\/\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = Math.floor(b[0]/b[1]);
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //加
-  while(tempMatch.match(/\d+\+\d+/)!=null){
-    //b[0]+b[1]=a
-    let a = tempMatch.match(/\d+\+\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = Number(b[0])+Number(b[1]);
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  //減
-  while(tempMatch.match(/\d+-\d+/)!=null){
-    //b[0]-b[1]=a
-    let a = tempMatch.match(/\d+-\d+/).toString();
-    let b = a.match(/\d+/g);
-    let c = b[0]-b[1];
-    tempMatch=tempMatch.replace(a,c.toString());
-  }
-  return tempMatch;
+    let returnStr = '基礎運算：';
+    let claculate = inputStr.match(/^[\d\+\-\*\/%\(\)\.d]+/)[0].toString();
+    let compare = null;
+    if(inputStr.match(/(>=|<=|=|>|<)\d+/)!=null){
+        compare = inputStr.match(/(>=|<=|=|>|<)\d+/)[0].toString();
+    }
+    while(claculate.match(/\d+d\d+/)!=null){
+        let input = claculate.match(/\d+d\d+/)[0].toString();
+        let output=0;
+        
+        let num=input.match(/\d+/g);
+        for(let i=0;i<num[0];i++){
+            let dice=Math.ceil(Math.random()*num[1]);
+            output+=dice;
+        }
+        claculate=claculate.replace(input,output);
+    }
+    returnStr+=claculate+' = ';
+    returnStr+=eval(claculate).toFixed(2);
+    if(compare!=null){
+        returnStr+=' '+compare;
+        if(eval(claculate+compare)) returnStr+=' → 成功';
+        else    returnStr+=' → 失敗';
+    }
+    return returnStr;
 }
 ////基本骰組
 function xDx(inputStr){
