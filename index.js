@@ -1242,29 +1242,35 @@ function dontRestYourHeadPC(inputStr){
     eArray.reverse();
     mArray.reverse();
     
-    returnStr+='\n';
-    returnStr+='紀律骰：[';
-    for(let i=0;i<d;i++){
-        returnStr+=dArray[i];
-        if(i!=d-1)  returnStr+=', ';
+    if(d>0){
+        returnStr+='\n';
+        returnStr+='紀律骰：[';
+        for(let i=0;i<d;i++){
+            returnStr+=dArray[i];
+            if(i!=d-1)  returnStr+=', ';
+        }
+        returnStr+=']';
     }
-    returnStr+=']';
     
-    returnStr+='\n';
-    returnStr+='疲憊骰：[';
-    for(let i=0;i<e;i++){
-        returnStr+=eArray[i];
-        if(i!=e-1)  returnStr+=', ';
+    if(e>0){
+        returnStr+='\n';
+        returnStr+='疲憊骰：[';
+        for(let i=0;i<e;i++){
+            returnStr+=eArray[i];
+            if(i!=e-1)  returnStr+=', ';
+        }
+        returnStr+=']';
     }
-    returnStr+=']';
     
-    returnStr+='\n';
-    returnStr+='瘋狂骰：[';
-    for(let i=0;i<m;i++){
-        returnStr+=mArray[i];
-        if(i!=m-1)  returnStr+=', ';
+    if(m>0){
+        returnStr+='\n';
+        returnStr+='瘋狂骰：[';
+        for(let i=0;i<m;i++){
+            returnStr+=mArray[i];
+            if(i!=m-1)  returnStr+=', ';
+        }
+        returnStr+=']';
     }
-    returnStr+=']';
     
     return returnStr;
 }
