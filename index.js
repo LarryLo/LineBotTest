@@ -447,7 +447,7 @@ function parseInput(rplyToken, inputStr) {
     return xDx(trigger);
   }
   //基本骰組 xbx>b
-  if (trigger.match(/^(\d+b\d+|\d+b|b\d+)(((>=|<=|=|>|<)\d+)?$/)!= null ){
+  if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xBx(trigger);
   }
   //基本骰組 d66
