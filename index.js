@@ -439,7 +439,7 @@ function parseInput(rplyToken, inputStr) {
     return dontRestYourHeadPC(trigger);
   }
   //請勿入睡 GM骰
-  if (trigger.match(/^dryh(\d+m)$/)!= null ){
+  if (trigger.match(/^dryh(\d+p)$/)!= null ){
     return dontRestYourHeadGM(trigger);
   }
   //基本骰組 xdx+a>b
