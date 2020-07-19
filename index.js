@@ -671,7 +671,7 @@ function xBx(inputStr){
     }
     
     //xBx
-    if(inputStr.match(/\d+b\d+/)!=null){
+    if(clacu.match(/\d+b\d+/)!=null){
         let num=clacu.match(/\d+/g);
         for(let i=0;i<num[0];i++){
             let dice=Math.ceil(Math.random()*num[1]);
