@@ -1890,6 +1890,9 @@ function help(inputStr){
     returnStr+='大小判斷支援[ > , < , >= , <= , = ]五種\n';
     returnStr+='Ex：2D, 2D6, 3D4-1>=3\n';
     returnStr+='\n';
+    returnStr+='基本骰|nBn+n>n\n';
+    returnStr+='同nDn骰法\n';
+    returnStr+='\n';
     returnStr+='d66骰|d66\n';
     returnStr+='隨機選取|CHOICE a b c d\n';
     returnStr+='\n';
