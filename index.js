@@ -1823,7 +1823,6 @@ function help(inputStr){
     returnStr+='GM骰 DRYHnP\n';
     returnStr+='nP為災難骰\n';
     returnStr+='Ex：DRYH4P\n';
-    returnStr+='\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
