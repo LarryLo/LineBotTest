@@ -446,6 +446,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(trigger);
   }
+  //基本骰組 xbx>b
+  if (trigger.match(/^(\d+b\d+|\d+b|b\d+)(((>=|<=|=|>|<)\d+)?$/)!= null ){
+    return xBx(trigger);
+  }
   //基本骰組 d66
   if (trigger.match(/^d66$/)!= null ){
     return d66();
@@ -640,6 +644,48 @@ function xDx(inputStr){
     else returnStr+='→失敗';
   }
   return returnStr;
+}
+function xBx(inputStr){
+    let returnStr='基本擲骰：[';
+    let clacu = inputStr.match(/\d*b\d*/)[0].toString();
+    let compare = null;
+    if(inputStr.match(/(>=|<=|=|>|<)\d+/)!=null){
+        compare = inputStr.match(/(>=|<=|=|>|<)\d+/)[0].toString();
+    }
+    let answer=0;
+    let successCount=0;
+    let bool=false;
+    
+    //xB
+    if(clacu.match(/^\d+b$/)!=null){
+        clacu=clacu+'6';
+    }
+    
+    //Bx
+    if(clacu.match(/^b\d+$/)!=null){
+        clacu='1'+clacu;
+    }
+    
+    //xBx
+    if(inputStr.match(/\d+b\d+/)!=null){
+        let num=clacu.match(/\d+/g);
+        for(let i=0;i<num[0];i++){
+            let dice=Math.ceil(Math.random()*num[1]);
+            if(compare!=null){
+                successCount+=eval(dice+compare);
+            }
+            if(i>0) returnStr+=', ';
+            returnStr+=dice.toString();
+        }
+        returnStr+=']';
+    }
+    if(compare!=null){
+        returnStr+=compare;
+        returnStr+=' → ';
+        returnStr+=successCount;
+        returnStr+='成功';
+    }
+    return returnStr;
 }
 ////d66骰
 function d66(){
