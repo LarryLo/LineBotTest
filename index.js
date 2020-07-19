@@ -345,7 +345,7 @@ function parseInput(rplyToken, inputStr) {
   let trigger = mainMsg[0].toString().toLowerCase(); 
   //let trigger2 = mainMsg[1].toString().toLowerCase(); 
   //help
-  if (trigger.match(/^(sw|sg)?(help|幫助)$/)!= null ){
+  if (trigger.match(/^(sw|sg|dryh)?(help|幫助)$/)!= null ){
     return help(trigger);
   }
   if (trigger.match(/^ver$/)!= null ){
