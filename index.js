@@ -553,10 +553,14 @@ function claculate(inputStr){
         claculate=claculate.replace(input,output);
     }
     returnStr+=claculate+' = ';
-    returnStr+=eval(claculate).toFixed(2);
+    let sum=eval(claculate);
+    if(Math.abs(sum-Math.round(sum))>0.01)
+        returnStr+=sum.toFixed(2);
+    else
+        returnStr+=sum.toFixed(0);
     if(compare!=null){
         returnStr+=' '+compare;
-        if(eval(claculate+compare)) returnStr+=' → 成功';
+        if(eval(sum+compare)) returnStr+=' → 成功';
         else    returnStr+=' → 失敗';
     }
     return returnStr;
