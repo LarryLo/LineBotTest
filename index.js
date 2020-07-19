@@ -1812,6 +1812,19 @@ function help(inputStr){
     returnStr+='場景表 SGST\n';
     returnStr+='戰場表 SGBT\n';
   }
+  else if(inputStr.match(/dryh/)!=null){
+    returnStr+='======================\n';
+    returnStr+='請勿入睡骰組\n';
+    returnStr+='======================\n';
+    returnStr+='PC骰 DRYHnDnEnM';
+    returnStr+='nD為紀律骰 nD為紀律骰 nD為紀律骰\n';
+    returnStr+='Ex：DRYH3D2E4M\n';
+    returnStr+='\n';
+    returnStr+='GM骰 DRYHnP\n';
+    returnStr+='nP為災難骰\n';
+    returnStr+='Ex：DRYH4P\n';
+    returnStr+='\n';
+  }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
     returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
@@ -1842,6 +1855,9 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='======================\n';
     returnStr+='忍神骰組|詳見 sgHelp\n';
+    returnStr+='======================\n';
+    returnStr+='======================\n';
+    returnStr+='請勿入睡骰組|詳見 dryhHelp\n';
     returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
