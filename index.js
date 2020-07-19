@@ -463,7 +463,8 @@ function parseInput(rplyToken, inputStr) {
     return choiceN(inputStr);
   }
   ///基本運算(暫時關閉)
-  if (trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/)!= null){
+  if (trigger.match(/[^\d\+\-\*\/%\(\)\.d]/><=)==null
+      &&trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/)!= null){
     return claculate(inputStr);
   }
   //*/
