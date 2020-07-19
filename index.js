@@ -1,4 +1,4 @@
-var version='1.24 hpc';
+var version='1.25β dryh';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -345,7 +345,7 @@ function parseInput(rplyToken, inputStr) {
   let trigger = mainMsg[0].toString().toLowerCase(); 
   //let trigger2 = mainMsg[1].toString().toLowerCase(); 
   //help
-  if (trigger.match(/^(sw|sg)?(help|幫助)$/)!= null ){
+  if (trigger.match(/^(sw|sg|dryh)?(help|幫助)$/)!= null ){
     return help(trigger);
   }
   if (trigger.match(/^ver$/)!= null ){
@@ -433,6 +433,14 @@ function parseInput(rplyToken, inputStr) {
   //死亡flag 關係表
   if (trigger.match(/^dfr$/)!= null ){
     return dfr();
+  }
+  //請勿入睡 PC骰
+  if (trigger.match(/^dryh(\d+d)?(\d+e)?(\d+m)?$/)!= null ){
+    return dontRestYourHeadPC(trigger);
+  }
+  //請勿入睡 GM骰
+  if (trigger.match(/^dryh(\d+p)$/)!= null ){
+    return dontRestYourHeadGM(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -1149,6 +1157,158 @@ function dfr() {
   return '死亡flag關係表：'+sheet[Math.floor(Math.random()*sheet.length)];
 }
 ////死亡flag function 結束
+////請勿入睡 function 開始
+//////請勿入睡PC骰
+function dontRestYourHeadPC(inputStr){
+    let returnStr = '請勿入睡擲骰：';
+    let d=0;
+    let dArray=[];
+    let dLead=1;
+    let e=0;
+    let eArray=[];
+    let eLead=1;
+    let m=0;
+    let mArray=[];
+    let mLead=1;
+    let success=0;
+    
+    if(inputStr.match(/\d+d/)!=null){
+        d=inputStr.match(/\d+d/)[0].toString();
+        d=d.match(/\d+/).toString();
+    }
+    if(inputStr.match(/\d+e/)!=null){
+        e=inputStr.match(/\d+e/)[0].toString();
+        e=e.match(/\d+/).toString();
+    }
+    if(inputStr.match(/\d+m/)!=null){
+        m=inputStr.match(/\d+m/)[0].toString();
+        m=m.match(/\d+/).toString();
+    }
+    
+    for(let i=0;i<d;i++){
+        dArray[i]=Math.ceil(Math.random()*6);
+        if(dArray[i]<4) success++;
+    }
+    for(let i=0;i<e;i++){
+        eArray[i]=Math.ceil(Math.random()*6);
+        if(eArray[i]<4) success++;
+    }
+    for(let i=0;i<m;i++){
+        mArray[i]=Math.ceil(Math.random()*6);
+        if(mArray[i]<4) success++;
+    }
+    
+    dArray.sort();
+    eArray.sort();
+    mArray.sort();
+    dArray.reverse();
+    eArray.reverse();
+    mArray.reverse();
+    
+    returnStr+='成功';
+    returnStr+=success;
+    
+    if(d==0) dLead=0;
+    if(e==0) eLead=0;
+    if(m==0) mLead=0;
+    
+    let dTemp=0;
+    let eTemp=0;
+    let mTemp=0;
+    for(let i=0;i<Math.max(d,e,m)&&(dLead+eLead+mLead)>1;i++){
+        if(!dLead||i>=d) dTemp=0;
+        else dTemp=dArray[i];
+        if(!eLead||i>=e) eTemp=0;
+        else eTemp=eArray[i];
+        if(!mLead||i>=m) mTemp=0;
+        else mTemp=mArray[i];
+        
+        if(dTemp<eTemp||dTemp<mTemp)    dLead=0;
+        if(eTemp<dTemp||eTemp<mTemp)    eLead=0;
+        if(mTemp<eTemp||mTemp<dTemp)    mLead=0;
+    }
+    
+    if(dLead){
+        returnStr+='→紀律主導';
+    }
+    else if(eLead){
+        returnStr+='→疲憊主導';
+    }
+    else if(mLead){
+        returnStr+='→瘋狂主導';
+    }
+    
+    dArray.reverse();
+    eArray.reverse();
+    mArray.reverse();
+    
+    if(d>0){
+        returnStr+='\n';
+        returnStr+='紀律骰：[';
+        for(let i=0;i<d;i++){
+            returnStr+=dArray[i];
+            if(i!=d-1)  returnStr+=', ';
+        }
+        returnStr+=']';
+    }
+    
+    if(e>0){
+        returnStr+='\n';
+        returnStr+='疲憊骰：[';
+        for(let i=0;i<e;i++){
+            returnStr+=eArray[i];
+            if(i!=e-1)  returnStr+=', ';
+        }
+        returnStr+=']';
+    }
+    
+    if(m>0){
+        returnStr+='\n';
+        returnStr+='瘋狂骰：[';
+        for(let i=0;i<m;i++){
+            returnStr+=mArray[i];
+            if(i!=m-1)  returnStr+=', ';
+        }
+        returnStr+=']';
+    }
+    
+    return returnStr;
+}
+
+//////請勿入睡GM骰
+function dontRestYourHeadGM(inputStr){
+    let returnStr = '請勿入睡擲骰：';
+    let p=0;
+    let pArray=[];
+    let success=0;
+    
+    if(inputStr.match(/\d+p/)!=null){
+        p=inputStr.match(/\d+p/)[0].toString();
+        p=p.match(/\d+/).toString();
+    }
+    
+    for(let i=0;i<p;i++){
+        pArray[i]=Math.ceil(Math.random()*6);
+        if(pArray[i]<4) success++;
+    }
+    
+    pArray.sort();
+    
+    returnStr+='成功';
+    returnStr+=success;
+    returnStr+='→災難主導';
+    
+    returnStr+='\n';
+    returnStr+='災難骰：[';
+    for(let i=0;i<p;i++){
+        returnStr+=pArray[i];
+        if(i!=p-1)  returnStr+=', ';
+    }
+    returnStr+=']';
+    
+    return returnStr;
+}
+////請勿入睡 function 結束
 ////雜項
 //////峻崴骰
 function GinWay() {
@@ -1652,6 +1812,18 @@ function help(inputStr){
     returnStr+='場景表 SGST\n';
     returnStr+='戰場表 SGBT\n';
   }
+  else if(inputStr.match(/dryh/)!=null){
+    returnStr+='======================\n';
+    returnStr+='請勿入睡骰組\n';
+    returnStr+='======================\n';
+    returnStr+='PC骰 DRYHnDnEnM\n';
+    returnStr+='nD為紀律骰 nE為疲憊骰 nM為瘋狂骰\n';
+    returnStr+='Ex：DRYH3D2E4M\n';
+    returnStr+='\n';
+    returnStr+='GM骰 DRYHnP\n';
+    returnStr+='nP為災難骰\n';
+    returnStr+='Ex：DRYH4P\n';
+  }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
     returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
@@ -1682,6 +1854,9 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='======================\n';
     returnStr+='忍神骰組|詳見 sgHelp\n';
+    returnStr+='======================\n';
+    returnStr+='======================\n';
+    returnStr+='請勿入睡骰組|詳見 dryhHelp\n';
     returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
