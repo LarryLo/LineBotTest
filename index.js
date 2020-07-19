@@ -446,8 +446,8 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(trigger);
   }
-  //基本骰組 xbx>b
-  if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((>=|<=|=|>|<)\d+)?$/)!= null ){
+  //基本骰組 xbx+a>b
+  if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xBx(trigger);
   }
   //基本骰組 d66
@@ -648,6 +648,10 @@ function xDx(inputStr){
 function xBx(inputStr){
     let returnStr='基本擲骰：[';
     let clacu = inputStr.match(/\d*b\d*/)[0].toString();
+    let adding = null;
+    if(inputStr.match(/(\+|-)\d+/)!=null){
+        adding = inputStr.match(/(\+|-)\d+/)[0].toString();
+    }
     let compare = null;
     if(inputStr.match(/(>=|<=|=|>|<)\d+/)!=null){
         compare = inputStr.match(/(>=|<=|=|>|<)\d+/)[0].toString();
@@ -671,13 +675,17 @@ function xBx(inputStr){
         let num=clacu.match(/\d+/g);
         for(let i=0;i<num[0];i++){
             let dice=Math.ceil(Math.random()*num[1]);
+            if(i>0) returnStr+=', ';
+            returnStr+=dice.toString();
+            if(adding!=null)    dice+=adding;
             if(compare!=null){
                 successCount+=eval(dice+compare);
             }
-            if(i>0) returnStr+=', ';
-            returnStr+=dice.toString();
         }
         returnStr+=']';
+    }
+    if(adding!=null){
+        returnStr+=adding;
     }
     if(compare!=null){
         returnStr+=compare;
