@@ -1816,7 +1816,7 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='請勿入睡骰組\n';
     returnStr+='======================\n';
-    returnStr+='PC骰 DRYHnDnEnM';
+    returnStr+='PC骰 DRYHnDnEnM\n';
     returnStr+='nD為紀律骰 nD為紀律骰 nD為紀律骰\n';
     returnStr+='Ex：DRYH3D2E4M\n';
     returnStr+='\n';
