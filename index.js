@@ -470,11 +470,6 @@ function parseInput(rplyToken, inputStr) {
   }
   //*/
   //雜項
-  //
-  if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
-    return GinWay();
-  }
-  //*/
   if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
     return '\\蓮帝/';
   }
@@ -496,7 +491,12 @@ function parseInput(rplyToken, inputStr) {
   if (inputStr.match(/複雜度/)!= null ||
       inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
+  }  
+  //
+  if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
+    return GinWay();
   }
+  //*/
   return countStr;
 }
 
