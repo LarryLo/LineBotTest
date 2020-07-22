@@ -470,10 +470,11 @@ function parseInput(rplyToken, inputStr) {
   }
   //*/
   //雜項
-  /*
-  if (inputStr.match(/(峻崴|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
+  //
+  if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
     return GinWay();
-  }*/
+  }
+  //*/
   if (trigger.match(/^(紅炎的|紅蓮的)/)!= null ){
     return '\\蓮帝/';
   }
@@ -1344,7 +1345,7 @@ function dontRestYourHeadGM(inputStr){
 }
 ////請勿入睡 function 結束
 ////雜項
-//////峻崴骰
+//////峻巍骰
 function GinWay() {
   let GWSheet=['哼','口亨','閉嘴','閉嘴閉嘴閉嘴閉嘴','機掰','機掰機掰機掰機掰','G8','過份','嗯哼哼:(','你們真的很機掰','霍普難過 霍普哀傷 霍普心痛痛','你們都欺負可憐的霍普','你們這樣欺負霍普心都不會痛嗎？'];
   return GWSheet[Math.floor(Math.random()*GWSheet.length)];
@@ -1357,7 +1358,7 @@ function terbuchet(inputStr) {
   returnStr+=Math.pow(10,Math.random()*8-2).toFixed(2)+'公尺！';
   return returnStr;
 }
-//////峻崴流言表
+//////峻巍流言表
 function GinWayRm() {
   let returnStr = 'SW2.0流言：';
   returnStr+='霍普';
@@ -1365,7 +1366,7 @@ function GinWayRm() {
   returnStr+=swRmSheet3[Math.floor(Math.random()*swRmSheet3.length)];
   return returnStr;
 }
-//////峻崴怪物表
+//////峻巍怪物表
 function GinWayMonster() {
   let returnStr = '隨機怪物：';
   let rareSheet=['N','R','SR','SSR','UR','LR','XLR'];
@@ -1768,7 +1769,7 @@ function GinWayMonster() {
   
   return returnStr;
 }
-//////峻崴角色表
+//////峻巍角色表
 function GinWayCharacter() {
     let returnStr = '隨機霍普角色：';
     let colourSheet=['紅','黃','藍','綠','金','黑','紫','橘','白','銀','青'];
