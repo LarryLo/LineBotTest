@@ -492,7 +492,7 @@ function parseInput(rplyToken, inputStr) {
       inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
   }  
-  /*/
+  //
   if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
     return GinWay();
   }
