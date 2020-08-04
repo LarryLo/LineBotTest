@@ -712,7 +712,7 @@ function choice(inputStr){
 //////sw威力表
 function Kx(inputStr) {
   let returnStr = 'SW2.0威力表擲骰：';
-  let tempMatch = inputStr.match(/^(k)(\d+)((\+|-)\d+)?(@\d+)?(\$(\+|-)?\d+)?(gf)?$/)[0].toString();
+  let tempMatch = inputStr;
   //return tempMatch.match(/k\d+/).toString();
   let k=0;
   let b=0;
