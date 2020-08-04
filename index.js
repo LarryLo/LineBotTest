@@ -435,7 +435,7 @@ function parseInput(rplyToken, inputStr) {
     return dfr();
   }
   //請勿入睡 PC骰
-  if (trigger.match(/^dryh(\d+d)?(\d+e)?(\d+m)?$/)!= null ){
+  if (trigger.match(/^dryh((\d+d)|(\d+e)|(\d+m))+$/)!= null ){
     return dontRestYourHeadPC(trigger);
   }
   //請勿入睡 GM骰
