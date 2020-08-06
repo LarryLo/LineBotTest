@@ -466,7 +466,7 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/)==null
       &&trigger.match(/[\+\-\*\/%><=]/)!=null
       &&trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/)!= null){
-    return claculate(inputStr);
+    return claculate(trigger);
   }
   //*/
   //雜項
