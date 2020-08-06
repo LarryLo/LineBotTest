@@ -456,13 +456,13 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組 choice
   if (trigger.match(/^choice$/)!= null ){
-    return choice(inputStr);
+    return choice(trigger);
   }
   //基本骰組 choiceN
   if (trigger.match(/^choice\d+$/)!= null ){
-    return choiceN(inputStr);
+    return choiceN(trigger);
   }
-  ///基本運算(暫時關閉)
+  ///基本運算
   if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/)==null
       &&trigger.match(/[\+\-\*\/%><=]/)!=null
       &&trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/)!= null){
