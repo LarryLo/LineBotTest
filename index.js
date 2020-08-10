@@ -497,6 +497,11 @@ function parseInput(rplyToken, inputStr) {
     return GinWay();
   }
   //*/
+  //
+  if (inputStr.match(/霍普黑雷達/)!= null ){
+    return GinWay();
+  }
+  //*/
   return countStr;
 }
 
