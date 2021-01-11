@@ -702,7 +702,7 @@ function choiceN(inputStr){
     c=option.length+1;
   }
   for(;c>0;c--){
-    returnStr+=' '+option.splice(Math.floor(Math.random()*option.length),1);
+    returnStr+=option.splice(Math.floor(Math.random()*option.length),1)+' ';
   }
   return returnStr;
 }
