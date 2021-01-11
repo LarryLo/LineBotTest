@@ -1,4 +1,4 @@
-var version='1.27 claculate';
+var version='1.28 choiceβ';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -456,11 +456,11 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組 choice
   if (trigger.match(/^choice$/)!= null ){
-    return choice(trigger);
+    return choice(inputStr);
   }
   //基本骰組 choiceN
   if (trigger.match(/^choice\d+$/)!= null ){
-    return choiceN(trigger);
+    return choiceN(inputStr);
   }
   ///基本運算
   if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/)==null
@@ -702,7 +702,7 @@ function choiceN(inputStr){
     c=option.length+1;
   }
   for(;c>0;c--){
-    returnStr+=' '+option.splice(Math.floor(Math.random()*option.length),1);
+    returnStr+=option.splice(Math.floor(Math.random()*option.length),1)+' ';
   }
   return returnStr;
 }
