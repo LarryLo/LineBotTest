@@ -456,11 +456,11 @@ function parseInput(rplyToken, inputStr) {
   }
   //基本骰組 choice
   if (trigger.match(/^choice$/)!= null ){
-    return choice(trigger);
+    return choice(inputStr);
   }
   //基本骰組 choiceN
   if (trigger.match(/^choice\d+$/)!= null ){
-    return choiceN(trigger);
+    return choiceN(inputStr);
   }
   ///基本運算
   if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/)==null
