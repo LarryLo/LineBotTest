@@ -1,4 +1,4 @@
-var version='1.28 choice';
+var version='1.29 hpmβ';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -1746,18 +1746,56 @@ function GinWayMonster() {
                 '礦工',
                 '牛郎',
                 '親子丼'];
+  let itemSheet=['肉',
+                 '皮',
+                 '殼',
+                 '零件',
+                 '核心',
+                 '鱗片',
+                 '粉末',
+                 '碎片',
+                 '金屬',
+                 '種子',
+                 '電路',
+                 '果實',
+                 '中樞',
+                 '裝甲',
+                 '牙',
+                 '爪',
+                 '囊',
+                 '魂魄',
+                 '精華',
+                 '黏液',
+                 '結石',
+                 '晶石',
+                 '枝葉',
+                 '骨頭',
+                 '心臟'];
+  let itemStr = '無';
+  let mon = monSheet[Math.floor(Math.random()*monSheet.length)];
   let rare=1;
   for(let i=Math.random()*Math.pow(1.5,rareSheet.length-1);i>1;i=i/1.5){
     rare++;
   }
   rare=rareSheet.length-rare;
   for(let i=0;i<=rare;i++){
-    returnStr+=porSheet[Math.floor(Math.random()*porSheet.length)];
+    let por = porSheet[Math.floor(Math.random()*porSheet.length)];
+    returnStr+=por;
+    for(let j=Math.floor(Math.random()*3);j>0;j--){
+      if(itemStr !== '無')
+        itemStr += ', ';
+      else
+        itemStr = '';
+      itemStr += por+mon+itemSheet[Math.floor(Math.random()*itemSheet.length)];
+    }
   }
-  returnStr+=monSheet[Math.floor(Math.random()*monSheet.length)];
+  returnStr+=mon;
   returnStr+='\n';
   returnStr+='稀有度：';
   returnStr+=rareSheet[rare];
+  returnStr+='\n';
+  returnStr+='掉落物：';
+  returnStr+=itemStr;
   returnStr+='\n';
   returnStr+='HP：';
   returnStr+=Math.floor(Math.pow(10,Math.random()*(rare+1)+rare/2));
