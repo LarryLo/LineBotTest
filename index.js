@@ -1756,7 +1756,7 @@ function GinWayMonster() {
                  '碎片',
                  '骨頭',
                  '心臟'];
-  let itemStr = "";
+  let itemStr = '無';
   let mon = monSheet[Math.floor(Math.random()*monSheet.length)];
   let rare=1;
   for(let i=Math.random()*Math.pow(1.5,rareSheet.length-1);i>1;i=i/1.5){
@@ -1767,8 +1767,10 @@ function GinWayMonster() {
     let por = porSheet[Math.floor(Math.random()*porSheet.length)];
     returnStr+=por;
     for(let j=Math.floor(Math.random()*3);j>0;j--){
-      if(itemStr !== '')
+      if(itemStr !== '無')
         itemStr += ', ';
+      else
+        itemStr = '';
       itemStr += por+mon+itemSheet[Math.floor(Math.random()*itemSheet.length)];
     }
   }
