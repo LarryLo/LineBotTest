@@ -491,7 +491,10 @@ function parseInput(rplyToken, inputStr) {
   if (inputStr.match(/複雜度/)!= null ||
       inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
-  }  
+  }
+  if (trigger.match(/^(鑑定|鑑定武器|鑑定防具|鑑定道具)/)!= null ){
+    return appraisal(inputStr);
+  }
   /*/
   if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
     return GinWay();
