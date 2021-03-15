@@ -1937,7 +1937,7 @@ function appraisal(inputStr){
   }
 }
 function appraisalWp(inputStr){
-  inputStr=inputStr.replace(/^(鑑定武器|apsw)\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定武器|apsw)\s*/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let diceSheet=[[5,'d2'],[80,'d4'],[60,'d6'],[40,'d8'],[30,'d10'],[20,'d12'],[10,'d20'],[1,'d100']];
