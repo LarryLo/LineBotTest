@@ -1956,13 +1956,20 @@ function appraisalWp(inputStr){
   returnStr += extractStr(typeSheet,srand(seed++))+'\n'
   
   if(mag_n>0) returnStr += '魔法物品：'+'+'+mag_n+'\n';
-  else if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
+  else if(0.2>srand(seed++)){
+    returnStr += '魔法物品：是'+'\n';
+    mag_n++;
+  }
   else returnStr += '魔法物品：否'+'\n';
   
   returnStr += '價格：';
   let price = 0;
   if (0.5>srand(seed++))  price++;
   price += price+srand(seed++);
+  //增加魔法道具價值
+  if(mag_n!=0)
+    mag_n = mag_n+1.5-srand(seed++);
+  price +=mag_n;
   price = Math.floor(Math.pow(10,price));
   returnStr += priceToCoin(price)+'\n';
   
