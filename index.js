@@ -1952,6 +1952,9 @@ function appraisalWp(inputStr){
   while(0.5>srand(seed++)) n++;
   returnStr += '+'+n+extractStr(typeSheet,srand(seed++))+'\n';
   
+  if(0.5>srand(seed++)) returnStr += '魔法物品：是'+'\n';
+  else returnStr += '魔法物品：否'+'\n';
+  
   returnStr += '價格：'
   let price = 0;
   if (0.5>srand(seed++))  price++;
@@ -1959,7 +1962,7 @@ function appraisalWp(inputStr){
   price = Math.floor(Math.pow(10,price));
   returnStr += priceToCoin(price)+'\n';
   
-  returnStr += '重量：'+(srand(seed++)*20).toFixed(1)+'\n';
+  returnStr += '重量：'+(srand(seed++)*20).toFixed(1)+'磅'+'\n';
   return returnStr;
 }
 function appraisalAm(inputStr){
