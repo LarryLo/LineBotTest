@@ -1949,11 +1949,12 @@ function appraisalWp(inputStr){
   var n = 1;
   while(0.2>srand(seed++)) n++;
   returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
-  n = 0;
-  while(0.5>srand(seed++)) n++;
-  returnStr += '+'+n+extractStr(typeSheet,srand(seed++))+'\n';
+  let mag_n = 0;
+  while(0.1>srand(seed++)) mag_n++;
+  if(mag_n!=0)
+    returnStr += '+'+mag_n+extractStr(typeSheet,srand(seed++))+'\n';
   
-  if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
+  if(mag_n>0 || 0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
   else returnStr += '魔法物品：否'+'\n';
   
   returnStr += '價格：';
