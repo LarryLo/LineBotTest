@@ -1955,7 +1955,7 @@ function appraisalWp(inputStr){
   if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
   else returnStr += '魔法物品：否'+'\n';
   
-  returnStr += '價格：'
+  returnStr += '價格：';
   let price = 0;
   if (0.5>srand(seed++))  price++;
   price += price+srand(seed++);
@@ -1963,6 +1963,62 @@ function appraisalWp(inputStr){
   returnStr += priceToCoin(price)+'\n';
   
   returnStr += '重量：'+(srand(seed++)*20).toFixed(1)+'磅'+'\n';
+  
+  returnStr += '屬性：';
+  let proStr = '';
+  if(0.8>srand(seed++)){
+    //近戰
+    let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
+    proStr += weight;
+    if(0.25>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '靈巧';
+    }
+    if(0.25>srand(seed++)){
+      if(proStr!=='') proStr += '、';
+      proStr += '觸及';
+    }
+    if(0.15>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      let range = Math.ceil(srand(seed++)*14)+1)*10;
+      proStr += '投擲'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
+    }
+    let doubleHand = false;
+    if(0.25>srand(seed++) && weight!=='輕型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '雙手';
+      doubleHand = true;
+    }
+    if(0.25>srand(seed++) && !doubleHand){
+      if(proStr!=='') proStr += '、';
+      proStr += '可雙手';
+    }    
+  }
+  else{
+    //遠戰
+    let range = Math.ceil(srand(seed++)*13)+2)*10;
+    proStr += '彈藥'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
+    
+    let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
+    if(weight!=='') proStr += '、';
+    proStr += weight;
+    
+    if(0.1>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '靈巧';
+    }
+    if(0.25>srand(seed++) && weight!=='輕型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '雙手';
+    }
+    if(0.25>srand(seed++)){
+      if(proStr!=='') proStr += '、';
+      proStr += '裝填';
+    }
+  }
+  if(proStr==='') proStr = '-';
+  returnStr += proStr+'\n';
+  
   return returnStr;
 }
 function appraisalAm(inputStr){
@@ -1976,7 +2032,7 @@ function appraisalIt(inputStr){
   return undefined;
 }
 function priceToCoin(price){
-  if(price == 0)  return '無價';
+  if(price == 0)  return '-';
   let returnStr = '';
   let coinSheet = ['銅幣','銀幣','金幣','鉑金幣'];
   for(let i = 0; i<4; i++)
