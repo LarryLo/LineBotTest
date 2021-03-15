@@ -1952,7 +1952,7 @@ function appraisalWp(inputStr){
   while(0.5>srand(seed++)) n++;
   returnStr += '+'+n+extractStr(typeSheet,srand(seed++))+'\n';
   
-  if(0.5>srand(seed++)) returnStr += '魔法物品：是'+'\n';
+  if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
   else returnStr += '魔法物品：否'+'\n';
   
   returnStr += '價格：'
