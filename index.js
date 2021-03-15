@@ -1918,6 +1918,69 @@ function GinWayCharacter() {
     }
     return returnStr;
 }
+
+//////鑑定
+function appraisal(inputStr){
+  if(inputStr.match(/^鑑定武器/)!=null) return appraisalWp(inputStr);
+  else if(inputStr.match(/^鑑定防具/)!=null) return appraisalAm(inputStr);
+  else if(inputStr.match(/^鑑定道具/)!=null) return appraisalIt(inputStr);
+  else{
+    inputStr=inputStr.replace(/^鑑定\s+/,'');
+    if(inputStr==='')  return undefined;
+    let seed=strToSeed(inputStr);
+    if(srand(seed++)<1/3) return appraisalWp(inputStr);
+    else if(srand(seed++)<2/3) return appraisalAm(inputStr);
+    else return appraisalIt(inputStr);
+  }
+}
+function appraisalWp(inputStr){
+  inputStr=inputStr.replace(/^鑑定\s+/,'');
+  inputStr=inputStr.replace(/^鑑定武器\s+/,'');
+  if(inputStr==='')  return undefined;
+  let seed=strToSeed(inputStr);
+  let diceSheet=[[5,'d2'],[80,'d4'],[60,'d6'],[40,'d8'],[30,'d10'],[20,'d12'],[10,'d20'],[1,'d100']];
+  let typeSheet=[[50,'鈍擊'],[50,'穿刺'],[50,'劈砍'],[2,'酸蝕'],[2,'寒冰'],[2,'火焰'],[2,'閃電'],[2,'雷鳴'],[2,'毒素'],[1,'死靈'],[1,'光耀'],[1,'精神'],[2,'力場']];
+  
+  let returnStr = '鑑定結果：'+inputStr+'\n';
+  var n = 1;
+  while(0.2>srand(seed++)) n++;
+  returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
+  n = 0;
+  while(0.5>srand(seed++)) n++;
+  returnStr += '+'+n+extractStr(typeSheet,srand(seed++))+'\n';
+  
+  returnStr += '價格：'
+  let price = 0;
+  if (0.5>srand(seed++))  price++;
+  price += price+srand(seed++);
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+(srand(seed++)*20).toFixed(1)+'\n';
+  return returnStr;
+}
+function appraisalAm(inputStr){
+  inputStr=inputStr.replace(/^鑑定防具\s+/,'');
+  if(inputStr==='')  return undefined;
+  return undefined;
+}
+function appraisalIt(inputStr){
+  inputStr=inputStr.replace(/^鑑定道具\s+/,'');
+  if(inputStr==='')  return undefined;
+  return undefined;
+}
+function priceToCoin(price){
+  if(price == 0)  return '無價';
+  let returnStr = '';
+  let coinSheet = ['銅幣','銀幣','金幣','鉑金幣'];
+  for(let i = 0; i<4; i++)
+    if(price>0){
+      returnStr = price%10+coinSheet[i]+returnStr;
+      price = Math.floor(price/10);
+    }
+  return returnStr;
+}
+//////鑑定結束
 ////雜項結束
 ////幫助
 function help(inputStr){
