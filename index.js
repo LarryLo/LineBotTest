@@ -1924,11 +1924,11 @@ function GinWayCharacter() {
 
 //////鑑定
 function appraisal(inputStr){
-  if(inputStr.match(/^鑑定武器/)!=null) return appraisalWp(inputStr);
-  else if(inputStr.match(/^鑑定防具/)!=null) return appraisalAm(inputStr);
-  else if(inputStr.match(/^鑑定道具/)!=null) return appraisalIt(inputStr);
+  if(inputStr.match(/^(鑑定武器|apsw)/)!=null) return appraisalWp(inputStr);
+  else if(inputStr.match(/^(鑑定防具|apsa)/)!=null) return appraisalAm(inputStr);
+  else if(inputStr.match(/^(鑑定道具|apsi)/)!=null) return appraisalIt(inputStr);
   else{
-    inputStr=inputStr.replace(/^鑑定\s+/,'');
+    inputStr=inputStr.replace(/^(鑑定|aps)\s+/,'');
     if(inputStr==='')  return undefined;
     let seed=strToSeed(inputStr);
     if(srand(seed++)<1/3) return appraisalWp(inputStr);
@@ -1937,12 +1937,13 @@ function appraisal(inputStr){
   }
 }
 function appraisalWp(inputStr){
-  inputStr=inputStr.replace(/^鑑定\s+/,'');
-  inputStr=inputStr.replace(/^鑑定武器\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定武器|apsw)\s+/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let diceSheet=[[5,'d2'],[80,'d4'],[60,'d6'],[40,'d8'],[30,'d10'],[20,'d12'],[10,'d20'],[1,'d100']];
   let typeSheet=[[50,'鈍擊'],[50,'穿刺'],[50,'劈砍'],[2,'酸蝕'],[2,'寒冰'],[2,'火焰'],[2,'閃電'],[2,'雷鳴'],[2,'毒素'],[1,'死靈'],[1,'光耀'],[1,'精神'],[2,'力場']];
+  
+  let range_tag =  inputStr.match(/(弓|弩|炮|鏢|箭|鎗)$/)!=null;
   
   let returnStr = '鑑定結果：'+inputStr+'\n';
   var n = 1;
@@ -1966,7 +1967,7 @@ function appraisalWp(inputStr){
   
   returnStr += '屬性：';
   let proStr = '';
-  if(0.8>srand(seed++)){
+  if(!range_tag && 0.8>srand(seed++)){
     //近戰
     let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
     proStr += weight;
