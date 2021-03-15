@@ -1964,12 +1964,14 @@ function appraisalWp(inputStr){
   
   returnStr += '價格：';
   let price = 0;
-  if (0.5>srand(seed++))  price++;
-  price += price+srand(seed++);
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
   //增加魔法道具價值
-  if(mag_n!=0)
-    mag_n = mag_n+1.5-srand(seed++);
-  price +=mag_n;
+  else{
+    price = mag_n+5-srand(seed++);
+  }
   price = Math.floor(Math.pow(10,price));
   returnStr += priceToCoin(price)+'\n';
   
