@@ -1980,7 +1980,7 @@ function appraisalWp(inputStr){
     }
     if(0.15>srand(seed++) && weight!=='重型'){
       if(proStr!=='') proStr += '、';
-      let range = Math.ceil(srand(seed++)*14)+1)*10;
+      let range = Math.ceil((srand(seed++)*14)+1)*10;
       proStr += '投擲'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
     }
     let doubleHand = false;
@@ -1996,7 +1996,7 @@ function appraisalWp(inputStr){
   }
   else{
     //遠戰
-    let range = Math.ceil(srand(seed++)*13)+2)*10;
+    let range = Math.ceil((srand(seed++)*13)+2)*10;
     proStr += '彈藥'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
     
     let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
