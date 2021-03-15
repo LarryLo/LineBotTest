@@ -492,7 +492,7 @@ function parseInput(rplyToken, inputStr) {
       inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
   }
-  if (trigger.match(/^(鑑定|鑑定武器|鑑定防具|鑑定道具)/)!= null ){
+  if (trigger.match(/^(鑑定|aps|鑑定武器|apsw|鑑定防具|apsa|鑑定道具|apsi)/)!= null ){
     return appraisal(inputStr);
   }
   /*/
