@@ -1952,7 +1952,8 @@ function appraisalWp(inputStr){
   let mag_n = 0;
   while(0.2>srand(seed++)) mag_n++;
   if(mag_n!=0)
-    returnStr += '+'+mag_n+extractStr(typeSheet,srand(seed++))+'\n';
+    returnStr += '+'+mag_n;
+  returnStr += extractStr(typeSheet,srand(seed++))+'\n'
   
   if(mag_n>0) returnStr += '魔法物品：'+'+'+mag_n+'\n';
   else if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
