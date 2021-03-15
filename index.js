@@ -1950,7 +1950,7 @@ function appraisalWp(inputStr){
   while(0.2>srand(seed++)) n++;
   returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
   let mag_n = 0;
-  while(0.1>srand(seed++)) mag_n++;
+  while(0.2>srand(seed++)) mag_n++;
   if(mag_n!=0)
     returnStr += '+'+mag_n+extractStr(typeSheet,srand(seed++))+'\n';
   
