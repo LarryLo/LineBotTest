@@ -1962,7 +1962,7 @@ function appraisalWp(inputStr){
   if(mag_n!=0){
     if(!GinWay_tag)
       returnStr += '+';
-    eles
+    else
       returnStr += '-';
     returnStr += mag_n;
   }
@@ -1975,7 +1975,7 @@ function appraisalWp(inputStr){
   if(mag_n>0){
     if(!GinWay_tag)
       returnStr += '+';
-    eles
+    else
       returnStr += '-';
     returnStr += mag_n+'\n';
   }
