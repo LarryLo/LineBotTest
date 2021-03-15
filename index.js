@@ -1944,25 +1944,50 @@ function appraisalWp(inputStr){
   let typeSheet=[[50,'鈍擊'],[50,'穿刺'],[50,'劈砍'],[2,'酸蝕'],[2,'寒冰'],[2,'火焰'],[2,'閃電'],[2,'雷鳴'],[2,'毒素'],[1,'死靈'],[1,'光耀'],[1,'精神'],[2,'力場']];
   
   let range_tag =  inputStr.match(/(弓|弩|炮|鏢|箭|鎗)$/)!=null;
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
   
   let returnStr = '鑑定結果：'+inputStr+'\n';
   var n = 1;
   while(0.2>srand(seed++)) n++;
-  returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
-  let mag_n = 0;
-  while(0.2>srand(seed++)) mag_n++;
-  if(mag_n!=0)
-    returnStr += '+'+mag_n;
-  returnStr += extractStr(typeSheet,srand(seed++))+'\n'
+  if(!GinWay_tag)
+    returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
+  else
+    returnStr += '傷害：1d1';
   
-  if(mag_n>0) returnStr += '魔法物品：'+'+'+mag_n+'\n';
+  let mag_n = 0;
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n!=0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    eles
+      returnStr += '-';
+    returnStr += mag_n;
+  }
+  if(!GinWay_tag)
+    returnStr += extractStr(typeSheet,srand(seed++))+'\n';
+  else    
+    returnStr += extractStr([[1,'哼'],[1,'閉嘴'],[1,'機掰']],srand(seed++))+'\n';
+  
+  returnStr += '魔法物品：';
+  if(mag_n>0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    eles
+      returnStr += '-';
+    returnStr += mag_n+'\n';
+  }
   else if(0.2>srand(seed++)){
-    returnStr += '魔法物品：是'+'\n';
+    returnStr += '是'+'\n';
     mag_n++;
   }
-  else returnStr += '魔法物品：否'+'\n';
+  else returnStr += '否'+'\n';
   
   returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
   let price = 0;
   if(mag_n == 0){
     if (0.5>srand(seed++))  price++;
@@ -1994,7 +2019,7 @@ function appraisalWp(inputStr){
     if(0.15>srand(seed++) && weight!=='重型'){
       if(proStr!=='') proStr += '、';
       let range = Math.ceil((srand(seed++)*14)+1)*10;
-      proStr += '投擲'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
+      proStr += '投擲'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'呎）';
     }
     let doubleHand = false;
     if(0.25>srand(seed++) && weight!=='輕型'){
@@ -2010,7 +2035,7 @@ function appraisalWp(inputStr){
   else{
     //遠戰
     let range = Math.ceil((srand(seed++)*13)+2)*10;
-    proStr += '彈藥'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'）';
+    proStr += '彈藥'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'呎）';
     
     let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
     if(weight!=='') proStr += '、';
