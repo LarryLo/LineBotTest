@@ -1954,7 +1954,8 @@ function appraisalWp(inputStr){
   if(mag_n!=0)
     returnStr += '+'+mag_n+extractStr(typeSheet,srand(seed++))+'\n';
   
-  if(mag_n>0 || 0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
+  if(mag_n>0) returnStr += '魔法物品：'+'+'+mag_n+'\n';
+  else if(0.2>srand(seed++)) returnStr += '魔法物品：是'+'\n';
   else returnStr += '魔法物品：否'+'\n';
   
   returnStr += '價格：';
@@ -2024,17 +2025,26 @@ function appraisalWp(inputStr){
   return returnStr;
 }
 function appraisalAm(inputStr){
-  inputStr=inputStr.replace(/^鑑定防具\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定防具|apsa)\s+/,'');
   if(inputStr==='')  return undefined;
-  return undefined;
+  let seed=strToSeed(inputStr);
+    
+  let returnStr = '鑑定結果：'+inputStr+'\n';
+  
+  return returnStr;
 }
 function appraisalIt(inputStr){
-  inputStr=inputStr.replace(/^鑑定道具\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定道具|apsi)\s+/,'');
   if(inputStr==='')  return undefined;
-  return undefined;
+  let seed=strToSeed(inputStr);
+  
+  let returnStr = '鑑定結果：'+inputStr+'\n';
+  
+  
+  return returnStr;
 }
 function priceToCoin(price){
-  if(price == 0)  return '-';
+  if(price <= 0)  return '-';
   let returnStr = '';
   let coinSheet = ['銅幣','銀幣','金幣','鉑金幣'];
   for(let i = 0; i<4; i++)
