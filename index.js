@@ -1791,7 +1791,7 @@ function GinWayMonster() {
         itemStr += ', ';
       else
         itemStr = '';
-      itemStr += por+mon+itemSheet[Math.floor(Math.random()*itemSheet.length)];
+      itemStr += rareSheet[Math.floor(Math.random()*rare)]+' '+por+mon+itemSheet[Math.floor(Math.random()*itemSheet.length)];
     }
   }
   returnStr+=mon;
