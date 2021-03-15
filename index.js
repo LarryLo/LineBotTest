@@ -2082,11 +2082,14 @@ function priceToCoin(price){
   if(price <= 0)  return '-';
   let returnStr = '';
   let coinSheet = ['銅幣','銀幣','金幣','鉑金幣'];
-  for(let i = 0; i<4; i++)
+  for(let i = 0; i<3; i++)
     if(price>0){
       returnStr = price%10+coinSheet[i]+returnStr;
       price = Math.floor(price/10);
     }
+  if(price>0){
+      returnStr = price+coinSheet[3]+returnStr;
+  }
   return returnStr;
 }
 //////鑑定結束
