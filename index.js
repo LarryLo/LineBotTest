@@ -1974,6 +1974,15 @@ function help(inputStr){
     returnStr+='nP為災難骰\n';
     returnStr+='Ex：DRYH4P\n';
   }
+  else if(inputStr.match(/toy/)!=null){
+    returnStr+='======================\n';
+    returnStr+='玩具骰組\n';
+    returnStr+='======================\n';
+    returnStr+='鑑定骰 「鑑定物品名」 或 「apr物品名」\n';
+    returnStr+='鑑定武器骰 「鑑定物品名」 或 「aprw物品名」\n';
+    returnStr+='鑑定防具骰 「鑑定防具物品名」 或 「apra物品名」\n';
+    returnStr+='鑑定道具骰 「鑑定道具物品名」 或 「apri物品名」\n';
+  }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
     returnStr+='泡沫排序 ver'+version+' 現正運作中☆\n';
@@ -2010,6 +2019,9 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='======================\n';
     returnStr+='請勿入睡骰組|詳見 dryhHelp\n';
+    returnStr+='======================\n';
+    returnStr+='======================\n';
+    returnStr+='其他玩具|詳見 toyHelp\n';
     returnStr+='======================\n';
     returnStr+='-----------------------\n';
     returnStr+='泡沫排序 dice bot\n';
