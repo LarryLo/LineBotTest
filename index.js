@@ -2068,9 +2068,13 @@ function appraisalAm(inputStr){
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
+  let sheld_tag =  inputStr.match(/盾$/)!=null;
+  let armor_tag =  inputStr.match(/甲$/)!=null;
   
   let returnStr = '鑑定結果：'+inputStr+'\n';  
   let weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲'],[1,'盾']],srand(seed++));
+  if(armor_tag) weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲']],srand(seed++));
+  if(sheld_tag) weight = '盾';
   returnStr += '類型：'+weight+'\n';
   
   returnStr += 'AC：';
@@ -2090,9 +2094,14 @@ function appraisalAm(inputStr){
       break;
     case '盾':
       ac = 2;
-      returnStr += '+';
+      if(!GinWay_tag)
+        returnStr += '+';
+      else
+        returnStr += '-';
       break;
   }
+  if(GinWay_tag && weight!=='盾')
+     ac -=10;
   returnStr += ac;
   switch(weight){
     case '輕甲':
@@ -2103,10 +2112,20 @@ function appraisalAm(inputStr){
       returnStr += '+敏捷調整值（最多為2）';
       break;
   }
+  let mag_n = 0;
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n!=0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n;
+  }
   returnStr += '\n';
   
-  let mag_n = 0;
-  while(0.2>srand(seed++)) mag_n++;
   returnStr += '魔法物品：';
   if(mag_n>0){
     if(!GinWay_tag)
