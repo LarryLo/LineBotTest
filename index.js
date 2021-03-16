@@ -2190,7 +2190,7 @@ function appraisalIt(inputStr){
     
   let returnStr = '鑑定結果：'+inputStr+'\n';
   
-  returnStr += '類型：'+extractStr(typeSheet,srand(seed++));
+  returnStr += '類型：'+extractStr(typeSheet,srand(seed++))+'\n';
   
   returnStr += '魔法物品：';
   let mag_n = 0;  
@@ -2199,7 +2199,6 @@ function appraisalIt(inputStr){
   else
     while(0.9>srand(seed++)) mag_n++;
   if(mag_n>0){
-    mag_n = 1;
     if(!GinWay_tag)
       returnStr += mag_n+'種額外魔法效果'+'\n';
     else
@@ -2222,12 +2221,7 @@ function appraisalIt(inputStr){
   price = Math.floor(Math.pow(10,price));
   returnStr += priceToCoin(price)+'\n';
   
-  returnStr += '重量：'+Math.ceil(srand(seed++)*60+10)+'磅'+'\n';
-  
-  if(weight==='重甲'){
-    returnStr += '力量需求：'+(ac-3)+'\n';
-  }
-  
+  returnStr += '重量：'+(srand(seed++)*100).toFixed(1)+'磅'+'\n';  
   return returnStr;
 }
 function priceToCoin(price){
