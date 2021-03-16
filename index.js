@@ -2302,10 +2302,10 @@ function help(inputStr){
     returnStr+='======================\n';
     returnStr+='玩具骰組\n';
     returnStr+='======================\n';
-    returnStr+='鑑定骰 「鑑定物品名」 或 「apr物品名」\n';
-    returnStr+='鑑定武器骰 「鑑定物品名」 或 「aprw物品名」\n';
-    returnStr+='鑑定防具骰 「鑑定防具物品名」 或 「apra物品名」\n';
-    returnStr+='鑑定道具骰 「鑑定道具物品名」 或 「apri物品名」\n';
+    returnStr+='鑑定骰 「鑑定 物品名」 或 「apr 物品名」\n';
+    returnStr+='鑑定武器骰 「鑑定 物品名」 或 「aprw 物品名」\n';
+    returnStr+='鑑定防具骰 「鑑定防具 物品名」 或 「apra 物品名」\n';
+    returnStr+='鑑定道具骰 「鑑定道具 物品名」 或 「apri 物品名」\n';
   }
   else{
     returnStr+='泡泡！泡泡！更多泡泡！\n';
