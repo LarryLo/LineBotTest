@@ -1,4 +1,4 @@
-var version='1.30 hpm';
+var version='1.31β appraisal';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -491,7 +491,10 @@ function parseInput(rplyToken, inputStr) {
   if (inputStr.match(/複雜度/)!= null ||
       inputStr.match(/O\(\)/)!= null){
     return '☆逼歐恩平方☆';
-  }  
+  }
+  if (trigger.match(/^(鑑定|aps|鑑定武器|apsw|鑑定防具|apsa|鑑定道具|apsi)/)!= null ){
+    return appraisal(inputStr);
+  }
   /*/
   if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
     return GinWay();
@@ -1918,6 +1921,327 @@ function GinWayCharacter() {
     }
     return returnStr;
 }
+
+//////鑑定
+function appraisal(inputStr){
+  if(inputStr.match(/^(鑑定武器|apsw)/)!=null) return appraisalWp(inputStr);
+  else if(inputStr.match(/^(鑑定防具|apsa)/)!=null) return appraisalAm(inputStr);
+  else if(inputStr.match(/^(鑑定道具|apsi)/)!=null) return appraisalIt(inputStr);
+  else{
+    inputStr=inputStr.replace(/^(鑑定|aps)\s+/,'');
+    if(inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/)!=null) return appraisalWp(inputStr);
+    if(inputStr.match(/(盾|甲)$/)!=null) return appraisalAm(inputStr);
+    if(inputStr==='')  return undefined;
+    let seed=strToSeed(inputStr);
+    if(srand(seed++)<1/3) return appraisalWp(inputStr);
+    else if(srand(seed++)<2/3) return appraisalAm(inputStr);
+    else return appraisalIt(inputStr);
+  }
+}
+function appraisalWp(inputStr){
+  inputStr=inputStr.replace(/^(鑑定武器|apsw)\s*/,'');
+  if(inputStr==='')  return undefined;
+  let seed=strToSeed(inputStr);
+  let diceSheet=[[5,'d2'],[80,'d4'],[60,'d6'],[40,'d8'],[30,'d10'],[20,'d12'],[10,'d20'],[1,'d100']];
+  let typeSheet=[[50,'鈍擊'],[50,'穿刺'],[50,'劈砍'],[2,'酸蝕'],[2,'寒冰'],[2,'火焰'],[2,'閃電'],[2,'雷鳴'],[2,'毒素'],[1,'死靈'],[1,'光耀'],[1,'精神'],[2,'力場']];
+  
+  let range_tag =  inputStr.match(/(弓|弩|炮|鏢|箭|鎗)$/)!=null;
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
+  
+  let returnStr = '鑑定結果：'+inputStr+'\n';
+  var n = 1;
+  while(0.2>srand(seed++)) n++;
+  if(!GinWay_tag)
+    returnStr += '傷害：'+n+extractStr(diceSheet,srand(seed++));
+  else
+    returnStr += '傷害：1d1';
+  
+  let mag_n = 0;
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n!=0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n;
+  }
+  if(!GinWay_tag)
+    returnStr += extractStr(typeSheet,srand(seed++))+'\n';
+  else    
+    returnStr += extractStr([[1,'哼'],[1,'閉嘴'],[1,'機掰']],srand(seed++))+'\n';
+  
+  returnStr += '魔法物品：';
+  if(mag_n>0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n+'\n';
+  }
+  else if(0.2>srand(seed++)){
+    mag_n = 1;
+    while(0.2>srand(seed++)) mag_n++;
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
+  }
+  else returnStr += '否'+'\n';
+  
+  returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
+  let price = 0;
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
+  //增加魔法道具價值
+  else{
+    price = mag_n+5-srand(seed++);
+  }
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+(srand(seed++)*20).toFixed(1)+'磅'+'\n';
+  
+  returnStr += '屬性：';
+  let proStr = '';
+  if(!range_tag && 0.8>srand(seed++)){
+    //近戰
+    let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
+    proStr += weight;
+    if(0.25>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '靈巧';
+    }
+    if(0.25>srand(seed++)){
+      if(proStr!=='') proStr += '、';
+      proStr += '觸及';
+    }
+    if(0.15>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      let range = Math.ceil((srand(seed++)*14)+1)*10;
+      proStr += '投擲'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'呎）';
+    }
+    let doubleHand = false;
+    if(0.25>srand(seed++) && weight!=='輕型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '雙手';
+      doubleHand = true;
+    }
+    if(0.25>srand(seed++) && !doubleHand){
+      if(proStr!=='') proStr += '、';
+      proStr += '可雙手';
+    }    
+  }
+  else{
+    //遠戰
+    let range = Math.ceil((srand(seed++)*13)+2)*10;
+    proStr += '彈藥'+'（'+range+'/'+range*(Math.floor(srand(seed++)*2)+3)+'呎）';
+    
+    let weight = extractStr([[1,''],[1,'輕型'],[1,'重型']],srand(seed++));
+    if(weight!=='') proStr += '、';
+    proStr += weight;
+    
+    if(0.1>srand(seed++) && weight!=='重型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '靈巧';
+    }
+    if(0.25>srand(seed++) && weight!=='輕型'){
+      if(proStr!=='') proStr += '、';
+      proStr += '雙手';
+    }
+    if(0.25>srand(seed++)){
+      if(proStr!=='') proStr += '、';
+      proStr += '裝填';
+    }
+  }
+  if(proStr==='') proStr = '-';
+  returnStr += proStr+'\n';
+  
+  return returnStr;
+}
+function appraisalAm(inputStr){
+  inputStr=inputStr.replace(/^(鑑定防具|apsa)\s+/,'');
+  if(inputStr==='')  return undefined;
+  let seed=strToSeed(inputStr);
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
+  let sheld_tag =  inputStr.match(/盾$/)!=null;
+  let armor_tag =  inputStr.match(/甲$/)!=null;
+  
+  let returnStr = '鑑定結果：'+inputStr+'\n';  
+  let weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲'],[1,'盾']],srand(seed++));
+  if(armor_tag) weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲']],srand(seed++));
+  if(sheld_tag) weight = '盾';
+  returnStr += '類型：'+weight+'\n';
+  
+  returnStr += 'AC：';
+  let ac = 10;
+  switch(weight){
+    case '輕甲':
+      ac = 11;
+      while(0.2>srand(seed++)) ac++;
+      break;
+    case '中甲':
+      ac = 12;
+      while(0.4>srand(seed++)) ac++;
+      break;
+    case '重甲':
+      ac = 14;
+      while(0.5>srand(seed++)) ac++;
+      break;
+    case '盾':
+      ac = 2;
+      if(!GinWay_tag)
+        returnStr += '+';
+      else
+        returnStr += '-';
+      break;
+  }
+  if(GinWay_tag && weight!=='盾')
+     ac -=10;
+  returnStr += ac;
+  switch(weight){
+    case '輕甲':
+      returnStr += '+敏捷調整值';
+      break;
+    case '中甲':
+      ac = 12;
+      returnStr += '+敏捷調整值（最多為2）';
+      break;
+  }
+  let mag_n = 0;
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n!=0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n;
+  }
+  returnStr += '\n';
+  
+  returnStr += '魔法物品：';
+  if(mag_n>0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n+'\n';
+  }
+  else if(0.2>srand(seed++)){
+    mag_n = 1;
+    while(0.2>srand(seed++)) mag_n++;
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
+  }
+  else returnStr += '否'+'\n';
+  
+  returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
+  let price = 0;
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
+  //增加魔法道具價值
+  else{
+    price = mag_n+5-srand(seed++);
+  }
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+Math.ceil(srand(seed++)*60+10)+'磅'+'\n';
+  
+  if(weight==='重甲'){
+    returnStr += '力量需求：'+(ac-3)+'\n';
+  }
+  
+  switch(weight){
+    case '輕甲':
+      if(0.2>srand(seed++)) returnStr += '隱匿：劣勢\n';
+      break;
+    case '中甲':
+      if(0.4>srand(seed++)) returnStr += '隱匿：劣勢\n';
+      break;
+    case '重甲':
+      returnStr += '隱匿：劣勢\n';
+      break;
+  }  
+  
+  return returnStr;
+}
+function appraisalIt(inputStr){
+  inputStr=inputStr.replace(/^(鑑定道具|apsi)\s+/,'');
+  if(inputStr==='')  return undefined;
+  let seed=strToSeed(inputStr);
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
+  let typeSheet = [[2,'奇物'],[1,'藥水'],[5,'戒指'],[1,'捲軸'],[1,'魔杖'],[1,'權杖'],[1,'法杖'],[20,'素材'],[20,'其他'],[5,'廢棄品']];
+    
+  let returnStr = '鑑定結果：'+inputStr+'\n';
+  
+  let type = extractStr(typeSheet,srand(seed++));
+  if(GinWay_tag) type = '廢棄品';
+  returnStr += '類型：'+type+'\n';
+  
+  returnStr += '魔法物品：';
+  let mag_n = 0;
+  if(type.match(/(藥水|奇物|捲軸|魔杖|權杖|法杖)/)!=null) mag_n = 1;
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n>0){
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
+  }
+  else returnStr += '否'+'\n';
+  
+  returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
+  let price = 0;
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
+  //增加魔法道具價值
+  else{
+    price = mag_n+5-srand(seed++);
+  }
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+(srand(seed++)*100).toFixed(1)+'磅'+'\n';  
+  return returnStr;
+}
+function priceToCoin(price){
+  if(price <= 0)  return '-';
+  let returnStr = '';
+  let coinSheet = ['銅幣','銀幣','金幣','鉑金幣'];
+  for(let i = 0; i<3; i++)
+    if(price>0){
+      returnStr = price%10+coinSheet[i]+returnStr;
+      price = Math.floor(price/10);
+    }
+  if(price>0){
+      returnStr = price+coinSheet[3]+returnStr;
+  }
+  return returnStr;
+}
+//////鑑定結束
 ////雜項結束
 ////幫助
 function help(inputStr){
