@@ -2186,14 +2186,17 @@ function appraisalIt(inputStr){
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
-  let typeSheet = [[2,'奇物'],[1,'藥水'],[5,'戒指'],[1,'捲軸'],[1,'魔杖'],[1,'權杖'],[1,'法杖'],[20,'素材'],[20,'其他'],[5,'垃圾']];
+  let typeSheet = [[2,'奇物'],[1,'藥水'],[5,'戒指'],[1,'捲軸'],[1,'魔杖'],[1,'權杖'],[1,'法杖'],[20,'素材'],[20,'其他'],[5,'廢棄品']];
     
   let returnStr = '鑑定結果：'+inputStr+'\n';
   
-  returnStr += '類型：'+extractStr(typeSheet,srand(seed++))+'\n';
+  let type = extractStr(typeSheet,srand(seed++));
+  if(GinWay_tag) type = '廢棄品';
+  returnStr += '類型：'+type+'\n';
   
   returnStr += '魔法物品：';
-  let mag_n = 0;  
+  let mag_n = 0;
+  if(type.match(/(藥水|奇物|捲軸|魔杖|權杖|法杖)/)!=null) mag_n = 1;
   if(!GinWay_tag)
     while(0.2>srand(seed++)) mag_n++;
   else
