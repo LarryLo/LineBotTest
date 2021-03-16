@@ -1929,8 +1929,8 @@ function appraisal(inputStr){
   else if(inputStr.match(/^(鑑定道具|apsi)/)!=null) return appraisalIt(inputStr);
   else{
     inputStr=inputStr.replace(/^(鑑定|aps)\s+/,'');
-    if(inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/)!=null) return appraisalWp(inputStr);
-    if(inputStr.match(/(盾|甲)$/)!=null) return appraisalAm(inputStr);
+    //if(inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/)!=null) return appraisalWp(inputStr);
+    //if(inputStr.match(/(盾|甲)$/)!=null) return appraisalAm(inputStr);
     if(inputStr==='')  return undefined;
     let seed=strToSeed(inputStr);
     if(srand(seed++)<1/3) return appraisalWp(inputStr);
