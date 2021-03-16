@@ -2067,6 +2067,7 @@ function appraisalAm(inputStr){
   inputStr=inputStr.replace(/^(鑑定防具|apsa)\s+/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
   
   let returnStr = '鑑定結果：'+inputStr+'\n';  
   let weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲'],[1,'盾']],srand(seed++));
@@ -2117,7 +2118,10 @@ function appraisalAm(inputStr){
   else if(0.2>srand(seed++)){
     mag_n = 1;
     while(0.2>srand(seed++)) mag_n++;
-    returnStr += mag_n+'種額外魔法效果'+'\n';
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
   }
   else returnStr += '否'+'\n';
   
