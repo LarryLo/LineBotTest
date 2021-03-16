@@ -1982,7 +1982,10 @@ function appraisalWp(inputStr){
   else if(0.2>srand(seed++)){
     mag_n = 1;
     while(0.2>srand(seed++)) mag_n++;
-    returnStr += mag_n+'種額外魔法效果'+'\n';
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
   }
   else returnStr += '否'+'\n';
   
