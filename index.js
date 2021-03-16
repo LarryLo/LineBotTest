@@ -1929,6 +1929,8 @@ function appraisal(inputStr){
   else if(inputStr.match(/^(鑑定道具|apsi)/)!=null) return appraisalIt(inputStr);
   else{
     inputStr=inputStr.replace(/^(鑑定|aps)\s+/,'');
+    if(inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/)!=null) return appraisalWp(inputStr);
+    if(inputStr.match(/(盾|甲)$/)!=null) return appraisalWp(inputStr);
     if(inputStr==='')  return undefined;
     let seed=strToSeed(inputStr);
     if(srand(seed++)<1/3) return appraisalWp(inputStr);
@@ -2183,9 +2185,48 @@ function appraisalIt(inputStr){
   inputStr=inputStr.replace(/^(鑑定道具|apsi)\s+/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
-  
+  let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
+  let typeSheet = [[2,'奇物'],[1,'藥水'],[5,'戒指'],[1,'捲軸'],[1,'魔杖'],[1,'權杖'],[1,'法杖'],[20,'素材'],[20,'其他'],[5,'垃圾']];
+    
   let returnStr = '鑑定結果：'+inputStr+'\n';
   
+  returnStr += '類型：'+extractStr(typeSheet,srand(seed++));
+  
+  returnStr += '魔法物品：';
+  let mag_n = 0;  
+  if(!GinWay_tag)
+    while(0.2>srand(seed++)) mag_n++;
+  else
+    while(0.9>srand(seed++)) mag_n++;
+  if(mag_n>0){
+    mag_n = 1;
+    if(!GinWay_tag)
+      returnStr += mag_n+'種額外魔法效果'+'\n';
+    else
+      returnStr += mag_n+'種額外霍普效果'+'\n';;
+  }
+  else returnStr += '否'+'\n';
+  
+  returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
+  let price = 0;
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
+  //增加魔法道具價值
+  else{
+    price = mag_n+5-srand(seed++);
+  }
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+Math.ceil(srand(seed++)*60+10)+'磅'+'\n';
+  
+  if(weight==='重甲'){
+    returnStr += '力量需求：'+(ac-3)+'\n';
+  }
   
   return returnStr;
 }
