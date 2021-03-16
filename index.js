@@ -1980,8 +1980,9 @@ function appraisalWp(inputStr){
     returnStr += mag_n+'\n';
   }
   else if(0.2>srand(seed++)){
-    returnStr += '是'+'\n';
-    mag_n++;
+    mag_n = 1;
+    while(0.2>srand(seed++)) mag_n++;
+    returnStr += mag_n+'種額外魔法效果'+'\n';
   }
   else returnStr += '否'+'\n';
   
@@ -2063,8 +2064,92 @@ function appraisalAm(inputStr){
   inputStr=inputStr.replace(/^(鑑定防具|apsa)\s+/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
-    
-  let returnStr = '鑑定結果：'+inputStr+'\n';
+  
+  let returnStr = '鑑定結果：'+inputStr+'\n';  
+  let weight = extractStr([[5,'輕甲'],[5,'中甲'],[5,'重甲'],[1,'盾']],srand(seed++));
+  returnStr += '類型：'+weight+'\n';
+  
+  returnStr += 'AC：';
+  let ac = 10;
+  switch(weight){
+    case '輕甲':
+      ac = 11;
+      while(0.2>srand(seed++)) ac++;
+      break;
+    case '中甲':
+      ac = 12;
+      while(0.4>srand(seed++)) ac++;
+      break;
+    case '重甲':
+      ac = 14;
+      while(0.5>srand(seed++)) ac++;
+      break;
+    case '盾':
+      ac = 2;
+      returnStr += '+';
+      break;
+  }
+  returnStr += ac;
+  switch(weight){
+    case '輕甲':
+      returnStr += '+敏捷調整值';
+      break;
+    case '中甲':
+      ac = 12;
+      returnStr += '+敏捷調整值（最多為2）';
+      break;
+  }
+  returnStr += '\n';
+  
+  let mag_n = 0;
+  while(0.2>srand(seed++)) mag_n++;
+  returnStr += '魔法物品：';
+  if(mag_n>0){
+    if(!GinWay_tag)
+      returnStr += '+';
+    else
+      returnStr += '-';
+    returnStr += mag_n+'\n';
+  }
+  else if(0.2>srand(seed++)){
+    mag_n = 1;
+    while(0.2>srand(seed++)) mag_n++;
+    returnStr += mag_n+'種額外魔法效果'+'\n';
+  }
+  else returnStr += '否'+'\n';
+  
+  returnStr += '價格：';
+  if(GinWay_tag)
+    returnStr += '負債';
+  let price = 0;
+  if(mag_n == 0){
+    if (0.5>srand(seed++))  price++;
+    price += price+srand(seed++);
+  }
+  //增加魔法道具價值
+  else{
+    price = mag_n+5-srand(seed++);
+  }
+  price = Math.floor(Math.pow(10,price));
+  returnStr += priceToCoin(price)+'\n';
+  
+  returnStr += '重量：'+Math.ceil(srand(seed++)*60+10)+'磅'+'\n';
+  
+  if(weight==='重甲'){
+    returnStr += '力量需求：'+(ac-3)+'\n';
+  }
+  
+  switch(weight){
+    case '輕甲':
+      if(0.2>srand(seed++)) returnStr += '隱匿：劣勢\n';
+      break;
+    case '中甲':
+      if(0.4>srand(seed++)) returnStr += '隱匿：劣勢\n';
+      break;
+    case '重甲':
+      returnStr += '隱匿：劣勢\n';
+      break;
+  }  
   
   return returnStr;
 }
