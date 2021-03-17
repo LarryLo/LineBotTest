@@ -1928,7 +1928,7 @@ function appraisal(inputStr){
   else if(inputStr.match(/^(鑑定防具|apsa)/)!=null) return appraisalAm(inputStr);
   else if(inputStr.match(/^(鑑定道具|apsi)/)!=null) return appraisalIt(inputStr);
   else{
-    inputStr=inputStr.replace(/^(鑑定|aps)\s+/,'');
+    inputStr=inputStr.replace(/^(鑑定|aps)\s*/,'');
     if(inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/)!=null) return appraisalWp(inputStr);
     if(inputStr.match(/(盾|甲)$/)!=null) return appraisalAm(inputStr);
     if(inputStr==='')  return undefined;
@@ -2066,7 +2066,7 @@ function appraisalWp(inputStr){
   return returnStr;
 }
 function appraisalAm(inputStr){
-  inputStr=inputStr.replace(/^(鑑定防具|apsa)\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定防具|apsa)\s*/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
@@ -2182,7 +2182,7 @@ function appraisalAm(inputStr){
   return returnStr;
 }
 function appraisalIt(inputStr){
-  inputStr=inputStr.replace(/^(鑑定道具|apsi)\s+/,'');
+  inputStr=inputStr.replace(/^(鑑定道具|apsi)\s*/,'');
   if(inputStr==='')  return undefined;
   let seed=strToSeed(inputStr);
   let GinWay_tag =  inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!=null;
