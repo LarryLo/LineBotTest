@@ -1379,7 +1379,7 @@ function fudge(inputStr) {
     num += dice;
   }
   returnStr += ']';
-  if(bonus.toString().match(/-/)==null)
+  if(bonus.toString().match(/-/)===null)
     returnStr += ' + ';
   returnStr += bonus + " = " + (num+bonus);
   return returnStr;
