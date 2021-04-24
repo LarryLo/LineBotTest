@@ -1363,7 +1363,7 @@ function fudge(inputStr) {
   inputStr = inputStr.replace(/fg/, '');
   let bonus = eval(inputStr);
   returnStr += '[';
-  repeat(4){
+  for(let i = 0; i<4; i++){
     let dice = Math.floor(Math.random()*3)-1;
     switch(dice){
       case -1:
