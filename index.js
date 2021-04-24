@@ -444,7 +444,7 @@ function parseInput(rplyToken, inputStr) {
   }
   //fudge骰
   if (trigger.match(/^fg(\+\d+|-\d+)?$/)!= null ){
-    return fg(trigger);
+    return fudge(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
