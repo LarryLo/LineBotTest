@@ -1361,7 +1361,9 @@ function fudge(inputStr) {
   let returnStr = 'Fudge擲骰：';
   let num = 0;
   inputStr = inputStr.replace(/fg/, '');
-  let bonus = eval(inputStr);
+  let bonus = 0;
+  if(inputStr !== '')
+    bonus = eval(inputStr);
   returnStr += '[';
   for(let i = 0; i<4; i++){
     let dice = Math.floor(Math.random()*3)-1;
@@ -1379,9 +1381,12 @@ function fudge(inputStr) {
     num += dice;
   }
   returnStr += ']';
-  if(bonus.toString().match(/-/)===null)
-    returnStr += ' + ';
-  returnStr += bonus + " = " + (num+bonus);
+  if(bonus != 0){
+    if(bonus.toString().match(/-/)===null)
+      returnStr += '+';
+    returnStr += bonus;
+  }
+  returnStr += " = " + (num+bonus);
   return returnStr;
 }
 ////Fudge骰結束
