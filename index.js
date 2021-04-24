@@ -1382,6 +1382,7 @@ function fudge(inputStr) {
   if(string(bonus).match(/-/)==null))
     returnStr += ' + ';
   returnStr += bonus + " = " + (num+bonus);
+  return returnStr;
 }
 ////Fudge骰結束
 ////雜項
