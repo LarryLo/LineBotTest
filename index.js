@@ -443,7 +443,7 @@ function parseInput(rplyToken, inputStr) {
     return dontRestYourHeadGM(trigger);
   }
   //fudge骰
-  if (trigger.match(/^fg(\+\d+|-\d+)?$/)!= null ){
+  if (trigger.match(/^fg(\+\d+|-\d+)*$/)!= null ){
     return fudge(trigger);
   }
   //基本骰組 xdx+a>b
