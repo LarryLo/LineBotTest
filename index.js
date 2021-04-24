@@ -443,7 +443,7 @@ function parseInput(rplyToken, inputStr) {
     return dontRestYourHeadGM(trigger);
   }
   //fudge骰
-  if (trigger.match(/^df(\+\d+|-\d+)*$/)!= null ){
+  if (trigger.match(/^fg(\+\d+|-\d+)*$/)!= null ){
     return fudge(trigger);
   }
   //基本骰組 xdx+a>b
@@ -1360,7 +1360,7 @@ function dontRestYourHeadGM(inputStr){
 function fudge(inputStr) {
   let returnStr = 'Fudge擲骰：';
   let num = 0;
-  inputStr = inputStr.replace(/df/, '');
+  inputStr = inputStr.replace(/fg/, '');
   let bonus = 0;
   if(inputStr !== '')
     bonus = eval(inputStr);
