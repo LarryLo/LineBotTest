@@ -1364,7 +1364,7 @@ function fudge(inputStr) {
   let bonus = eval(inputStr);
   returnStr += '[';
   repeat(4){
-    let dice = Math.floor(Math.random()*3)0-1;
+    let dice = Math.floor(Math.random()*3)-1;
     switch(dice){
       case -1:
         returnStr += '-';
