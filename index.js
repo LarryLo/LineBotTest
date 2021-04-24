@@ -442,6 +442,10 @@ function parseInput(rplyToken, inputStr) {
   if (trigger.match(/^dryh(\d+p)$/)!= null ){
     return dontRestYourHeadGM(trigger);
   }
+  //fudge骰
+  if (trigger.match(/^fg(\+\d+|-\d+)?$/)!= null ){
+    return fg(trigger);
+  }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
     return xDx(trigger);
@@ -1352,6 +1356,34 @@ function dontRestYourHeadGM(inputStr){
     return returnStr;
 }
 ////請勿入睡 function 結束
+////Fudge骰開始
+function fudge(inputStr) {
+  let returnStr = 'Fudge擲骰：';
+  let num = 0;
+  inputStr = inputStr.replace(/fg/, '');
+  let bonus = eval(inputStr);
+  returnStr += '[';
+  repeat(4){
+    let dice = Math.floor(Math.random()*3)0-1;
+    switch(dice){
+      case -1:
+        returnStr += '-';
+        break;
+      case 0:
+        returnStr += '0';
+        break;
+      case 1:
+        returnStr += '+';
+        break;
+    }
+    num += dice;
+  }
+  returnStr += ']';
+  if(string(bonus).match(/-/)==null))
+    returnStr += ' + ';
+  returnStr += bonus + " = " + (num+bonus);
+}
+////Fudge骰結束
 ////雜項
 //////峻巍骰
 function GinWay() {
