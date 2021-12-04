@@ -1234,7 +1234,7 @@ class bot {
 				returnStr += '好！一般成功！';
 			}
 			else{
-				switch(Math.floor(Math.random() * 3)){
+				switch(Math.floor(Math.random() * 5)){
 					case 0:
 						returnStr += '這道料理沒有試吃的必要！';
 						break;
@@ -1242,8 +1242,14 @@ class bot {
 						returnStr += '平淡的創意，卻企圖以華麗的表演來掩飾，你應該感到慚愧！';
 						break;
 					case 2:
-						returnStr += '難吃！太失敗了！';
-						break;					
+						returnStr += '我還是坦白說吧，你的問題不是廚藝，而是你的人格有問題。';
+						break;
+					case 3:
+						returnStr += '你這種人，根本就不配當一個廚！';
+						break;
+					case 4:
+						returnStr += '我要在你身上，烙下敗者象徵的難吃印！';
+						break;		
 				}
 				
 			}
