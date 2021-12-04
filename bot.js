@@ -219,7 +219,7 @@ class bot {
 			if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
 				return fudge(trigger);
 			}
-			//fudge骰
+			//cook骰
 			if (trigger.match(/^ck\d+/) != null) {
 				return cook(trigger);
 			}
