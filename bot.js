@@ -219,6 +219,10 @@ class bot {
 			if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
 				return fudge(trigger);
 			}
+			//fudge骰
+			if (trigger.match(/^ck\d+/) != null) {
+				return cook(trigger);
+			}
 			//基本骰組 xdx+a>b
 			if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
 				return xDx(trigger);
@@ -1210,6 +1214,27 @@ class bot {
 			return returnStr;
 		}
 		////Fudge骰結束
+		////cook骰開始
+		function cook(inputStr){
+			let returnStr = '料理擲骰：';
+			let num = Number(inputStr.match(/\d+/)[0]);
+			let dice = Math.ceil(Math.random() * 12);
+			returnStr += '[' + dice + '] → ';
+			if(dice <= num/4){
+				returnStr += '☆至福☆！極限成功！';
+			}
+			else if(dice <= num/2){
+				returnStr += '美味！困難成功！';
+			}
+			else if(dice <= num/2){
+				returnStr += '好！一般成功！';
+			}
+			else{
+				returnStr += '難吃！太失敗了！';
+			}
+			return returnStr;
+		}
+		////cook骰結束
 		////雜項
 		//////峻巍骰
 		function GinWay() {
