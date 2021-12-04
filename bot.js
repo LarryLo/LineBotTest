@@ -1,6 +1,6 @@
 class bot {
 	constructor() {
-		var version = '2.0β modular';
+		var version = '2.0 modular';
 		//表格放置區
 		////sw2.0
 		var powerSheet = [
