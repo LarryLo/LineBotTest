@@ -219,6 +219,10 @@ class bot {
 			if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
 				return fudge(trigger);
 			}
+			//cookJudge骰
+			if (inputStr.match(/^ck (\S+ )+/) != null) {
+				return cookJudge(inputStr);
+			}
 			//cook骰
 			if (trigger.match(/^ck\d+/) != null) {
 				return cook(trigger);
