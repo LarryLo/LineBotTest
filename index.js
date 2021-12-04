@@ -1,4 +1,4 @@
-var version='1.31 appraisal';
+var version='1.32β fate';
 //表格放置區
 ////sw2.0
 var powerSheet=[[0,0,0,1,2,2,3,3,4,4],
@@ -441,6 +441,10 @@ function parseInput(rplyToken, inputStr) {
   //請勿入睡 GM骰
   if (trigger.match(/^dryh(\d+p)$/)!= null ){
     return dontRestYourHeadGM(trigger);
+  }
+  //fudge骰
+  if (trigger.match(/^fg(\+\d+|-\d+)*$/)!= null ){
+    return fudge(trigger);
   }
   //基本骰組 xdx+a>b
   if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/)!= null ){
@@ -1352,6 +1356,40 @@ function dontRestYourHeadGM(inputStr){
     return returnStr;
 }
 ////請勿入睡 function 結束
+////Fudge骰開始
+function fudge(inputStr) {
+  let returnStr = 'Fudge擲骰：';
+  let num = 0;
+  inputStr = inputStr.replace(/fg/, '');
+  let bonus = 0;
+  if(inputStr !== '')
+    bonus = eval(inputStr);
+  returnStr += '[';
+  for(let i = 0; i<4; i++){
+    let dice = Math.floor(Math.random()*3)-1;
+    switch(dice){
+      case -1:
+        returnStr += '-';
+        break;
+      case 0:
+        returnStr += '0';
+        break;
+      case 1:
+        returnStr += '+';
+        break;
+    }
+    num += dice;
+  }
+  returnStr += ']';
+  if(bonus != 0){
+    if(bonus.toString().match(/-/)===null)
+      returnStr += '+';
+    returnStr += bonus;
+  }
+  returnStr += " = " + (num+bonus);
+  return returnStr;
+}
+////Fudge骰結束
 ////雜項
 //////峻巍骰
 function GinWay() {
