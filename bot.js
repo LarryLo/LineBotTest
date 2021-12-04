@@ -220,7 +220,7 @@ class bot {
 				return fudge(trigger);
 			}
 			//cookJudge骰
-			if (inputStr.match(/^ck (\S+ )+/) != null) {
+			if (inputStr.match(/^ck (\S+ )+/i) != null) {
 				return cookJudge(inputStr);
 			}
 			//cook骰
@@ -1257,6 +1257,7 @@ class bot {
 			let score = new Array();
 			for(let i = 0; i < chef.length; i++){
 				score[i] = Number(chef[i].match(/\d+/)[0]);
+				if(score[i] > 11)	score[i] = 11;
 				chef[i] = chef[i].replace(score[i].toString(), '');
 			}
 			let rank = new Array();
@@ -1282,7 +1283,7 @@ class bot {
 					}
 				}
 			}
-			returnStr += '贏家：' + rank[rank.length - 1] + '\n\n';
+			returnStr += '贏家：' + rank[rank.length - 1] + '\n-------------------\n';
 			for(let i = rank.length - 2; i >= 0; i--){
 				returnStr += rank[i] + ' → 重大失誤：' + rank_fail_num[i] + '\n';
 			}
