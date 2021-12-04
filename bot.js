@@ -1252,7 +1252,7 @@ class bot {
 		
 		function cookJudge(inputStr){
 			let returnStr = '料理擲骰：\n';
-			inputStr = inputStr.replace(/ck /, '');
+			inputStr = inputStr.replace(/ck /i, '');
 			let chef = inputStr.split(' ');
 			let score = new Array();
 			for(let i = 0; i < chef.length; i++){
