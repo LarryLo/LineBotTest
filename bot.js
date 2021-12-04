@@ -1226,7 +1226,7 @@ class bot {
 			else if(dice <= num/2){
 				returnStr += '美味！困難成功！';
 			}
-			else if(dice <= num/2){
+			else if(dice <= num){
 				returnStr += '好！一般成功！';
 			}
 			else{
