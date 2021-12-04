@@ -1251,7 +1251,7 @@ class bot {
 		}
 		
 		function cookJudge(inputStr){
-			let returnStr = '料理擲骰：/n';
+			let returnStr = '料理擲骰：\n';
 			inputStr = inputStr.replace(/ck /, '');
 			let chef = inputStr.split(' ');
 			let score = new Array();
@@ -1282,9 +1282,9 @@ class bot {
 					}
 				}
 			}
-			returnStr += '贏家：' + rank[rank.length - 1] + '/n/n';
+			returnStr += '贏家：' + rank[rank.length - 1] + '\n\n';
 			for(let i = rank.length - 2; i >= 0; i--){
-				returnStr += rank[i] + ' → 重大失誤：' + rank_fail_num[i] + '/n';
+				returnStr += rank[i] + ' → 重大失誤：' + rank_fail_num[i] + '\n';
 			}
 			return returnStr;
 		}
