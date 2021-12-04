@@ -1257,8 +1257,8 @@ class bot {
 			let score = new Array();
 			for(let i = 0; i < chef.length; i++){
 				score[i] = Number(chef[i].match(/\d+/)[0]);
-				if(score[i] > 11)	score[i] = 11;
 				chef[i] = chef[i].replace(score[i].toString(), '');
+				if(score[i] > 11)	score[i] = 11;
 			}
 			let rank = new Array();
 			let rank_fail_num = new Array();
