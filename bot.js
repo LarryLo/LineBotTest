@@ -1,6 +1,6 @@
 class bot {
 	constructor() {
-		var version = '2.0 modular';
+		var version = '2.1β cook';
 		//表格放置區
 		////sw2.0
 		var powerSheet = [
@@ -218,6 +218,14 @@ class bot {
 			//fudge骰
 			if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
 				return fudge(trigger);
+			}
+			//cookJudge骰
+			if (inputStr.match(/^ck (\S+ )+/i) != null) {
+				return cookJudge(inputStr);
+			}
+			//cook骰
+			if (trigger.match(/^ck\d+/) != null) {
+				return cook(trigger);
 			}
 			//基本骰組 xdx+a>b
 			if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
@@ -1210,6 +1218,84 @@ class bot {
 			return returnStr;
 		}
 		////Fudge骰結束
+		////cook骰開始
+		function cook(inputStr){
+			let returnStr = '料理擲骰：';
+			let num = Number(inputStr.match(/\d+/)[0]);
+			let dice = Math.ceil(Math.random() * 12);
+			returnStr += '[' + dice + '] → ';
+			if(dice <= num/4){
+				returnStr += '☆至福☆！極限成功！';
+			}
+			else if(dice <= num/2){
+				returnStr += '美味！困難成功！';
+			}
+			else if(dice <= num){
+				returnStr += '好！一般成功！';
+			}
+			else{
+				switch(Math.floor(Math.random() * 5)){
+					case 0:
+						returnStr += '沒完成的料理沒有試吃的必要！';
+						break;
+					case 1:
+						returnStr += '平淡的創意，卻企圖以華麗的表演來掩飾，你應該感到慚愧！';
+						break;
+					case 2:
+						returnStr += '我還是坦白說吧，你的問題不是廚藝，而是你的人格有問題！';
+						break;
+					case 3:
+						returnStr += '你每天只顧著玩，根本就沒有好好用心學做菜！';
+						break;
+					case 4:
+						returnStr += '你現在所有的，就只有這個丟臉的難吃印了！';
+						break;		
+				}
+				
+			}
+			return returnStr;
+		}
+		
+		function cookJudge(inputStr){
+			let returnStr = '料理擲骰：\n';
+			inputStr = inputStr.replace(/ck /i, '');
+			let chef = inputStr.split(' ');
+			let score = new Array();
+			for(let i = 0; i < chef.length; i++){
+				score[i] = Number(chef[i].match(/\d+/)[0]);
+				chef[i] = chef[i].replace(score[i].toString(), '');
+				if(score[i] > 11)	score[i] = 11;
+			}
+			let rank = new Array();
+			let rank_fail_num = new Array();
+			let fail_num = new Array();
+			let fail_flag = new Array();
+			for(let i = 0; i < chef.length; i++){
+				fail_num[i] = 0;
+				fail_flag[i] = false;
+			}
+			while(rank.length < chef.length){
+				for(let i = 0; i < chef.length; i++){
+					if(!fail_flag[i]){
+						let dice = Math.ceil(Math.random() * 12);
+						if(dice <= score[i]){
+							fail_num[i]++;
+						}
+						else{
+							fail_flag[i] = true;
+							rank_fail_num[rank.length] = fail_num[i];
+							rank[rank.length] = chef[i];
+						}
+					}
+				}
+			}
+			returnStr += '贏家：' + rank[rank.length - 1] + '\n-------------------\n';
+			for(let i = rank.length - 2; i >= 0; i--){
+				returnStr += rank[i] + ' → 重大失誤：' + rank_fail_num[i] + '\n';
+			}
+			return returnStr;
+		}
+		////cook骰結束
 		////雜項
 		//////峻巍骰
 		function GinWay() {
