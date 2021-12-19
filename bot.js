@@ -1,6 +1,6 @@
 class bot {
 	constructor() {
-		var version = '2.1β cook';
+		var version = '2.1 cook';
 		//表格放置區
 		////sw2.0
 		var powerSheet = [
