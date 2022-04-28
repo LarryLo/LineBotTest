@@ -1,6 +1,6 @@
 /* jshint esversion:9 */
 
-const Bot = require('./Bot');
+const Bot = require('./bot');
 
 class myBot extends Bot {
 	constructor() {
