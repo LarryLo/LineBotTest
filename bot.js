@@ -256,19 +256,19 @@ class Bot {
 				}
 				//基本骰組 this.xDx+a>b
 				if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
-					return this.this.xDx(trigger);
+					return this.xDx(trigger);
 				}
 				//基本骰組 this.xBx+a>b
 				if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
-					return this.this.xBx(trigger);
+					return this.xBx(trigger);
 				}
 				//基本骰組 this.d66
 				if (trigger.match(/^d66$/) != null) {
-					return this.this.d66();
+					return this.d66();
 				}
 				//基本骰組 this.choice
 				if (trigger.match(/^choice$/) != null) {
-					return this.this.choice(inputStr);
+					return this.choice(inputStr);
 				}
 				//基本骰組 choiceN
 				if (trigger.match(/^choice\d+$/) != null) {
@@ -278,7 +278,7 @@ class Bot {
 				if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/) == null &&
 					trigger.match(/[\+\-\*\/%><=]/) != null &&
 					trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/) != null) {
-					return this.this.claculate(trigger);
+					return this.claculate(trigger);
 				}
 				//*/
 				//雜項
@@ -2004,7 +2004,7 @@ class Bot {
 				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
-			returnStr += priceToCoin(price) + '\n';
+			returnStr += this.priceToCoin(price) + '\n';
 
 			returnStr += '重量：' + (this.srand(seed++) * 20).toFixed(1) + '磅' + '\n';
 
@@ -2174,7 +2174,7 @@ class Bot {
 				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
-			returnStr += priceToCoin(price) + '\n';
+			returnStr += this.priceToCoin(price) + '\n';
 
 			returnStr += '重量：' + Math.ceil(this.srand(seed++) * 60 + 10) + '磅' + '\n';
 
@@ -2248,7 +2248,7 @@ class Bot {
 				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
-			returnStr += priceToCoin(price) + '\n';
+			returnStr += this.priceToCoin(price) + '\n';
 
 			returnStr += '重量：' + (this.srand(seed++) * 100).toFixed(1) + '磅' + '\n';
 			return returnStr;
