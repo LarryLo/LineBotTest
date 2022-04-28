@@ -50,7 +50,7 @@ class myBot extends Bot {
 
 
 		// Don't change this return.
-		return this.parserExtant(this.diceName, botParser).helpExtant(this.diceName, botHelper);
+		return this.parserExtant(this.botName, botParser).helpExtant(this.botName, botHelper);
 	}
 
 	// The function you need to call from instance by this.functionName().
