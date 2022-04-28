@@ -1,9 +1,35 @@
-class bot {
+/* jshint esversion: 9 */
+class Bot {
 	constructor() {
-		var version = '2.1 cook';
+		////
+		this.parseInput = (inputStr) => {
+			let res;
+			for (let p in this.parser) {
+				res = this.parser[p](inputStr);
+				if (res != undefined && res != "") break;
+			}
+			return res;
+		};
+
+		this.parserExtant = (parserName, parserFn) => {
+			this.parser[parserName] = parserFn;
+			return this;
+		};
+
+		this.helpList = [];
+
+		this.helpExtant = (parserName, helpFn) => {
+			this.helpList = this.helpList.concat(...helpFn);
+			return this;
+		};
+
+		////
+
+
+		this.version = '2.1.1 cook-ng';
 		//表格放置區
 		////sw2.0
-		var powerSheet = [
+		this.powerSheet = [
 			[0, 0, 0, 1, 2, 2, 3, 3, 4, 4],
 			[0, 0, 0, 1, 2, 3, 3, 3, 4, 4],
 			[0, 0, 0, 1, 2, 3, 4, 4, 4, 4],
@@ -106,209 +132,212 @@ class bot {
 			[8, 12, 15, 17, 19, 20, 22, 24, 27, 29],
 			[8, 12, 15, 18, 19, 20, 22, 24, 27, 30]
 		];
-		var swRmSheet1 = ['有個領主', '一把守護之劍', '一批走私貨品', '一個德雷克', '一隊暗影傭兵團', '一隊貿易商旅', '一個神官', '一堆狗頭人', '三隻伯格妖', '一個精靈', '一群精靈', '一個矮人', '一群矮人', '一個人類', '一群人類', '一個草原妖精', '一群草原妖精', '一個塔比特', '一群長頸巨龍', '一群哥布林', '一個符民', '一個未啟動的符民', '兩隻巴西利斯克', '一大群人馬', '一支蠻族軍隊', '一個龍人', '一個慧人', '一個女武神', '一個古貓人', '一隻兔子', '一個吟遊詩人', '三萬伯格妖', '三億個龍人', '一個公會長', '一批輕騎兵', '一個傭兵團', '一批重步兵', '一個國王', '兩個公爵', '三個伯爵', '四個男爵', '五個子爵', '六個侯爵', '七個小矮人', '八個老太婆', '九個太陽傳教士', '一個手持雙刀的輕戰士', '一個手無縛雞之力的拳鬥士', '一個身穿重裝鎧甲的法師', '某個工具人'];
-		var swRmSheet2 = ['在宴會上', '在冒險者店裡', '在森林裡', '在河邊', '在娼館裡', '在路邊', '在睡覺時', '在領主宅底', '在魔動文明遺跡中', '在一座小島上', '在隔壁城鎮', '在附近的村莊', '在平原上', '在迷宮裡', '在城牆上', '在船上', '在發呆時', '在蒐集戰利品時', '在貧民窟裡', '在攻擊的時候', '在洗澡之前，脫光了以後', '在櫃台前', '在異空間', '在戰場中央', '在山頂上', '在沙漠', '在沼澤', '在極寒之地', '在餐廳', '在沙灘上', '在湖裡', '在洞窟', '在王宮', '在莊園裡', '在旅館', '在冒險者公會', '在酒館', '在教堂', '在賭場', '在競技場', '在火山', '在冰河', '在哨所中', '在堡壘裡', '在軍營', '在一座高塔上面', '在內衣堆上'];
-		var swRmSheet3 = ['被吃掉了', '爆炸了', '被藏起來了', '失蹤了', '喝醉了', '打起來了', '自殺了', '佔領該處了', '到處施放魔法', '準備睡覺了', '販賣戰利品', '脫手裝備中', '開始遊行了', '展開攻擊了', '被襲擊了', '被偷走了', '當上領主了', '當上神官了', '四處搜索著', '騎著魔動機車', '找到了迷宮入口', '看到了貴族的醜聞', '孵了一顆蛋', '被拿去料理了', '下海了', '發起革命', '膝蓋上中了一箭', '組成了聯邦', '協議停戰了', '叛亂了', '得了重病', '被埋伏了', '開始無差別殺人', '解放了奴隸', '脫褲子放屁', '得了不治之症', '暴斃了', '腿斷了', '瞎了', '唱起歌來', '無法生育了', '受到了詛咒', '失智了', '精神失常了', '撿到了古文明的神奇物品', '謀殺行動暴露了', '偷情被發現了', '去朝聖了', '蓋了一座實驗室', '重要的東西被偷走了', '使用左右開弓打出了1000點傷害', '用守護吃下了全部的傷害還沒有死', '用石頭打死一個伯格妖', '用內褲悶死一隻哥布林'];
+		this.swRmSheet1 = ['有個領主', '一把守護之劍', '一批走私貨品', '一個德雷克', '一隊暗影傭兵團', '一隊貿易商旅', '一個神官', '一堆狗頭人', '三隻伯格妖', '一個精靈', '一群精靈', '一個矮人', '一群矮人', '一個人類', '一群人類', '一個草原妖精', '一群草原妖精', '一個塔比特', '一群長頸巨龍', '一群哥布林', '一個符民', '一個未啟動的符民', '兩隻巴西利斯克', '一大群人馬', '一支蠻族軍隊', '一個龍人', '一個慧人', '一個女武神', '一個古貓人', '一隻兔子', '一個吟遊詩人', '三萬伯格妖', '三億個龍人', '一個公會長', '一批輕騎兵', '一個傭兵團', '一批重步兵', '一個國王', '兩個公爵', '三個伯爵', '四個男爵', '五個子爵', '六個侯爵', '七個小矮人', '八個老太婆', '九個太陽傳教士', '一個手持雙刀的輕戰士', '一個手無縛雞之力的拳鬥士', '一個身穿重裝鎧甲的法師', '某個工具人'];
+		this.swRmSheet2 = ['在宴會上', '在冒險者店裡', '在森林裡', '在河邊', '在娼館裡', '在路邊', '在睡覺時', '在領主宅底', '在魔動文明遺跡中', '在一座小島上', '在隔壁城鎮', '在附近的村莊', '在平原上', '在迷宮裡', '在城牆上', '在船上', '在發呆時', '在蒐集戰利品時', '在貧民窟裡', '在攻擊的時候', '在洗澡之前，脫光了以後', '在櫃台前', '在異空間', '在戰場中央', '在山頂上', '在沙漠', '在沼澤', '在極寒之地', '在餐廳', '在沙灘上', '在湖裡', '在洞窟', '在王宮', '在莊園裡', '在旅館', '在冒險者公會', '在酒館', '在教堂', '在賭場', '在競技場', '在火山', '在冰河', '在哨所中', '在堡壘裡', '在軍營', '在一座高塔上面', '在內衣堆上'];
+		this.swRmSheet3 = ['被吃掉了', '爆炸了', '被藏起來了', '失蹤了', '喝醉了', '打起來了', '自殺了', '佔領該處了', '到處施放魔法', '準備睡覺了', '販賣戰利品', '脫手裝備中', '開始遊行了', '展開攻擊了', '被襲擊了', '被偷走了', '當上領主了', '當上神官了', '四處搜索著', '騎著魔動機車', '找到了迷宮入口', '看到了貴族的醜聞', '孵了一顆蛋', '被拿去料理了', '下海了', '發起革命', '膝蓋上中了一箭', '組成了聯邦', '協議停戰了', '叛亂了', '得了重病', '被埋伏了', '開始無差別殺人', '解放了奴隸', '脫褲子放屁', '得了不治之症', '暴斃了', '腿斷了', '瞎了', '唱起歌來', '無法生育了', '受到了詛咒', '失智了', '精神失常了', '撿到了古文明的神奇物品', '謀殺行動暴露了', '偷情被發現了', '去朝聖了', '蓋了一座實驗室', '重要的東西被偷走了', '使用左右開弓打出了1000點傷害', '用守護吃下了全部的傷害還沒有死', '用石頭打死一個伯格妖', '用內褲悶死一隻哥布林'];
 		//表格結束
 		
-		this.parseInput = (inputStr) => {
-			let countStr = '';
-			let msgSplitor = (/\S+/ig);
-			let mainMsg = inputStr.match(msgSplitor);
-			let trigger = mainMsg[0].toString().toLowerCase();
-			//let trigger2 = mainMsg[1].toString().toLowerCase(); 
-			//help
-			if (trigger.match(/^(sw|sg|dryh|toy)?(help|幫助)$/) != null) {
-				return help(trigger);
+		this.parser = {
+			oriParser: (inputStr) => {
+				let countStr = '';
+				let msgSplitor = (/\S+/ig);
+				let mainMsg = inputStr.match(msgSplitor);
+				let trigger = mainMsg[0].toString().toLowerCase();
+				//let trigger2 = mainMsg[1].toString().toLowerCase(); 
+				//help
+				if (trigger.match(new RegExp(`^(sw|sg|dryh|toy|${this.helpList.map(h => h.reg.toLowerCase()).join("|")})?(help|幫助)$`, "g")) != null) {
+					return this.help(trigger);
+				}
+				if (trigger.match(/^ver$/) != null) {
+					return this.version;
+				}
+				//SW2.0 威力骰
+				if (trigger.match(/^(k)(\d+)(((\+|-)\d+)|(@\d+)|(\$(\+|-)?\d+)|(gf))*$/) != null) {
+					return this.Kx(trigger);
+				}
+				//SW2.0 超越判定
+				if (trigger.match(/^swfc((\+|-)\d+)?$/) != null) {
+					return this.swFc(trigger);
+				}
+				//SW2.0 成長骰
+				if (trigger.match(/^gr\d*$/) != null) {
+					return this.swGr(trigger);
+				}
+				//SW2.0 大失敗表
+				if (trigger.match(/^swft$/) != null) {
+					return this.swFt();
+				}
+				//SW2.0 纏繞表
+				if (trigger.match(/^swtt$/) != null) {
+					return this.swTt();
+				}
+				//SW2.0 流言表
+				if (trigger.match(/^swrm$/) != null) {
+					return this.swRm();
+				}
+				//SW2.0 寶物表
+				if (trigger.match(/^swdi$/) != null) {
+					return this.swDi();
+				}
+				//SW2.0 城鎮生成
+				if (trigger.match(/^swtw/) != null) {
+					return this.swTw(trigger);
+				}
+				//忍神判定
+				if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/) != null) {
+					return this.sg(trigger);
+				}
+				if (trigger.match(/^sg$/) != null) {
+					return this.sg('sg>=5');
+				}
+				//忍神情感表
+				if (trigger.match(/^sget$/) != null) {
+					return this.sgEt();
+				}
+				//忍神大失敗表
+				if (trigger.match(/^sgft$/) != null) {
+					return this.sgFt();
+				}
+				//忍神變調表
+				if (trigger.match(/^sgwt$/) != null) {
+					return this.sgWt();
+				}
+				//忍神戰國變調表
+				if (trigger.match(/^sggwt$/) != null) {
+					return this.sgGWt();
+				}
+				//忍神場景表
+				if (trigger.match(/^sgst$/) != null) {
+					return this.sgSt();
+				}
+				//忍神分野表
+				if (trigger.match(/^sgrtt$/) != null) {
+					return this.sgRtt();
+				}
+				//忍神戰場表
+				if (trigger.match(/^sgbt$/) != null) {
+					return this.sgBt();
+				}
+				//CoC7基本骰組
+				if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/) != null) {
+					return this.cc(trigger);
+				}
+				//死亡flag flag表
+				if (trigger.match(/^df$/) != null) {
+					return this.df();
+				}
+				//死亡flag 場景表
+				if (trigger.match(/^dfs$/) != null) {
+					return this.dfs();
+				}
+				//死亡flag 關係表
+				if (trigger.match(/^dfr$/) != null) {
+					return this.dfr();
+				}
+				//請勿入睡 PC骰
+				if (trigger.match(/^dryh((\d+d)|(\d+e)|(\d+m))+$/) != null) {
+					return this.dontRestYourHeadPC(trigger);
+				}
+				//請勿入睡 GM骰
+				if (trigger.match(/^dryh(\d+p)$/) != null) {
+					return this.dontRestYourHeadGM(trigger);
+				}
+				//fudge骰
+				if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
+					return this.fudge(trigger);
+				}
+				//cookJudge骰
+				if (inputStr.match(/^ck (\S+ )+/i) != null) {
+					return this.cookJudge(inputStr);
+				}
+				//cook骰
+				if (trigger.match(/^ck\d+/) != null) {
+					return this.cook(trigger);
+				}
+				//基本骰組 this.xDx+a>b
+				if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
+					return this.this.xDx(trigger);
+				}
+				//基本骰組 this.xBx+a>b
+				if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
+					return this.this.xBx(trigger);
+				}
+				//基本骰組 this.d66
+				if (trigger.match(/^d66$/) != null) {
+					return this.this.d66();
+				}
+				//基本骰組 this.choice
+				if (trigger.match(/^choice$/) != null) {
+					return this.this.choice(inputStr);
+				}
+				//基本骰組 choiceN
+				if (trigger.match(/^choice\d+$/) != null) {
+					return this.choiceN(inputStr);
+				}
+				///基本運算
+				if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/) == null &&
+					trigger.match(/[\+\-\*\/%><=]/) != null &&
+					trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/) != null) {
+					return this.this.claculate(trigger);
+				}
+				//*/
+				//雜項
+				if (trigger.match(/^(紅炎的|紅蓮的)/) != null) {
+					return '\\蓮帝/';
+				}
+				if (trigger.match(/投人機$/) != null) {
+					return this.terbuchet(trigger);
+				}
+				if (trigger.match(/^霍普rm$/) != null) {
+					return this.GinWayRm();
+				}
+				if (trigger.match(/^hpm\d*$/) != null) {
+					return this.GinWayMonster();
+				}
+				if (trigger.match(/^生成霍普角色$/) != null) {
+					return this.GinWayCharacter();
+				}
+				if (trigger.match(/^\\泡泡\/$/) != null) {
+					return '泡泡！泡泡！更多泡泡！';
+				}
+				if (inputStr.match(/複雜度/) != null ||
+					inputStr.match(/O\(\)/) != null) {
+					return '☆逼歐恩平方☆';
+				}
+				if (trigger.match(/^(鑑定|aps|鑑定武器|apsw|鑑定防具|apsa|鑑定道具|apsi)/) != null) {
+					return this.appraisal(inputStr);
+				}
+				/*/
+				if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
+				return this.GinWay();
+				}
+				//*/
+				//
+				if (inputStr.match(/霍普黑雷達/) != null) {
+					return this.GinWay();
+				}
+				//*/
+				return countStr;
 			}
-			if (trigger.match(/^ver$/) != null) {
-				return version;
-			}
-			//SW2.0 威力骰
-			if (trigger.match(/^(k)(\d+)(((\+|-)\d+)|(@\d+)|(\$(\+|-)?\d+)|(gf))*$/) != null) {
-				return Kx(trigger);
-			}
-			//SW2.0 超越判定
-			if (trigger.match(/^swfc((\+|-)\d+)?$/) != null) {
-				return swFc(trigger);
-			}
-			//SW2.0 成長骰
-			if (trigger.match(/^gr\d*$/) != null) {
-				return swGr(trigger);
-			}
-			//SW2.0 大失敗表
-			if (trigger.match(/^swft$/) != null) {
-				return swFt();
-			}
-			//SW2.0 纏繞表
-			if (trigger.match(/^swtt$/) != null) {
-				return swTt();
-			}
-			//SW2.0 流言表
-			if (trigger.match(/^swrm$/) != null) {
-				return swRm();
-			}
-			//SW2.0 寶物表
-			if (trigger.match(/^swdi$/) != null) {
-				return swDi();
-			}
-			//SW2.0 城鎮生成
-			if (trigger.match(/^swtw/) != null) {
-				return swTw(trigger);
-			}
-			//忍神判定
-			if (trigger.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/) != null) {
-				return sg(trigger);
-			}
-			if (trigger.match(/^sg$/) != null) {
-				return sg('sg>=5');
-			}
-			//忍神情感表
-			if (trigger.match(/^sget$/) != null) {
-				return sgEt();
-			}
-			//忍神大失敗表
-			if (trigger.match(/^sgft$/) != null) {
-				return sgFt();
-			}
-			//忍神變調表
-			if (trigger.match(/^sgwt$/) != null) {
-				return sgWt();
-			}
-			//忍神戰國變調表
-			if (trigger.match(/^sggwt$/) != null) {
-				return sgGWt();
-			}
-			//忍神場景表
-			if (trigger.match(/^sgst$/) != null) {
-				return sgSt();
-			}
-			//忍神分野表
-			if (trigger.match(/^sgrtt$/) != null) {
-				return sgRtt();
-			}
-			//忍神戰場表
-			if (trigger.match(/^sgbt$/) != null) {
-				return sgBt();
-			}
-			//CoC7基本骰組
-			if (trigger.match(/^cc<=\d+(\(-?\d+\))?$/) != null) {
-				return cc(trigger);
-			}
-			//死亡flag flag表
-			if (trigger.match(/^df$/) != null) {
-				return df();
-			}
-			//死亡flag 場景表
-			if (trigger.match(/^dfs$/) != null) {
-				return dfs();
-			}
-			//死亡flag 關係表
-			if (trigger.match(/^dfr$/) != null) {
-				return dfr();
-			}
-			//請勿入睡 PC骰
-			if (trigger.match(/^dryh((\d+d)|(\d+e)|(\d+m))+$/) != null) {
-				return dontRestYourHeadPC(trigger);
-			}
-			//請勿入睡 GM骰
-			if (trigger.match(/^dryh(\d+p)$/) != null) {
-				return dontRestYourHeadGM(trigger);
-			}
-			//fudge骰
-			if (trigger.match(/^fg(\+\d+|-\d+)*$/) != null) {
-				return fudge(trigger);
-			}
-			//cookJudge骰
-			if (inputStr.match(/^ck (\S+ )+/i) != null) {
-				return cookJudge(inputStr);
-			}
-			//cook骰
-			if (trigger.match(/^ck\d+/) != null) {
-				return cook(trigger);
-			}
-			//基本骰組 xdx+a>b
-			if (trigger.match(/^(\d+d\d+|\d+d)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
-				return xDx(trigger);
-			}
-			//基本骰組 xbx+a>b
-			if (trigger.match(/^(\d+b\d+|\d+b|b\d+)((\+|-)\d+)?((>=|<=|=|>|<)\d+)?$/) != null) {
-				return xBx(trigger);
-			}
-			//基本骰組 d66
-			if (trigger.match(/^d66$/) != null) {
-				return d66();
-			}
-			//基本骰組 choice
-			if (trigger.match(/^choice$/) != null) {
-				return choice(inputStr);
-			}
-			//基本骰組 choiceN
-			if (trigger.match(/^choice\d+$/) != null) {
-				return choiceN(inputStr);
-			}
-			///基本運算
-			if (trigger.match(/[^\d\+\-\*\/%\(\)\.d><=]/) == null &&
-				trigger.match(/[\+\-\*\/%><=]/) != null &&
-				trigger.match(/^[\d\+\-\*\/%\(\)\.d]+((>=|<=|=|>|<)\d+(\.\d+)?)?/) != null) {
-				return claculate(trigger);
-			}
-			//*/
-			//雜項
-			if (trigger.match(/^(紅炎的|紅蓮的)/) != null) {
-				return '\\蓮帝/';
-			}
-			if (trigger.match(/投人機$/) != null) {
-				return terbuchet(trigger);
-			}
-			if (trigger.match(/^霍普rm$/) != null) {
-				return GinWayRm();
-			}
-			if (trigger.match(/^hpm\d*$/) != null) {
-				return GinWayMonster();
-			}
-			if (trigger.match(/^生成霍普角色$/) != null) {
-				return GinWayCharacter();
-			}
-			if (trigger.match(/^\\泡泡\/$/) != null) {
-				return '泡泡！泡泡！更多泡泡！';
-			}
-			if (inputStr.match(/複雜度/) != null ||
-				inputStr.match(/O\(\)/) != null) {
-				return '☆逼歐恩平方☆';
-			}
-			if (trigger.match(/^(鑑定|aps|鑑定武器|apsw|鑑定防具|apsa|鑑定道具|apsi)/) != null) {
-				return appraisal(inputStr);
-			}
-			/*/
-			if (inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/)!= null ){
-			  return GinWay();
-			}
-			//*/
-			//
-			if (inputStr.match(/霍普黑雷達/) != null) {
-				return GinWay();
-			}
-			//*/
-			return countStr;
-		}
+		};
+	}
 
 		//骰組function
 		////seed random
-		function srand(seed) {
+		srand(seed) {
 			seed = '0.' + Math.sin(seed).toString().substr(6);
 			return Number(seed);
 		}
-		////strToSeed
-		function strToSeed(inputStr) {
+		////this.strToSeed
+		strToSeed(inputStr) {
 			let seed = 7;
 			for (let i = 0; i < inputStr.length; i++) {
 				seed = (seed / 7 * inputStr.charCodeAt(i)) % 65535;
 			}
 			return Number(seed);
 		}
-		////extract
-		function extract(rate, num) {
+		////this.extract
+		extract(rate, num) {
 			let sum = 0;
 			num = num * rate.reduce(function(a, b) {
 				return a + b;
@@ -319,8 +348,8 @@ class bot {
 			}
 			return undefined;
 		}
-		////extractStr
-		function extractStr(rate, num) {
+		////this.extractStr
+		extractStr(rate, num) {
 			let sum = 0;
 			num = num * rate.reduce(function(a, b) {
 				return a + b[0];
@@ -332,7 +361,7 @@ class bot {
 			return undefined;
 		}
 		////基本運算
-		function claculate(inputStr) {
+		claculate(inputStr) {
 			let returnStr = '基礎運算：';
 			let claculate = inputStr.match(/^[\d\+\-\*\/%\(\)\.d]+/)[0].toString();
 			let compare = null;
@@ -364,12 +393,12 @@ class bot {
 			return returnStr;
 		}
 		////基本骰組
-		function xDx(inputStr) {
+		xDx(inputStr) {
 			let returnStr = '基本擲骰：[';
 			let answer = 0;
 			let bool = false;
 
-			//xDx
+			//this.xDx
 			if (inputStr.match(/\d+d\d+/) != null) {
 				let tempMatch = inputStr.match(/\d+d\d+/).toString();
 				let a = tempMatch.match(/\d+/g);
@@ -424,7 +453,7 @@ class bot {
 			return returnStr;
 		}
 
-		function xBx(inputStr) {
+		xBx(inputStr) {
 			let returnStr = '基本擲骰：[';
 			let clacu = inputStr.match(/\d*b\d*/)[0].toString();
 			let adding = null;
@@ -449,7 +478,7 @@ class bot {
 				clacu = '1' + clacu;
 			}
 
-			//xBx
+			//this.xBx
 			if (clacu.match(/\d+b\d+/) != null) {
 				let num = clacu.match(/\d+/g);
 				for (let i = 0; i < num[0]; i++) {
@@ -474,22 +503,22 @@ class bot {
 			}
 			return returnStr;
 		}
-		////d66骰
-		function d66() {
+		////this.d66骰
+		d66() {
 			let returnStr = '基本擲骰：' + Math.ceil(Math.random() * 6) + Math.ceil(Math.random() * 6);
 			return returnStr;
 		}
-		////choiceN
-		function choiceN(inputStr) {
+		////this.choiceN
+		choiceN(inputStr) {
 			let c = 1;
 			let returnStr = '隨機選取：';
-			c = inputStr.toLowerCase().match(/^choice\d+/).toString();
+			c = inputStr.toLowerCase().match(/^this.choice\d+/).toString();
 			c = c.match(/\d+/).toString();
 			if (c < 1) {
 				returnStr += '不能選取少於一個選項喔';
 				return returnStr;
 			}
-			inputStr = inputStr.toLowerCase().replace(/choice\d+ /, '');
+			inputStr = inputStr.toLowerCase().replace(/this.choice\d+ /, '');
 			let option = inputStr.split(' ');
 			if (c > option.length) {
 				c = option.length + 1;
@@ -499,16 +528,16 @@ class bot {
 			}
 			return returnStr;
 		}
-		////choice
-		function choice(inputStr) {
-			inputStr = inputStr.toLowerCase().replace('choice ', '');
+		////this.choice
+		choice(inputStr) {
+			inputStr = inputStr.toLowerCase().replace('this.choice ', '');
 			let option = inputStr.split(' ');
 			let returnStr = '隨機選取：' + option[Math.floor(Math.random() * option.length)];
 			return returnStr;
 		}
 		////SW2.0 function 開始
 		//////sw威力表
-		function Kx(inputStr) {
+		Kx(inputStr) {
 			let returnStr = 'SW2.0威力表擲骰：';
 			let tempMatch = inputStr;
 			//return tempMatch.match(/k\d+/).toString();
@@ -588,7 +617,7 @@ class bot {
 			return returnStr;
 		}
 		//////超越判定
-		function swFc(inputStr) {
+		swFc(inputStr) {
 			let returnStr = 'SW2.0超越判定：';
 			let successFlag = false;
 			let successFlag2 = false;
@@ -632,7 +661,7 @@ class bot {
 			return returnStr;
 		}
 		//////成長骰
-		function swGr(inputStr) {
+		swGr(inputStr) {
 			let returnStr = 'SW2.0成長擲骰：';
 			let sheet = ['靈巧', '敏捷', '力量', '生命', '智力', '精神'];
 			let count = 0;
@@ -647,29 +676,29 @@ class bot {
 			return returnStr;
 		}
 		//////大失敗表
-		function swFt() {
+		swFt() {
 			let returnStr = 'SW2.0大失敗表：';
 			let sheet = ['[1]額外擲兩次大失敗表，兩方效果皆適用（不會累加），另外本次大失敗額外增加50點經驗', '[2]傷害增加攻擊者的「劍之碎片」點', '[3]傷害增加攻擊者的「等級」點', '[4]骰兩次傷害骰，選擇較高者', '[5]傷害增加為原本的兩倍', '[6]防護點無效化'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 		//////纏繞表
-		function swTt() {
+		swTt() {
 			let returnStr = 'SW2.0纏繞表：';
 			let sheet = ['[1]頭或臉：使用牙齒的命中判定-2，魔法行使判定-2', '[2]武器：武器無法使用，盾牌加值無效化', '[3]手腕：命中判定-2，盾牌加值無效化', '[4]腳：迴避判定-2', '[5]身體：所有行為判定-1', '[6]特殊：使用該部位的行為判定-1，失去該部位加值'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 		//////流言表
-		function swRm() {
+		swRm() {
 			let returnStr = 'SW2.0流言：';
-			returnStr += swRmSheet1[Math.floor(Math.random() * swRmSheet1.length)];
-			returnStr += swRmSheet2[Math.floor(Math.random() * swRmSheet2.length)];
-			returnStr += swRmSheet3[Math.floor(Math.random() * swRmSheet3.length)];
+			returnStr += this.swRmSheet1[Math.floor(Math.random() * this.swRmSheet1.length)];
+			returnStr += this.swRmSheet2[Math.floor(Math.random() * this.swRmSheet2.length)];
+			returnStr += this.swRmSheet3[Math.floor(Math.random() * this.swRmSheet3.length)];
 			return returnStr;
 		}
 		//////掉落表
-		function swDi() {
+		swDi() {
 			let returnStr = 'SW2.0寶物表：';
 			let dropSheet = [
 				[1, '劍'],
@@ -706,16 +735,16 @@ class bot {
 				[3, '++'],
 				[1, '+++']
 			];
-			returnStr += extractStr(dropSheet, Math.random());
-			returnStr += extractStr(rankSheet, Math.random());
-			returnStr += extractStr(magicSheet, Math.random());
+			returnStr += this.extractStr(dropSheet, Math.random());
+			returnStr += this.extractStr(rankSheet, Math.random());
+			returnStr += this.extractStr(magicSheet, Math.random());
 			return returnStr;
 		}
 		//////城鎮生成
-		function swTw(inputStr) {
+		swTw(inputStr) {
 			if (inputStr.match(/^swtw$/) != null) return undefined;
 			inputStr = inputStr.replace(/^swtw/, '');
-			let seedO = strToSeed(inputStr);
+			let seedO = this.strToSeed(inputStr);
 			let seed = seedO;
 			let townLvSheet = ['小型村', '中型村', '小型鎮', '中型鎮', '大型鎮', '小型城市', '中型城市', '大型城市（經濟樞紐級）', '巨型城都（王城級）', '超巨型城都(世界都市級)'];
 			let popuSheet = [25, 80, 200, 500, 1000, 2000, 5000, 10000, 20000, 60000];
@@ -783,11 +812,11 @@ class bot {
 
 			//人口
 			let level = 0;
-			if (inputStr.match(/村$/) != null) level = Math.floor(srand(seed) * 2);
-			else if (inputStr.match(/鎮$/) != null) level = 2 + Math.floor(srand(seed) * 3);
-			else if (inputStr.match(/城$/) != null) level = 5 + Math.floor(srand(seed) * 4.2);
-			else level = Math.floor(srand(seed) * 9.2);
-			let population = Math.floor(popuSheet[level] * (2 + srand(++seed) + srand((seed++) + 1)) / 3);
+			if (inputStr.match(/村$/) != null) level = Math.floor(this.srand(seed) * 2);
+			else if (inputStr.match(/鎮$/) != null) level = 2 + Math.floor(this.srand(seed) * 3);
+			else if (inputStr.match(/城$/) != null) level = 5 + Math.floor(this.srand(seed) * 4.2);
+			else level = Math.floor(this.srand(seed) * 9.2);
+			let population = Math.floor(popuSheet[level] * (2 + this.srand(++seed) + this.srand((seed++) + 1)) / 3);
 
 			let type = 0;
 			if (level < 2) type = 0;
@@ -795,10 +824,10 @@ class bot {
 			else if (level < 10) type = 2;
 			//種族
 			//populationComType處理
-			let pCType = extract(comRate[type], srand(++seed));
+			let pCType = this.extract(comRate[type], this.srand(++seed));
 			pCType = populationComSheet[pCType];
 			for (let i = 0; i < pCType.length; i++) {
-				pCType[i] = pCType[i] + Math.floor(srand(++seed) * 6) - Math.floor(srand((seed++) + 1) * 6);
+				pCType[i] = pCType[i] + Math.floor(this.srand(++seed) * 6) - Math.floor(this.srand((seed++) + 1) * 6);
 			}
 			pCType = pCType.sort(function(a, b) {
 				return b - a
@@ -809,11 +838,11 @@ class bot {
 			//populationCom處理
 			let populationCom = [];
 			for (let i = 0; i < pCType.length - 1; i++) {
-				let r = extractStr(populationSheet, srand(++seed));
+				let r = this.extractStr(populationSheet, this.srand(++seed));
 				while (populationCom.some(function(a) {
 						return a == r;
 					})) {
-					r = extractStr(populationSheet, srand(++seed));
+					r = this.extractStr(populationSheet, this.srand(++seed));
 				}
 				populationCom.push(r);
 			}
@@ -831,10 +860,10 @@ class bot {
 			if (populationCom[0] == '塔比特') riligionSheet[2][0] += 14; //提高塔比特對於賢神出現率
 			if (populationCom[0] == '旭日') riligionSheet[1][0] += 14; //提高旭日對於太陽神出現率
 			//riligionComType處理
-			let rCType = extract(comRate[type], srand(++seed));
+			let rCType = this.extract(comRate[type], this.srand(++seed));
 			rCType = riligionComSheet[rCType];
 			for (let i = 0; i < rCType.length; i++) {
-				rCType[i] = rCType[i] + Math.floor(srand(++seed) * 6) - Math.floor(srand((seed++) + 1) * 6);
+				rCType[i] = rCType[i] + Math.floor(this.srand(++seed) * 6) - Math.floor(this.srand((seed++) + 1) * 6);
 			}
 			rCType = rCType.sort(function(a, b) {
 				return b - a
@@ -845,11 +874,11 @@ class bot {
 			//riligionCom處理
 			let riligionCom = [];
 			for (let i = 0; i < rCType.length - 1; i++) {
-				let r = extractStr(riligionSheet, srand(++seed));
+				let r = this.extractStr(riligionSheet, this.srand(++seed));
 				while (riligionCom.some(function(a) {
 						return a == r;
 					})) {
-					r = extractStr(riligionSheet, srand(++seed));
+					r = this.extractStr(riligionSheet, this.srand(++seed));
 				}
 				riligionCom.push(r);
 			}
@@ -868,14 +897,14 @@ class bot {
 			}
 			returnStr += '\n興盛產業：';
 			for (let i = 0; i < industrySheet.length; i++) {
-				if (srand(++seed) * 10 < level) returnStr += industrySheet[i] + '  ';
+				if (this.srand(++seed) * 10 < level) returnStr += industrySheet[i] + '  ';
 			}
 			return returnStr;
 		}
 		////SW2.0 function 結束
 		////忍神 function 開始
 		//////sg基本判定
-		function sg(inputStr) {
+		sg(inputStr) {
 			let returnStr = '忍神骰組：[';
 			let tempMatch = inputStr.match(/^sg(\+\d+|-\d+)?>=\d+(#\d+)?(@\d+)?$/)[0].toString();
 			let dice = 0;
@@ -928,49 +957,49 @@ class bot {
 			return returnStr;
 		}
 
-		function sgFt() {
+		sgFt() {
 			let returnStr = '忍神大失敗表：';
 			let sheet = ['[1]不太對勁！該輪所有行為判定受到-1修正。', '[2]大事不妙！損失一個任意忍具。', '[3]情報洩漏！你以外的角色可以知曉你的【祕密】或【居所】任意一個。', '[4]太大意了！術式操作失敗，任選【生命力】流失一點。', '[5]敵人的陰謀？落入陷阱中，隨機受到一個變調。', '[6]呼，真是危險，還好沒有發生什麼事。'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgEt() {
+		sgEt() {
 			let returnStr = '忍神感情表：';
 			let sheet = ['[1]共感＼不信', '[2]友情＼憤怒', '[3]愛情＼忌妒', '[4]忠誠＼侮辱', '[5]憧憬＼自卑', '[6]狂信＼殺意'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgWt() {
+		sgWt() {
 			let returnStr = '忍神變調表：';
 			let sheet = ['[1]故障：所有的忍具變為無法使用，每輪結束時可以進行【絡繰術】判定嘗試解除此狀態。', '[2]麻痺：從已學得的特技中隨機選擇1個，受到此變調影響時該特技視為未習得狀態，每輪結束時可以進行【身體操術】判定嘗試解除此狀態。', '[3]重傷：進行命中、情報、感情判定時受到1點接近戰傷害，每輪結束時可以進行【生存術】判定嘗試解除此狀態。本效果不可累積。', '[4]行蹤不明：主要階段時、不是自己主場的場景變為無法出場，每輪結束時可以進行【經濟力】判定嘗試解除此狀態。', '[5]忘卻：從已獲得感情中隨機選擇1個，受到此變調影響時該感情視為未獲得狀態，每輪結束時可以進行【記憶術】判定嘗試解除此狀態。', '[6]詛咒：從已習得的忍法中隨機選擇1個，受到此變調影響時該忍法視為未習得狀態，每輪結束時可以進行【咒術】判定嘗試解除此狀態。'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgGWt() {
+		sgGWt() {
 			let returnStr = '忍神戰國變調表：';
 			let sheet = ['[1]催眠：戰鬥開始時擁有此變調或得到此變調的當下，若不減少1點【生命力】則立刻從戰鬥中脫落，每輪結束時可以進行【意氣】判定嘗試解除此狀態。本效果不可累積。', '[2]火達摩：受到本變調影響者大失敗值+1、且大失敗時受到1點【接近戰傷害】，場景結束時自動解除。疊加後大失敗值與傷害值都會增加。', '[3]猛毒：若受到了本變調，回合結束丟1D6(猛毒和飢餓共用此判定)，奇數則減少1點【生命力】，每輪結束可進行【毒術】判定嘗試解除此狀態。疊加後傷害值會增加。', '[4]飢餓：若受到了本變調，回合結束時1D6(猛毒和飢餓共用此判定)，偶數則減少1點【生命力】，每輪結束可進行【兵糧術】判定嘗試解除此狀態。疊加後傷害值會增加。', '[5]殘刃：若受到了本變調影響，回復判定、忍法、忍具與背景的回復生命效果無效化，每輪結束時可以進行【拷問術】判定嘗試解除此狀態。本效果不可累積。', '[6]野望：命中判定+1，除此之外的所有判定-1，每輪結束時可以進行【憑依術】判定嘗試解除此狀態。本效果不可累積。'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgSt() {
+		sgSt() {
 			let returnStr = '忍神場景表：';
 			let sheet = ['[2]周圍充滿了血的氣息，似乎有進行過戰鬥的氣息。不對，戰鬥還在繼續嗎？', '[3]這是…夢嗎？那是本應結束了的過去，但確無法忘懷。', '[4]眺望著眼前展開的城市。在這裡的話就可以將一街一物盡收眼底…', '[5]像是世界末日般的黑暗。黑暗之中你們在低低私語。', '[6]度過了悠閒的時光，幾乎要忘卻影之世界的一切。', '[7]空氣清新的森林裡，鳥兒婉轉歌唱，清風拂過樹葉嘩嘩地作響。', '[8]人群如山海湧動而喧囂，毫不知曉影之世界的單純人們高談闊論，喋喋不休。', '[9]大雨傾盆。人們慌張的奔向避雨之所。', '[10]大風呼嘯。頭髮跟衣服被吹的搖曳。似乎有什麼事要發生了…', '[11]醉漢大吼著，攬客聲呼喚著，女人們嬌聲著，這是繁華街道常見的畫面。', '[12]太陽的微笑包裹著你，那對於影之世界的住民來說太過於耀眼。'];
 			returnStr += sheet[Math.floor(Math.random() * 6) + Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgRtt() {
+		sgRtt() {
 			let returnStr = '忍神分野表：';
 			let sheet = ['器術', '體術', '忍術', '謀術', '戰術', '妖術'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
 			return returnStr;
 		}
 
-		function sgBt() {
+		sgBt() {
 			let returnStr = '忍神戰場表：';
 			let sheet = ['平地—無效果', '水中—所有角色迴避判定-2', '高所—大失敗時額外受到1點接近戰傷害', '惡天候—攻擊忍法間隔+1', '雜踏—大失敗值變更為謀位值+1', '極地—回合結束時擲骰1d6，若小於等於經過回合數，則所有角色受到1點近接戰傷害。此外脫離戰鬥者額外得到一個變調'];
 			returnStr += sheet[Math.floor(Math.random() * 6)];
@@ -979,7 +1008,7 @@ class bot {
 		////忍神 function 結束
 		////CoC7 function 開始
 		//////CoC基本判定
-		function cc(inputStr) {
+		cc(inputStr) {
 			let returnStr = 'CoC7th擲骰：';
 			let tempMatch = inputStr.match(/<=\d+/).toString();
 			let target = Number(tempMatch.match(/\d+/));
@@ -1019,24 +1048,24 @@ class bot {
 		}
 		////CoC7 function 結束
 		////死亡flag function 開始
-		function df() {
+		df() {
 			let sheet = ['噗噫噫噫噫－好萌萌啊！！！', '總不會掉進水溝裡面吧。', '你好像很照顧我的夥伴啊。', '這香菇鮮豔的顏色看起來真好吃。', '這一點不會死啦。', '看來差不多該使出真本事了。', '不要、不行、NO、我還不想死阿！！', '我要往這邊走！', '這邊交給我，你們先走吧！', '這機器我調整的，跑得超順吧。', '拿到最後一個啦啦啦啦！！！', '我啊，回老家就要結婚了。', '千分之一的死亡率還好吧。', '幫我跟我老媽說，謝謝他生下我！', '我只有惡運絕佳啊。', '不過就河豚、處理起來很簡單的。', '我要回房間了！', '再一步就是終點了！', '這個藥跟這個藥混在一起的話…', '這個火柴…好溫暖', '我要跟你同歸於盡！', '這個速度應該能跟上吧。', '我可不會死在這裡！！', '我舔、這個是氰化鉀！', '真希望死前還能來這裡一趟。', '我可是能空手打倒熊的男人啊。', '等那片葉子落下，我也該走了。', '這裡居然有香蕉皮！', '在這個範圍內我是最強的，我贏啦！', '等、等一下！我家生病的女兒還在等我！', '啊、隕石從天上掉下來了！', '只有我知道這房間怎麼進去。', '已經什麼都不怕了。', '我沒有弱點！', '哥哥，我能活著、真的太好了。', '無(自由決定)'];
 			return '死亡flag：' + sheet[Math.floor(Math.random() * sheet.length)];
 		}
 
-		function dfs() {
+		dfs() {
 			let sheet = ['第一次的跑腿in超市', '學校午餐時間的戰鬥中', '在迴轉壽司不吃壽司而是轉椅子', '來到大眾浴池大廳的我…', '培根蛋義大利麵專家出現在義大利肉醬麵專門店', '攝影專家& Coser in 活動會場', '比賽前十分鐘的足球場', '婆婆正在吃麻糬、沒問題吧。', '世界講話最快準決賽開始！', '來到了植物園(有種大麻)', '花子(牛)生產中', '巨大隕石落下的新聞在客廳放送中', '會抽出靈魂的相機攝影會', '那個超有名偶像好像在那個拉麵店欸！', '很受各種人觀迎的高中屋頂', '剛要曬衣服就開始下雨了', '不小心就爬到夢中富士山的半山腰了', '不小心打爆美術館名畫的我…', '喜歡A的B、喜歡B的C、喜歡C的A，三人巧遇', '剛買回來的泰迪熊棉花跑出來了', '在會議室肚子超痛NOW！', '沉睡著聖劍的山頂上…', '要擊敗惡龍的王子和公主在湖邊…', '戰爭中，駕駛駛向戰地…', '在愛麗絲的仙境裡迷路了…', '喇叭vs耳機 ～identity的戰爭～', '走在路上時長脖女捲了過來…', '爸爸在路邊撿了恐龍回來…', '自家地板下有某種巢穴，是什麼的巢穴啊…？', '跟超級美女交往的我…', '兩隻腳走路的黑貓送包裹上門了', '我們這邊每天有三分鐘，會出現巨大的絲襪男。啊、出現了', '封印在傳說水晶中的女神大人就在我眼前…', '異形vs終極戰士vs臭酸宅(我)', '生魚片拼盤的魚頭跟我搭話了…', '格鬥家在我眼前「喔喔喔喔喔」的喊著…', '來到住著妖精的森林啦！', '拿著菜刀的傢伙從電腦螢幕裡跑了出來NOW', '西瓜藤從嘴裡伸出來了！', '已經不吃不喝一天了，這就是最後的釣餌了啊。', '眼前的傢伙說我們是虛擬世界的居民', '糖果從天下掉下來了！'];
 			return '死亡flag場景表：' + sheet[Math.floor(Math.random() * sheet.length)];
 		}
 
-		function dfr() {
+		dfr() {
 			let sheet = ['社團夥伴', '粉絲與偶像', '競爭對手', '師兄弟', '上司與部下', '心之友', '親子', '戰友', '夥伴', '夫婦', '孽緣', '青梅竹馬', '援軍', '商業夥伴', '裝傻和吐槽', '依賴', '同卵雙胞胎', '指腹為婚', '三角關係的兩個人', '主治醫生和患者', '信徒與教主', '被害者與加害者', '必要的互相傷害', '戀人', '濱口跟有野', '奇奇與蒂蒂', '魔法少女與吉祥物', '光美跟少女', '船長與船員', '我是你你是我', '前世與轉世', '被抓住弱點的奴隸', '合體', '二次元和三次元', '富豪跟保鑣', '魔王與勇者'];
 			return '死亡flag關係表：' + sheet[Math.floor(Math.random() * sheet.length)];
 		}
 		////死亡flag function 結束
 		////請勿入睡 function 開始
 		//////請勿入睡PC骰
-		function dontRestYourHeadPC(inputStr) {
+		dontRestYourHeadPC(inputStr) {
 			let returnStr = '請勿入睡擲骰：';
 			let d = 0;
 			let dArray = [];
@@ -1151,7 +1180,7 @@ class bot {
 		}
 
 		//////請勿入睡GM骰
-		function dontRestYourHeadGM(inputStr) {
+		dontRestYourHeadGM(inputStr) {
 			let returnStr = '請勿入睡擲骰：';
 			let p = 0;
 			let pArray = [];
@@ -1185,7 +1214,7 @@ class bot {
 		}
 		////請勿入睡 function 結束
 		////Fudge骰開始
-		function fudge(inputStr) {
+		fudge(inputStr) {
 			let returnStr = 'Fudge擲骰：';
 			let num = 0;
 			inputStr = inputStr.replace(/fg/, '');
@@ -1219,7 +1248,7 @@ class bot {
 		}
 		////Fudge骰結束
 		////cook骰開始
-		function cook(inputStr){
+		cook(inputStr){
 			let returnStr = '料理擲骰：';
 			let num = Number(inputStr.match(/\d+/)[0]);
 			let dice = Math.ceil(Math.random() * 12);
@@ -1256,7 +1285,7 @@ class bot {
 			return returnStr;
 		}
 		
-		function cookJudge(inputStr){
+		cookJudge(inputStr){
 			let returnStr = '料理擲骰：\n';
 			inputStr = inputStr.replace(/ck /i, '');
 			let chef = inputStr.split(' ');
@@ -1298,12 +1327,12 @@ class bot {
 		////cook骰結束
 		////雜項
 		//////峻巍骰
-		function GinWay() {
+		GinWay() {
 			let GWSheet = ['哼', '口亨', '閉嘴', '閉嘴閉嘴閉嘴閉嘴', '機掰', '機掰機掰機掰機掰', 'G8', '過份', '嗯哼哼:(', '你們真的很機掰', '霍普難過 霍普哀傷 霍普心痛痛', '你們都欺負可憐的霍普', '你們這樣欺負霍普心都不會痛嗎？'];
 			return GWSheet[Math.floor(Math.random() * GWSheet.length)];
 		}
 		//////投人機
-		function terbuchet(inputStr) {
+		terbuchet(inputStr) {
 			let returnStr = '咻～！';
 			if (inputStr.match(/(活性|界面|^投人機$)/) != null) return undefined;
 			returnStr += inputStr.replace(/投人機$/, '飛了');
@@ -1311,15 +1340,15 @@ class bot {
 			return returnStr;
 		}
 		//////峻巍流言表
-		function GinWayRm() {
+		GinWayRm() {
 			let returnStr = 'SW2.0流言：';
 			returnStr += '霍普';
-			returnStr += swRmSheet2[Math.floor(Math.random() * swRmSheet2.length)];
-			returnStr += swRmSheet3[Math.floor(Math.random() * swRmSheet3.length)];
+			returnStr += this.swRmSheet2[Math.floor(Math.random() * this.swRmSheet2.length)];
+			returnStr += this.swRmSheet3[Math.floor(Math.random() * this.swRmSheet3.length)];
 			return returnStr;
 		}
 		//////峻巍怪物表
-		function GinWayMonster() {
+		GinWayMonster() {
 			let returnStr = '隨機怪物：';
 			let rareSheet = ['N', 'R', 'SR', 'SSR', 'UR', 'LR', 'XLR'];
 			let porSheet = ['曲速',
@@ -1835,7 +1864,7 @@ class bot {
 			return returnStr;
 		}
 		//////峻巍角色表
-		function GinWayCharacter() {
+		GinWayCharacter() {
 			let returnStr = '隨機霍普角色：';
 			let colourSheet = ['紅', '黃', '藍', '綠', '金', '黑', '紫', '橘', '白', '銀', '青'];
 			let describeSheet = ['沉著', '陽光', '長髮', '俐落', '爽朗', '溫和', '冷酷'];
@@ -1868,26 +1897,26 @@ class bot {
 		}
 
 		//////鑑定
-		function appraisal(inputStr) {
-			if (inputStr.match(/^(鑑定武器|apsw)/) != null) return appraisalWp(inputStr);
-			else if (inputStr.match(/^(鑑定防具|apsa)/) != null) return appraisalAm(inputStr);
-			else if (inputStr.match(/^(鑑定道具|apsi)/) != null) return appraisalIt(inputStr);
+		appraisal(inputStr) {
+			if (inputStr.match(/^(鑑定武器|apsw)/) != null) return this.appraisalWp(inputStr);
+			else if (inputStr.match(/^(鑑定防具|apsa)/) != null) return this.appraisalAm(inputStr);
+			else if (inputStr.match(/^(鑑定道具|apsi)/) != null) return this.appraisalIt(inputStr);
 			else {
 				inputStr = inputStr.replace(/^(鑑定|aps)\s*/, '');
-				if (inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/) != null) return appraisalWp(inputStr);
+				if (inputStr.match(/(弓|弩|炮|鏢|箭|鎗|劍|刀|槍|矛|棍|匕首|杖|戟|鎬|鞭|刃|斧|連枷)$/) != null) return this.appraisalWp(inputStr);
 				if (inputStr.match(/(盾|甲)$/) != null) return appraisalAm(inputStr);
 				if (inputStr === '') return undefined;
-				let seed = strToSeed(inputStr);
-				if (srand(seed++) < 1 / 3) return appraisalWp(inputStr);
-				else if (srand(seed++) < 2 / 3) return appraisalAm(inputStr);
-				else return appraisalIt(inputStr);
+				let seed = this.strToSeed(inputStr);
+				if (this.srand(seed++) < 1 / 3) return this.appraisalWp(inputStr);
+				else if (this.srand(seed++) < 2 / 3) return this.appraisalAm(inputStr);
+				else return this.appraisalIt(inputStr);
 			}
 		}
 
-		function appraisalWp(inputStr) {
+		appraisalWp(inputStr) {
 			inputStr = inputStr.replace(/^(鑑定武器|apsw)\s*/, '');
 			if (inputStr === '') return undefined;
-			let seed = strToSeed(inputStr);
+			let seed = this.strToSeed(inputStr);
 			let diceSheet = [
 				[5, 'd2'],
 				[80, 'd4'],
@@ -1919,17 +1948,17 @@ class bot {
 
 			let returnStr = '鑑定結果：' + inputStr + '\n';
 			var n = 1;
-			while (0.2 > srand(seed++)) n++;
+			while (0.2 > this.srand(seed++)) n++;
 			if (!GinWay_tag)
-				returnStr += '傷害：' + n + extractStr(diceSheet, srand(seed++));
+				returnStr += '傷害：' + n + this.extractStr(diceSheet, this.srand(seed++));
 			else
 				returnStr += '傷害：1d1';
 
 			let mag_n = 0;
 			if (!GinWay_tag)
-				while (0.2 > srand(seed++)) mag_n++;
+				while (0.2 > this.srand(seed++)) mag_n++;
 			else
-				while (0.9 > srand(seed++)) mag_n++;
+				while (0.9 > this.srand(seed++)) mag_n++;
 			if (mag_n != 0) {
 				if (!GinWay_tag)
 					returnStr += '+';
@@ -1938,13 +1967,13 @@ class bot {
 				returnStr += mag_n;
 			}
 			if (!GinWay_tag)
-				returnStr += extractStr(typeSheet, srand(seed++)) + '\n';
+				returnStr += this.extractStr(typeSheet, this.srand(seed++)) + '\n';
 			else
-				returnStr += extractStr([
+				returnStr += this.extractStr([
 					[1, '哼'],
 					[1, '閉嘴'],
 					[1, '機掰']
-				], srand(seed++)) + '\n';
+				], this.srand(seed++)) + '\n';
 
 			returnStr += '魔法物品：';
 			if (mag_n > 0) {
@@ -1953,9 +1982,9 @@ class bot {
 				else
 					returnStr += '-';
 				returnStr += mag_n + '\n';
-			} else if (0.2 > srand(seed++)) {
+			} else if (0.2 > this.srand(seed++)) {
 				mag_n = 1;
-				while (0.2 > srand(seed++)) mag_n++;
+				while (0.2 > this.srand(seed++)) mag_n++;
 				if (!GinWay_tag)
 					returnStr += mag_n + '種額外魔法效果' + '\n';
 				else
@@ -1967,73 +1996,73 @@ class bot {
 				returnStr += '負債';
 			let price = 0;
 			if (mag_n == 0) {
-				if (0.5 > srand(seed++)) price++;
-				price += price + srand(seed++);
+				if (0.5 > this.srand(seed++)) price++;
+				price += price + this.srand(seed++);
 			}
 			//增加魔法道具價值
 			else {
-				price = mag_n + 5 - srand(seed++);
+				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
 			returnStr += priceToCoin(price) + '\n';
 
-			returnStr += '重量：' + (srand(seed++) * 20).toFixed(1) + '磅' + '\n';
+			returnStr += '重量：' + (this.srand(seed++) * 20).toFixed(1) + '磅' + '\n';
 
 			returnStr += '屬性：';
 			let proStr = '';
-			if (!range_tag && 0.8 > srand(seed++)) {
+			if (!range_tag && 0.8 > this.srand(seed++)) {
 				//近戰
-				let weight = extractStr([
+				let weight = this.extractStr([
 					[1, ''],
 					[1, '輕型'],
 					[1, '重型']
-				], srand(seed++));
+				], this.srand(seed++));
 				proStr += weight;
-				if (0.25 > srand(seed++) && weight !== '重型') {
+				if (0.25 > this.srand(seed++) && weight !== '重型') {
 					if (proStr !== '') proStr += '、';
 					proStr += '靈巧';
 				}
-				if (0.25 > srand(seed++)) {
+				if (0.25 > this.srand(seed++)) {
 					if (proStr !== '') proStr += '、';
 					proStr += '觸及';
 				}
-				if (0.15 > srand(seed++) && weight !== '重型') {
+				if (0.15 > this.srand(seed++) && weight !== '重型') {
 					if (proStr !== '') proStr += '、';
-					let range = Math.ceil((srand(seed++) * 14) + 1) * 10;
-					proStr += '投擲' + '（' + range + '/' + range * (Math.floor(srand(seed++) * 2) + 3) + '呎）';
+					let range = Math.ceil((this.srand(seed++) * 14) + 1) * 10;
+					proStr += '投擲' + '（' + range + '/' + range * (Math.floor(this.srand(seed++) * 2) + 3) + '呎）';
 				}
 				let doubleHand = false;
-				if (0.25 > srand(seed++) && weight !== '輕型') {
+				if (0.25 > this.srand(seed++) && weight !== '輕型') {
 					if (proStr !== '') proStr += '、';
 					proStr += '雙手';
 					doubleHand = true;
 				}
-				if (0.25 > srand(seed++) && !doubleHand) {
+				if (0.25 > this.srand(seed++) && !doubleHand) {
 					if (proStr !== '') proStr += '、';
 					proStr += '可雙手';
 				}
 			} else {
 				//遠戰
-				let range = Math.ceil((srand(seed++) * 13) + 2) * 10;
-				proStr += '彈藥' + '（' + range + '/' + range * (Math.floor(srand(seed++) * 2) + 3) + '呎）';
+				let range = Math.ceil((this.srand(seed++) * 13) + 2) * 10;
+				proStr += '彈藥' + '（' + range + '/' + range * (Math.floor(this.srand(seed++) * 2) + 3) + '呎）';
 
-				let weight = extractStr([
+				let weight = this.extractStr([
 					[1, ''],
 					[1, '輕型'],
 					[1, '重型']
-				], srand(seed++));
+				], this.srand(seed++));
 				if (weight !== '') proStr += '、';
 				proStr += weight;
 
-				if (0.1 > srand(seed++) && weight !== '重型') {
+				if (0.1 > this.srand(seed++) && weight !== '重型') {
 					if (proStr !== '') proStr += '、';
 					proStr += '靈巧';
 				}
-				if (0.25 > srand(seed++) && weight !== '輕型') {
+				if (0.25 > this.srand(seed++) && weight !== '輕型') {
 					if (proStr !== '') proStr += '、';
 					proStr += '雙手';
 				}
-				if (0.25 > srand(seed++)) {
+				if (0.25 > this.srand(seed++)) {
 					if (proStr !== '') proStr += '、';
 					proStr += '裝填';
 				}
@@ -2044,26 +2073,26 @@ class bot {
 			return returnStr;
 		}
 
-		function appraisalAm(inputStr) {
+		appraisalAm(inputStr) {
 			inputStr = inputStr.replace(/^(鑑定防具|apsa)\s*/, '');
 			if (inputStr === '') return undefined;
-			let seed = strToSeed(inputStr);
+			let seed = this.strToSeed(inputStr);
 			let GinWay_tag = inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/) != null;
 			let sheld_tag = inputStr.match(/盾$/) != null;
 			let armor_tag = inputStr.match(/甲$/) != null;
 
 			let returnStr = '鑑定結果：' + inputStr + '\n';
-			let weight = extractStr([
+			let weight = this.extractStr([
 				[5, '輕甲'],
 				[5, '中甲'],
 				[5, '重甲'],
 				[1, '盾']
-			], srand(seed++));
-			if (armor_tag) weight = extractStr([
+			], this.srand(seed++));
+			if (armor_tag) weight = this.extractStr([
 				[5, '輕甲'],
 				[5, '中甲'],
 				[5, '重甲']
-			], srand(seed++));
+			], this.srand(seed++));
 			if (sheld_tag) weight = '盾';
 			returnStr += '類型：' + weight + '\n';
 
@@ -2072,15 +2101,15 @@ class bot {
 			switch (weight) {
 				case '輕甲':
 					ac = 11;
-					while (0.2 > srand(seed++)) ac++;
+					while (0.2 > this.srand(seed++)) ac++;
 					break;
 				case '中甲':
 					ac = 12;
-					while (0.4 > srand(seed++)) ac++;
+					while (0.4 > this.srand(seed++)) ac++;
 					break;
 				case '重甲':
 					ac = 14;
-					while (0.5 > srand(seed++)) ac++;
+					while (0.5 > this.srand(seed++)) ac++;
 					break;
 				case '盾':
 					ac = 2;
@@ -2104,9 +2133,9 @@ class bot {
 			}
 			let mag_n = 0;
 			if (!GinWay_tag)
-				while (0.2 > srand(seed++)) mag_n++;
+				while (0.2 > this.srand(seed++)) mag_n++;
 			else
-				while (0.9 > srand(seed++)) mag_n++;
+				while (0.9 > this.srand(seed++)) mag_n++;
 			if (mag_n != 0) {
 				if (!GinWay_tag)
 					returnStr += '+';
@@ -2123,9 +2152,9 @@ class bot {
 				else
 					returnStr += '-';
 				returnStr += mag_n + '\n';
-			} else if (0.2 > srand(seed++)) {
+			} else if (0.2 > this.srand(seed++)) {
 				mag_n = 1;
-				while (0.2 > srand(seed++)) mag_n++;
+				while (0.2 > this.srand(seed++)) mag_n++;
 				if (!GinWay_tag)
 					returnStr += mag_n + '種額外魔法效果' + '\n';
 				else
@@ -2137,17 +2166,17 @@ class bot {
 				returnStr += '負債';
 			let price = 0;
 			if (mag_n == 0) {
-				if (0.5 > srand(seed++)) price++;
-				price += price + srand(seed++);
+				if (0.5 > this.srand(seed++)) price++;
+				price += price + this.srand(seed++);
 			}
 			//增加魔法道具價值
 			else {
-				price = mag_n + 5 - srand(seed++);
+				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
 			returnStr += priceToCoin(price) + '\n';
 
-			returnStr += '重量：' + Math.ceil(srand(seed++) * 60 + 10) + '磅' + '\n';
+			returnStr += '重量：' + Math.ceil(this.srand(seed++) * 60 + 10) + '磅' + '\n';
 
 			if (weight === '重甲') {
 				returnStr += '力量需求：' + (ac - 3) + '\n';
@@ -2155,10 +2184,10 @@ class bot {
 
 			switch (weight) {
 				case '輕甲':
-					if (0.2 > srand(seed++)) returnStr += '隱匿：劣勢\n';
+					if (0.2 > this.srand(seed++)) returnStr += '隱匿：劣勢\n';
 					break;
 				case '中甲':
-					if (0.4 > srand(seed++)) returnStr += '隱匿：劣勢\n';
+					if (0.4 > this.srand(seed++)) returnStr += '隱匿：劣勢\n';
 					break;
 				case '重甲':
 					returnStr += '隱匿：劣勢\n';
@@ -2168,10 +2197,10 @@ class bot {
 			return returnStr;
 		}
 
-		function appraisalIt(inputStr) {
+		appraisalIt(inputStr) {
 			inputStr = inputStr.replace(/^(鑑定道具|apsi)\s*/, '');
 			if (inputStr === '') return undefined;
-			let seed = strToSeed(inputStr);
+			let seed = this.strToSeed(inputStr);
 			let GinWay_tag = inputStr.match(/(峻巍|霍普|哼|機掰|G8|閉嘴|口亨)/) != null;
 			let typeSheet = [
 				[2, '奇物'],
@@ -2188,7 +2217,7 @@ class bot {
 
 			let returnStr = '鑑定結果：' + inputStr + '\n';
 
-			let type = extractStr(typeSheet, srand(seed++));
+			let type = this.extractStr(typeSheet, this.srand(seed++));
 			if (GinWay_tag) type = '廢棄品';
 			returnStr += '類型：' + type + '\n';
 
@@ -2196,9 +2225,9 @@ class bot {
 			let mag_n = 0;
 			if (type.match(/(藥水|奇物|捲軸|魔杖|權杖|法杖)/) != null) mag_n = 1;
 			if (!GinWay_tag)
-				while (0.2 > srand(seed++)) mag_n++;
+				while (0.2 > this.srand(seed++)) mag_n++;
 			else
-				while (0.9 > srand(seed++)) mag_n++;
+				while (0.9 > this.srand(seed++)) mag_n++;
 			if (mag_n > 0) {
 				if (!GinWay_tag)
 					returnStr += mag_n + '種額外魔法效果' + '\n';
@@ -2211,21 +2240,21 @@ class bot {
 				returnStr += '負債';
 			let price = 0;
 			if (mag_n == 0) {
-				if (0.5 > srand(seed++)) price++;
-				price += price + srand(seed++);
+				if (0.5 > this.srand(seed++)) price++;
+				price += price + this.srand(seed++);
 			}
 			//增加魔法道具價值
 			else {
-				price = mag_n + 5 - srand(seed++);
+				price = mag_n + 5 - this.srand(seed++);
 			}
 			price = Math.floor(Math.pow(10, price));
 			returnStr += priceToCoin(price) + '\n';
 
-			returnStr += '重量：' + (srand(seed++) * 100).toFixed(1) + '磅' + '\n';
+			returnStr += '重量：' + (this.srand(seed++) * 100).toFixed(1) + '磅' + '\n';
 			return returnStr;
 		}
 
-		function priceToCoin(price) {
+		priceToCoin(price) {
 			if (price <= 0) return '-';
 			let returnStr = '';
 			let coinSheet = ['銅幣', '銀幣', '金幣', '鉑金幣'];
@@ -2242,7 +2271,7 @@ class bot {
 		//////鑑定結束
 		////雜項結束
 		////幫助
-		function help(inputStr) {
+		help(inputStr) {
 			let returnStr = '';
 			if (inputStr.match(/sw/) != null) {
 				returnStr += '======================\n';
@@ -2302,8 +2331,20 @@ class bot {
 				returnStr += '鑑定防具骰 「鑑定防具 物品名」 或 「apsa 物品名」\n';
 				returnStr += '鑑定道具骰 「鑑定道具 物品名」 或 「apsi 物品名」\n';
 			} else {
+				for (let h of this.helpList) {
+					if (inputStr.match(new RegExp(`${h.reg.toLowerCase()}`, "g")) != null) {
+						returnStr += '======================\n';
+						returnStr += `${h.title}\n`;
+						returnStr += '======================\n';
+						returnStr += h.description;
+						break;
+					}
+				}
+
+				if (returnStr != "") return returnStr;
+
 				returnStr += '泡泡！泡泡！更多泡泡！\n';
-				returnStr += '泡沫排序 ver' + version + ' 現正運作中☆\n';
+				returnStr += '泡沫排序 ver' + this.version + ' 現正運作中☆\n';
 				returnStr += '\n';
 				returnStr += '======================\n';
 				returnStr += '基本骰組\n';
@@ -2317,11 +2358,11 @@ class bot {
 				returnStr += '同nDn骰法\n';
 				returnStr += '\n';
 				returnStr += 'd66骰|d66\n';
-				returnStr += '隨機選取|CHOICE a b c d\n';
+				returnStr += '隨機選取|choice a b c d\n';
 				returnStr += '\n';
-				returnStr += '多數隨機選取|CHOICEn a b c d\n';
+				returnStr += '多數隨機選取|choiceN a b c d\n';
 				returnStr += '選取其中n個選項\n';
-				returnStr += 'Ex:CHOICE2 力量 敏捷 智力 生命\n';
+				returnStr += 'Ex:choice2 力量 敏捷 智力 生命\n';
 				returnStr += '\n';
 				returnStr += '======================\n';
 				returnStr += 'CoC7th骰組\n';
@@ -2341,6 +2382,9 @@ class bot {
 				returnStr += '======================\n';
 				returnStr += '其他玩具|詳見 toyHelp\n';
 				returnStr += '======================\n';
+
+				returnStr += `${this.helpList.map(h => `======================\n${h.title}|詳見 ${h.reg}Help\n======================\n`).join("")}`;
+				
 				returnStr += '-----------------------\n';
 				returnStr += '泡沫排序 dice bot\n';
 				returnStr += '以 LarryLo 的 line bot 為基底增加骰組而成\n';
@@ -2351,7 +2395,6 @@ class bot {
 			}
 			return returnStr;
 		}
-	}
 }
 
-module.exports = new bot();
+module.exports = Bot;
