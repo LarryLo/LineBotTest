@@ -1,4 +1,5 @@
-const bot = require('./bot.js');
+const Bot = require('./bot.js');
+const bot = new Bot();
 var express = require('express');
 var bodyParser = require('body-parser');
 var https = require('https');
