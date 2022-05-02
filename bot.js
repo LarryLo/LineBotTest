@@ -266,7 +266,7 @@ class Bot {
 				if (trigger.match(/^d66$/) != null) {
 					return this.d66();
 				}
-				//基本骰組 this.choice
+				//基本骰組 choice
 				if (trigger.match(/^choice$/) != null) {
 					return this.choice(inputStr);
 				}
@@ -508,17 +508,17 @@ class Bot {
 			let returnStr = '基本擲骰：' + Math.ceil(Math.random() * 6) + Math.ceil(Math.random() * 6);
 			return returnStr;
 		}
-		////this.choiceN
+		////choiceN
 		choiceN(inputStr) {
 			let c = 1;
 			let returnStr = '隨機選取：';
-			c = inputStr.toLowerCase().match(/^this.choice\d+/).toString();
+			c = inputStr.toLowerCase().match(/^choice\d+/).toString();
 			c = c.match(/\d+/).toString();
 			if (c < 1) {
 				returnStr += '不能選取少於一個選項喔';
 				return returnStr;
 			}
-			inputStr = inputStr.toLowerCase().replace(/this.choice\d+ /, '');
+			inputStr = inputStr.toLowerCase().replace(/choice\d+ /, '');
 			let option = inputStr.split(' ');
 			if (c > option.length) {
 				c = option.length + 1;
@@ -528,9 +528,9 @@ class Bot {
 			}
 			return returnStr;
 		}
-		////this.choice
+		////choice
 		choice(inputStr) {
-			inputStr = inputStr.toLowerCase().replace('this.choice ', '');
+			inputStr = inputStr.toLowerCase().replace('choice ', '');
 			let option = inputStr.split(' ');
 			let returnStr = '隨機選取：' + option[Math.floor(Math.random() * option.length)];
 			return returnStr;
