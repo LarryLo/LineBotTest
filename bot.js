@@ -26,7 +26,7 @@ class Bot {
 		////
 
 
-		this.version = '2.1.1 cook-ng';
+		this.version = '2.2 helpβ';
 		//表格放置區
 		////sw2.0
 		this.powerSheet = [
